@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #080705;
+  --color-card: #0d0b08;
+  --color-gold: #c9a84c;
+  --color-ember: #c47c3a;
+  --color-text: #f0e8cc;
+  --color-muted: #5c4f35;
+  --color-border: #1c1810;
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-crimson);
+  --font-label: var(--font-space-mono);
+}
+
+body {
+  background-color: #080705;
+  color: #f0e8cc;
+  font-family: var(--font-crimson), Georgia, serif;
+}
+
+::selection {
+  background-color: rgba(201, 168, 76, 0.2);
+  color: #f0e8cc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =============================================
+   ANIMAÇÕES
+   ============================================= */
+
+/* Fade + leve subida — cards, seções, hero */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade simples — cabeçalhos, textos de destaque */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Pulso dourado suave — ornamento ✦ */
+@keyframes goldPulse {
+  0%, 100% { opacity: 0.18; }
+  50%       { opacity: 0.38; }
+}
+
+/* Brilho deslizante na borda dourada */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Classes utilitárias */
+.animate-fade-in-up {
+  animation: fadeInUp 0.55s ease both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.animate-gold-pulse {
+  animation: goldPulse 3.5s ease-in-out infinite;
+}
+
+/* Cards com delay escalonado (índice 0–8 via style inline) */
+.animate-fade-in-up[style*="--delay"] {
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Entrada suave da página inteira */
+main {
+  animation: fadeIn 0.4s ease both;
+}
+
+/* Transição suave em links e botões interativos */
+a, button {
+  transition-property: color, border-color, background-color, opacity, transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Study body typography */
+.prose-study p {
+  font-family: var(--font-crimson), Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(240, 232, 204, 0.75);
+  margin-bottom: 1.5rem;
+}
+
+.prose-study h2 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.5rem;
+  color: #f0e8cc;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.prose-study h3 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.2rem;
+  color: #f0e8cc;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.prose-study strong {
+  color: #f0e8cc;
+  font-weight: 600;
+}
+
+.prose-study em {
+  color: rgba(240, 232, 204, 0.85);
+}
+
+.prose-study hr {
+  border: none;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  margin: 2.5rem 0;
+}
+
+.prose-study a {
+  color: #c9a84c;
+  text-underline-offset: 3px;
+}
+
+.prose-study a:hover {
+  color: #f0e8cc;
+}
+
+.prose-study blockquote {
+  border-left: 2px solid rgba(201, 168, 76, 0.4);
+  padding-left: 1.25rem;
+  margin-left: 0;
+  color: rgba(240, 232, 204, 0.6);
+  font-style: italic;
+}
+
+.prose-study ul,
+.prose-study ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: rgba(240, 232, 204, 0.75);
+}
+
+.prose-study li {
+  margin-bottom: 0.4rem;
+  line-height: 1.7;
+}

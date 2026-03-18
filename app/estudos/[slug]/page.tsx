@@ -86,13 +86,18 @@ export default async function StudyPage({
         }
       : null;
 
-  // JSON-LD: Article Schema
+  // JSON-LD: BlogPosting Schema
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
     headline: study.title,
     description: study.description ?? study.excerpt ?? "",
     datePublished: study.date,
+    dateModified: study.date,
     author: {
       "@type": "Person",
       name: "Rodrigo Ramos",
@@ -104,7 +109,18 @@ export default async function StudyPage({
       url: baseUrl,
     },
     url: canonicalUrl,
-    ...(study.image ? { image: study.image } : {}),
+    ...(study.image
+      ? {
+          image: {
+            "@type": "ImageObject",
+            url: study.image.startsWith("http")
+              ? study.image
+              : `${baseUrl}${study.image}`,
+            width: 1200,
+            height: 630,
+          },
+        }
+      : {}),
   };
 
   return (

@@ -1,15 +1,12 @@
 import Link from "next/link";
 import type { StudyMeta } from "@/lib/studies";
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("pt-BR", {
-    month: "short",
-    year: "numeric",
-  });
-}
+import { getCtaLabel, formatDateSmart } from "@/lib/utils";
 
 export default function FeaturedStudy({ study }: { study: StudyMeta | null }) {
   if (!study) return null;
+
+  const dateLabel = formatDateSmart(study.date, "short");
+  const ctaLabel = getCtaLabel(study.category);
 
   return (
     <section className="border-t border-gold/10 px-6 py-20" id="estudos">
@@ -52,14 +49,26 @@ export default function FeaturedStudy({ study }: { study: StudyMeta | null }) {
             )}
 
             <div className="flex items-center gap-6">
+              {/*
+                T1: CTA dinâmico por categoria
+                T2: text-gold (WCAG AA) + underline slide-in no hover
+                T3: dateLabel exibe "Em breve" para datas futuras
+              */}
               <Link
                 href={`/estudos/${study.slug}`}
-                className="font-label text-[11px] uppercase tracking-widest text-gold border-b border-gold/40 pb-0.5 hover:text-text hover:border-text/40 transition-colors duration-200"
+                className="
+                  relative font-label text-[11px] uppercase tracking-widest text-gold
+                  transition-colors duration-200
+                  after:absolute after:bottom-0 after:left-0
+                  after:h-px after:w-0 after:bg-gold
+                  after:transition-[width] after:duration-300
+                  hover:after:w-full
+                "
               >
-                Ler estudo →
+                {ctaLabel}
               </Link>
               <span className="font-label text-[10px] text-muted">
-                {formatDate(study.date)}
+                {dateLabel}
               </span>
             </div>
           </div>

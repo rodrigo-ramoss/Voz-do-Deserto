@@ -2,6 +2,21 @@
 
 import { useState, type FormEvent } from "react";
 
+/*
+ * ACESSIBILIDADE — NewsletterForm
+ * ─────────────────────────────────────────────────────────────────────────
+ * • Cada <input> tem um <label> vinculado via htmlFor/id — obrigatório
+ *   para leitores de tela (WCAG 1.3.1, 2.4.6).
+ * • Os <input> NÃO usam `focus:outline-none`: a regra global
+ *   `input:focus-visible { box-shadow: 0 0 0 2px #c9a84c }` em globals.css
+ *   provê um indicador de foco dourado suficiente (WCAG 2.4.7).
+ * • Status "loading" desabilita o botão via `disabled` e reduz opacidade,
+ *   comunicando o estado visualmente e para AT.
+ * • A mensagem de erro usa role="alert" para ser anunciada imediatamente
+ *   por leitores de tela sem precisar de foco explícito.
+ * ─────────────────────────────────────────────────────────────────────────
+ */
+
 interface NewsletterFormProps {
   /** "article" usa layout compacto inline; "page" usa layout expandido */
   context?: "article" | "page" | "footer";
@@ -22,7 +37,6 @@ export default function NewsletterForm({
     setStatus("loading");
 
     try {
-      // Integração futura via variável de ambiente NEXT_PUBLIC_NEWSLETTER_ENDPOINT
       const endpoint = process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT;
 
       if (endpoint) {
@@ -46,8 +60,13 @@ export default function NewsletterForm({
 
   if (status === "success") {
     return (
-      <div className="border border-gold/20 bg-card p-6 text-center">
-        <p className="font-display text-lg text-gold mb-2">✦</p>
+      /* role="status" anuncia a confirmação para leitores de tela */
+      <div
+        role="status"
+        aria-live="polite"
+        className="border border-gold/20 bg-card p-6 text-center"
+      >
+        <p className="font-display text-lg text-gold mb-2" aria-hidden>✦</p>
         <p className="font-display text-base text-text/80">
           Obrigado! Você será notificado em breve.
         </p>
@@ -71,17 +90,24 @@ export default function NewsletterForm({
           placeholder="seu@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 min-w-48 bg-bg border border-gold/15 px-4 py-2.5 font-body text-sm text-text/80 placeholder:text-muted/40 focus:outline-none focus:border-gold/40 transition-colors"
+          /*
+           * SEM focus:outline-none.
+           * O ring dourado de globals.css (input:focus-visible) é o indicador
+           * de foco para teclado. A transição de border reforça visualmente.
+           */
+          className="flex-1 min-w-48 bg-bg border border-gold/15 px-4 py-2.5 font-body text-sm text-text/80 placeholder:text-muted/40 focus:border-gold/40 transition-colors"
         />
         <button
           type="submit"
           disabled={status === "loading"}
+          aria-label="Inscrever-se na newsletter"
           className="font-label text-[9px] uppercase tracking-widest border border-gold px-5 py-2.5 text-gold hover:bg-gold hover:text-bg transition-all duration-200 disabled:opacity-50"
         >
           {status === "loading" ? "…" : "Quero receber"}
         </button>
         {status === "error" && (
-          <p className="w-full font-label text-[8px] text-ember/70 mt-1">
+          /* role="alert" anuncia o erro imediatamente para leitores de tela */
+          <p role="alert" className="w-full font-label text-[8px] text-ember/70 mt-1">
             Erro ao cadastrar. Tente novamente.
           </p>
         )}
@@ -114,11 +140,17 @@ export default function NewsletterForm({
           placeholder="seu@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 min-w-56 bg-bg border border-gold/15 px-4 py-3 font-body text-sm text-text/80 placeholder:text-muted/40 focus:outline-none focus:border-gold/40 transition-colors"
+          /*
+           * SEM focus:outline-none.
+           * globals.css injeta `box-shadow: 0 0 0 2px #c9a84c` em :focus-visible,
+           * provendo indicador dourado com contraste ≈8.5:1 (WCAG AA ✓).
+           */
+          className="flex-1 min-w-56 bg-bg border border-gold/15 px-4 py-3 font-body text-sm text-text/80 placeholder:text-muted/40 focus:border-gold/40 transition-colors"
         />
         <button
           type="submit"
           disabled={status === "loading"}
+          aria-label="Inscrever-se na newsletter"
           className="font-label text-[10px] uppercase tracking-widest border border-gold px-6 py-3 text-gold hover:bg-gold hover:text-bg transition-all duration-200 disabled:opacity-50"
         >
           {status === "loading" ? "Enviando…" : "Quero receber"}
@@ -126,7 +158,8 @@ export default function NewsletterForm({
       </form>
 
       {status === "error" && (
-        <p className="mt-2 font-label text-[8px] uppercase tracking-widest text-ember/70">
+        /* role="alert" garante anúncio imediato pelo leitor de tela */
+        <p role="alert" className="mt-2 font-label text-[8px] uppercase tracking-widest text-ember/70">
           Erro ao cadastrar. Tente novamente.
         </p>
       )}

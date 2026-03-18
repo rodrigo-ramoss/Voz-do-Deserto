@@ -3,11 +3,30 @@
 @theme {
   --color-bg: #080705;
   --color-card: #0d0b08;
-  --color-gold: #c9a84c;
+
+  /* ── Dourado/âmbar ────────────────────────────────────────────────────
+     #D4B76A sobre #080705 → contraste ~10.5:1  (WCAG AAA ✓)
+     Anterior: #C9A84C (~8.5:1) — mantido acima do AA, mas reforçado
+     para garantir legibilidade em todos os contextos de opacidade.     */
+  --color-gold: #d4b76a;
+  --color-gold-hover: #e0c87a;          /* hover/ativo → ~13:1           */
+
   --color-ember: #c47c3a;
+
+  /* ── Texto ────────────────────────────────────────────────────────────
+     Primário  #F0E8CC → contraste ~16:1  (WCAG AAA ✓)
+     Secundário #B8A98A → contraste ~8.6:1 (WCAG AAA ✓) — era #5C4F35 (~1.9:1 ✗)
+     Terciário  #8A7A60 → contraste ~5.1:1 (WCAG AA ✓)  — novo, para labels/rodapé */
   --color-text: #f0e8cc;
-  --color-muted: #5c4f35;
+  --color-muted: #b8a98a;               /* secundário: datas, excerpts, nav inativo */
+  --color-subtle: #8a7a60;              /* terciário: counts, labels, copyright      */
+
   --color-border: #1c1810;
+
+  /* ── Tags / pílulas de categoria ─────────────────────────────────────
+     Texto #D4B76A sobre fundo #2A2210 → contraste ~8.3:1 (WCAG AAA ✓) */
+  --color-tag-bg: #2a2210;
+  --color-tag-border: #4a3a20;
 
   --font-display: var(--font-playfair);
   --font-body: var(--font-crimson);
@@ -91,6 +110,38 @@ a, button {
   transition-property: color, border-color, background-color, opacity, transform;
   transition-duration: 200ms;
   transition-timing-function: ease;
+}
+
+/* =============================================
+   ACESSIBILIDADE — FOCO POR TECLADO (WCAG 2.1 AA)
+   =============================================
+   :focus-visible dispara apenas para foco via teclado ou dispositivos
+   equivalentes (não aplica em cliques com mouse/touch).
+
+   Contraste ouro (#c9a84c) sobre fundo escuro (#080705): ~8.5:1
+   → passa WCAG AA (mín. 3:1) e AAA (mín. 4.5:1) com folga.
+
+   IMPORTANTE: nunca use apenas `outline: none` sem substituto visível —
+   isso torna o site inacessível para usuários de teclado e leitores de tela.
+   ============================================= */
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);   /* #c9a84c */
+  outline-offset: 3px;
+}
+
+/* Remove o outline padrão do navegador em interações mouse/touch —
+   apenas quando o browser suporta :focus-visible (todos os modernos). */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Inputs e textareas: ring interno fica mais harmonioso que outline externo */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;                          /* substitui outline por ring     */
+  box-shadow: 0 0 0 2px var(--color-gold); /* ring dourado ~8.5:1 sobre card */
 }
 
 /* Study body typography */

@@ -2,7 +2,7 @@
 title: "O Fim do Estado Secular e Apocalipse 17: Quando Religião e Poder Fazem um Negócio"
 date: 2026-03-16
 category: Geopolítica Escatológica
-image: /imagens/estado-secular-apocalipse17-religiao-poder.webp
+image: /imagens/fim-estado-secular-apocalipse17.webp
 description: "Líderes com agenda religiosa explícita governam EUA, Rússia, Brasil e outros países. Apocalipse 17 descreve a mulher que cavalga a besta — a fusão de religião e poder político. O que isso significa para o desigrejado que recusou essa fusão."
 keywords: "#Apocalipse17 #EstadoSecular #ReligiãoEPoder #CristianismoNacionalista #VozDoDeserto #MulherQueCavalga"
 faq:

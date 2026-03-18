@@ -2,7 +2,7 @@
 title: "O Eixo China-Rússia-Irã e o Rei do Leste: Discernimento Geopolítico sem Mapa Conspirativo"
 date: 2026-03-16
 category: Geopolítica Escatológica
-image: /imagens/eixo-china-russia-ira-geopolitica.webp
+image: /imagens/eixo-china-russia-ira.webp
 description: "China, Rússia e Irã formam um eixo estratégico crescente. Apocalipse 16 menciona os reis do Leste. Entenda o que os dados mostram sobre essa aliança — e onde termina a análise legítima e começa o mapa conspirativo."
 keywords: "#EixoChinaRússiaIrã #ReiDoLeste #Apocalipse16 #GeopolíticaEscatológica #VozDoDeserto #AnáliseProfética"
 faq:

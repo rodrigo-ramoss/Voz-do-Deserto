@@ -2,7 +2,7 @@
 title: "Gaza, Palestinos e a Teologia da Terra Prometida: O que a Exegese Honesta Diz"
 date: 2026-03-16
 category: Geopolítica Escatológica
-image: /imagens/gaza-terra-prometida-exegese.webp
+image: /imagens/gaza-palestinos-teologia-terra-prometida.webp
 description: "Sionismo cristão versus teologia da substituição — dois extremos que distorcem o texto. O que a exegese responsável diz sobre as promessas territoriais do AT, o Estado de Israel e a situação em Gaza."
 keywords: "#Gaza #TerraPrometida #SionismoCristão #TeologiaSubstituição #VozDoDeserto #ExegeseBíblica #IsraelPalestina"
 faq:

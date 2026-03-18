@@ -2,7 +2,7 @@
 title: "O Colapso da Pax Americana: Daniel 2, Impérios que Caem e o que Vem Depois"
 date: 2026-03-16
 category: Geopolítica Escatológica
-image: /imagens/pax-americana-daniel2-imperios.webp
+image: /imagens/colapso-pax-americana-daniel2.webp
 description: "Os EUA estão se retirando de alianças históricas enquanto travavam guerra no Irã. Daniel 2 descreve sequências de impérios que caem. O que a narrativa bíblica sobre poder e soberania ensina para esse momento histórico."
 keywords: "#PaxAmericana #Daniel2 #ImprériosCaem #EscatologiaGeopolítica #VozDoDeserto #OrdemMundial"
 faq:

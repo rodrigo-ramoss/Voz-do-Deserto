@@ -68,7 +68,7 @@ export default function Footer() {
             {[
               { label: "Estudos", href: "/estudos" },
               { label: "Categorias", href: "/categorias" },
-              { label: "Livraria", href: "/livraria" },
+              { label: "Arquivo do Deserto", href: "/livraria" },
               { label: "Sobre", href: "/sobre" },
             ].map(({ label, href }) => (
               <Link

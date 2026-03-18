@@ -20,7 +20,9 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
 
   async function handleCopy() {
     try {
-      await navigator.clipboard.writeText(url);
+      // Usa a URL real do browser (sempre correta, independente de variável de ambiente)
+      const link = typeof window !== "undefined" ? window.location.href : url;
+      await navigator.clipboard.writeText(link);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {

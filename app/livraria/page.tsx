@@ -25,9 +25,9 @@ import type { Metadata } from "next";
 import NewsletterForm from "@/app/components/NewsletterForm";
 
 export const metadata: Metadata = {
-  title: "Livraria — Voz do Deserto",
+  title: "Arquivo do Deserto — Voz do Deserto",
   description:
-    "Em breve — estudos completos, materiais e leituras recomendadas no blog Voz do Deserto.",
+    "Estudos completos, materiais e leituras recomendadas no blog Voz do Deserto.",
 };
 
 const placeholders = [
@@ -80,7 +80,7 @@ export default function LivrariaPage() {
       </p>
       {/* H1 único da página */}
       <h1 className="font-display text-4xl text-text mb-4 md:text-5xl">
-        Livraria
+        Arquivo do Deserto
       </h1>
       <div className="h-px w-16 bg-gold/30 mb-5" />
       <p className="font-body text-lg text-text/55 max-w-xl leading-relaxed mb-16">
@@ -94,16 +94,18 @@ export default function LivrariaPage() {
         assim leitores de tela anunciam "seção: Materiais em preparação".
       */}
       <section aria-labelledby="materials-heading" className="mb-20">
-        {/*
-          H2 "Materiais em preparação": corrige a hierarquia.
-          Antes havia H3 sem H2 pai — inválido para WCAG 1.3.1.
-          O H2 é oculto visualmente (sr-only) para não duplicar a
-          descrição que já existe no parágrafo acima, mas permanece
-          disponível para leitores de tela.
-        */}
-        <h2 id="materials-heading" className="sr-only">
-          Materiais em preparação
-        </h2>
+        {/* Cabeçalho visível da subsecção Scriptorium */}
+        <div className="flex items-center gap-4 mb-8">
+          <h2
+            id="materials-heading"
+            className="font-display text-2xl text-text"
+          >
+            Scriptorium
+          </h2>
+          <span className="font-label text-[9px] uppercase tracking-[0.25em] text-bg bg-gold/70 px-2 py-1 leading-none">
+            Em breve
+          </span>
+        </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {placeholders.map((item) => (
@@ -197,7 +199,7 @@ export default function LivrariaPage() {
           id="newsletter-heading"
           className="font-display text-3xl text-text mb-3 text-center"
         >
-          Avise-me quando a Livraria abrir
+          Avise-me quando o Arquivo do Deserto abrir
         </h2>
         <p className="font-body text-base text-text/50 leading-relaxed mb-8 text-center">
           Cadastre seu e-mail e você será notificado quando os primeiros

@@ -2,7 +2,7 @@
 title: "Nag Hammadi: A Jarra que Guardou o Cristianismo que a Igreja Tentou Apagar"
 date: 2026-03-17
 category: Apócrifos
-image: /imagens/nag-hammadi-jarra-manuscritos-1945.webp
+image: /imagens/nag-hammadi-jarra-1945.webp
 description: "Em 1945, um camponês egípcio quebrou uma jarra no deserto e encontrou 52 textos cristãos primitivos. A história do achado que forçou teólogos a repensarem tudo."
 keywords: "#NagHammadi #ApócrifosEvangelhos #CristianismoPrimitivo #TextosAntigos #VozDoDeserto #GnosticismoHistória #ManuscritosAntigos"
 faq:

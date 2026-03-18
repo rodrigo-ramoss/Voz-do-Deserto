@@ -1,7 +1,7 @@
 ---
 title: "A Guerra de 12 Dias e Ezequiel 38: O que os Fatos Dizem — e o que Não Dizem"
 date: 2026-03-16
-category: Profecias
+category: Profecias e Tempo Presente
 image: /imagens/guerra-12-dias-israel-ira-ezequiel38.webp
 description: "Em junho de 2025, Israel e Irã travaram a primeira guerra direta de sua história. Em março de 2026, o conflito recomeçou. O que Ezequiel 38 realmente diz sobre isso — e onde termina a exegese e começa a especulação?"
 keywords: "#Ezequiel38 #GuerradeIsrael #PropheciasBíblicas #EscatologiaResponsável #VozDoDeserto #IsraelIrã #FimDosMundos"

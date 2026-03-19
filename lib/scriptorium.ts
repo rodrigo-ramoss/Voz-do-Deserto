@@ -134,6 +134,17 @@ export async function getScriptoriumBySlug(
   };
 }
 
+// Retorna artigos agrupados por categoria
+export function getScriptoriumByCategory(): Record<string, ScriptoriumMeta[]> {
+  const all = getAllScriptorium();
+  return all.reduce<Record<string, ScriptoriumMeta[]>>((acc, article) => {
+    const cat = article.category;
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(article);
+    return acc;
+  }, {});
+}
+
 export function getAllScriptoriumSlugs(): string[] {
   if (!fs.existsSync(scriptoriumDir)) return [];
   return fs

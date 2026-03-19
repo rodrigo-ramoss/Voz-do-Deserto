@@ -127,7 +127,7 @@ export default async function ScriptoriumArticlePage({
           <div className="mb-6">
             <Breadcrumb
               items={[
-                { label: "Arquivo do Deserto", href: "/livraria" },
+                { label: "Arquivo Secreto", href: "/livraria" },
                 { label: "Scriptorium", href: "/livraria" },
                 { label: article.title },
               ]}
@@ -283,7 +283,7 @@ export default async function ScriptoriumArticlePage({
             href="/livraria"
             className="font-label text-[9px] uppercase tracking-widest text-muted hover:text-gold transition-colors"
           >
-            ← Arquivo do Deserto
+            ← Arquivo Secreto
           </Link>
         </div>
       </div>

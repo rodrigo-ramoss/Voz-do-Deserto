@@ -74,6 +74,21 @@ function Bar({ categories }: { categories: string[] }) {
         </Link>
       </div>
 
+      {/* "Fora do Deserto" — link para /noticias */}
+      <div className="flex items-stretch shrink-0 border-r border-gold/10">
+        <Link
+          href="/noticias"
+          className={`${linkBase} gap-1.5 ${
+            pathname === "/noticias" || pathname.startsWith("/noticias/")
+              ? "border-ember text-ember"
+              : "border-transparent text-muted hover:text-text"
+          }`}
+        >
+          <span className="animate-blink w-1 h-1 rounded-full bg-ember/60 shrink-0" />
+          Fora do Deserto
+        </Link>
+      </div>
+
       {/* Marquee das categorias */}
       <div className="flex-1 overflow-hidden relative">
         {/* Fade nas bordas */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { StudyMeta } from "@/lib/studies";
@@ -10,8 +10,12 @@ interface Props {
   studies: StudyMeta[];
 }
 
+const AUTO_PLAY_MS = 6000;
+
 export default function WeeklyCarousel({ studies }: Props) {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   if (!studies.length) return null;
 
@@ -22,8 +26,24 @@ export default function WeeklyCarousel({ studies }: Props) {
   const prev = () => setCurrent((c) => (c === 0 ? studies.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === studies.length - 1 ? 0 : c + 1));
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (paused) return;
+    timerRef.current = setInterval(() => {
+      setCurrent((c) => (c === studies.length - 1 ? 0 : c + 1));
+    }, AUTO_PLAY_MS);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [paused, studies.length]);
+
   return (
-    <section className="border-b border-gold/10" aria-label="Publicações da semana">
+    <section
+      className="border-b border-gold/10"
+      aria-label="Publicações da semana"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="mx-auto max-w-6xl px-6 pt-6 pb-2 flex items-center justify-between">
         {/* Label */}
         <div className="flex items-center gap-3">
@@ -123,22 +143,34 @@ export default function WeeklyCarousel({ studies }: Props) {
         </div>
       </div>
 
-      {/* Dots */}
-      <div className="flex gap-2 justify-center pb-6" role="tablist" aria-label="Slides">
+      {/* Dots + indicador */}
+      <div className="flex items-center gap-3 justify-center pb-6" role="tablist" aria-label="Slides">
         {studies.map((_, i) => (
           <button
             key={i}
             role="tab"
             aria-selected={i === current}
             aria-label={`Slide ${i + 1}`}
-            onClick={() => setCurrent(i)}
-            className={`transition-all duration-200 rounded-full ${
+            onClick={() => { setCurrent(i); setPaused(true); }}
+            className={`transition-all duration-300 rounded-full ${
               i === current
-                ? "w-6 h-1.5 bg-gold"
+                ? "w-8 h-1.5 bg-gold"
                 : "w-1.5 h-1.5 bg-gold/25 hover:bg-gold/50"
             }`}
           />
         ))}
+        {/* Ícone pause/play */}
+        <button
+          onClick={() => setPaused((p) => !p)}
+          aria-label={paused ? "Retomar auto-play" : "Pausar auto-play"}
+          className="ml-1 text-muted/40 hover:text-gold transition-colors"
+        >
+          {paused ? (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M8 5v14l11-7z"/></svg>
+          ) : (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          )}
+        </button>
       </div>
     </section>
   );

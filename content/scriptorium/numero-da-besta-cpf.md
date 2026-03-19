@@ -1,7 +1,7 @@
 ---
 title: "O Número da Besta Não é 666 — É um CPF"
 date: "2026-03-18"
-category: "Escatologia Digital 2.0"
+category: "Escatologia Digital 2.0 - IA e Controle"
 image: "/imagens/numero-da-besta-cpf.webp"
 description: "João não previu um chip subcutâneo. Ele descreveu uma arquitetura de exclusão econômica que Roma já operava — e que 2026 aperfeiçoou sem avisar."
 keywords: "#MarcaDaBesta #Apocalipse #CBDC #ControleDigital #EscatologiaDigital"

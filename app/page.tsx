@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { getAllStudies } from "@/lib/studies";
+import { getAllNoticias } from "@/lib/noticias";
 import ArticleCard from "./components/ArticleCard";
 import Sidebar from "./components/Sidebar";
 import WeeklyCarousel from "./components/WeeklyCarousel";
+import NoticiasCarousel from "./components/NoticiasCarousel";
 
 export default function Home() {
   const studies = getAllStudies();
+  const noticias = getAllNoticias();
   const weeklySlides = studies.slice(0, 7);
   const rest = studies.slice(7, 13);
 
   return (
     <>
+      {noticias.length > 0 && <NoticiasCarousel noticias={noticias} />}
       <WeeklyCarousel studies={weeklySlides} />
 
       <div className="mx-auto max-w-6xl px-6 py-12">

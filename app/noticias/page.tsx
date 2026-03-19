@@ -1,5 +1,6 @@
 import { getAllNoticias } from "@/lib/noticias";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { formatDateSmart } from "@/lib/utils";
 
@@ -33,7 +34,7 @@ export default function NoticiasPage() {
         <div className="border border-gold/10 bg-card p-12 text-center">
           <p className="font-display text-2xl text-gold/20 mb-3" aria-hidden>✦</p>
           <p className="font-body text-text/35 text-sm">
-            Nenhuma notícia publicada ainda. Volte em breve.
+            Nenhuma notícia publicada ainda.
           </p>
         </div>
       ) : (
@@ -41,42 +42,63 @@ export default function NoticiasPage() {
           {noticias.map((noticia) => (
             <article
               key={noticia.slug}
-              className="group flex flex-col border border-gold/10 bg-card p-6 transition-colors duration-300 hover:border-ember/30"
+              className="group flex flex-col border border-gold/10 bg-card transition-colors duration-300 hover:border-ember/30"
             >
-              <div className="flex items-center gap-2 mb-3">
-                <span className="font-label text-[8px] uppercase tracking-[0.25em] text-ember/60">
-                  Fora do Deserto
-                </span>
-                {noticia.source && (
-                  <>
-                    <span className="text-gold/20">·</span>
-                    <span className="font-label text-[8px] uppercase tracking-widest text-muted/40">
-                      {noticia.source}
-                    </span>
-                  </>
+              {/* Imagem de capa */}
+              <Link href={`/noticias/${noticia.slug}`} className="block relative aspect-[16/9] overflow-hidden bg-card shrink-0">
+                {noticia.image ? (
+                  <Image
+                    src={noticia.image}
+                    alt={noticia.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-ember/10 via-transparent to-gold/5 flex items-center justify-center">
+                    <span className="font-display text-4xl text-ember/15 select-none">✦</span>
+                  </div>
                 )}
-              </div>
+              </Link>
 
-              <h2 className="font-display text-lg leading-snug text-text mb-3 transition-colors duration-200 group-hover:text-gold">
-                {noticia.title}
-              </h2>
+              {/* Conteúdo */}
+              <div className="flex flex-col flex-1 p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-label text-[8px] uppercase tracking-[0.25em] text-ember/60">
+                    Fora do Deserto
+                  </span>
+                  {noticia.source && (
+                    <>
+                      <span className="text-gold/20">·</span>
+                      <span className="font-label text-[8px] uppercase tracking-widest text-muted/40">
+                        {noticia.source}
+                      </span>
+                    </>
+                  )}
+                </div>
 
-              {noticia.excerpt && (
-                <p className="font-body text-sm leading-relaxed text-text/50 flex-1 mb-6">
-                  {noticia.excerpt}
-                </p>
-              )}
-
-              <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
-                <Link
-                  href={`/noticias/${noticia.slug}`}
-                  className="font-label text-[10px] uppercase tracking-widest text-gold/55 transition-colors hover:text-gold"
-                >
-                  Ler →
+                <Link href={`/noticias/${noticia.slug}`} className="block mb-3">
+                  <h2 className="font-display text-lg leading-snug text-text transition-colors duration-200 group-hover:text-gold">
+                    {noticia.title}
+                  </h2>
                 </Link>
-                <span className="font-label text-[10px] text-muted">
-                  {formatDateSmart(noticia.date, "short")}
-                </span>
+
+                {noticia.excerpt && (
+                  <p className="font-body text-sm leading-relaxed text-text/50 flex-1 mb-5 line-clamp-3">
+                    {noticia.excerpt}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
+                  <Link
+                    href={`/noticias/${noticia.slug}`}
+                    className="font-label text-[10px] uppercase tracking-widest text-gold/55 transition-colors hover:text-gold"
+                  >
+                    Ler →
+                  </Link>
+                  <span className="font-label text-[10px] text-muted">
+                    {formatDateSmart(noticia.date, "short")}
+                  </span>
+                </div>
               </div>
             </article>
           ))}

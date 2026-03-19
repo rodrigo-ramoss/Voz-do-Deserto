@@ -104,16 +104,9 @@ E quando essa pergunta é ignorada, a história já nos mostrou onde isso termin
 
 ---
 
-## Isso é apenas a superfície. O Arquivo Secreto vai mais fundo.
+*Continuação desta análise disponível apenas para os membros do Arquivo Secreto.*
 
-Na continuação desta análise, disponível apenas para membros do Arquivo Secreto, exploramos:
-
-- o paralelo entre a coordenação autônoma de agentes de IA e os sistemas proféticos de controle coletivo descritos em Apocalipse
-- por que "consciência artificial" pode não ser o verdadeiro risco — e o que é
-- o conceito de singularidade explicado sem hype e sem medo, mas com clareza bíblica
-- e o padrão oculto entre automação, concentração de poder e a estrutura do sistema descrito em Apocalipse 13
-
-**[👉 Acesse o Arquivo Secreto e continue essa leitura](https://vozdo deserto.com.br/arquivo-secreto)**
+[Acesse o Arquivo Secreto](/livraria)
 
 ---
 

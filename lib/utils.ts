@@ -28,14 +28,13 @@ export function formatDateSmart(
   dateStr: string,
   format: "long" | "short" = "short"
 ): string {
-  // Força meio-dia local para evitar off-by-one por fuso horário
-  const articleDate = new Date(dateStr + "T12:00:00");
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  if (articleDate > today) {
+  // Compara strings ISO (YYYY-MM-DD) para evitar problemas de fuso horário.
+  // "Em breve" só aparece para datas ESTRITAMENTE no futuro.
+  const todayStr = new Date().toISOString().slice(0, 10);
+  if (dateStr > todayStr) {
     return "Em breve";
   }
+  const articleDate = new Date(dateStr + "T12:00:00");
 
   const options: Intl.DateTimeFormatOptions =
     format === "long"

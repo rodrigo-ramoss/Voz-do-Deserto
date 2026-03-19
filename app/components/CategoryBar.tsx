@@ -13,7 +13,7 @@ function Bar({ categories }: { categories: string[] }) {
   const onEstudos = pathname === "/estudos";
 
   const linkBase =
-    "font-label text-xs font-medium uppercase tracking-[0.18em] px-4 min-h-[44px] flex items-center border-b-2 transition-colors duration-200 whitespace-nowrap shrink-0";
+    "font-label text-[10px] md:text-xs font-medium uppercase tracking-[0.18em] px-3 md:px-4 min-h-[36px] md:min-h-[44px] flex items-center border-b-2 transition-colors duration-200 whitespace-nowrap shrink-0";
 
   const renderCat = (cat: string, dup = false) => {
     const isActive = activeCat === cat;
@@ -26,7 +26,7 @@ function Bar({ categories }: { categories: string[] }) {
           href={`/estudos?cat=${encodeURIComponent(cat)}`}
           aria-hidden={dup || undefined}
           tabIndex={dup ? -1 : undefined}
-          className={`font-label text-[10px] font-medium uppercase tracking-[0.16em] px-3 flex flex-col items-center justify-center border transition-colors duration-200 whitespace-nowrap shrink-0 my-1.5 ${
+          className={`font-label text-[9px] md:text-[10px] font-medium uppercase tracking-[0.16em] px-2.5 md:px-3 flex flex-col items-center justify-center border transition-colors duration-200 whitespace-nowrap shrink-0 my-1 md:my-1.5 ${
             isActive
               ? "border-gold text-gold"
               : "border-gold/50 text-muted hover:border-gold hover:text-text"
@@ -58,30 +58,29 @@ function Bar({ categories }: { categories: string[] }) {
   };
 
   return (
-    <div className="border-b border-gold/10 bg-bg/98 backdrop-blur-sm flex items-stretch overflow-hidden">
+    <div className="border-b border-gold/10 bg-bg/98 backdrop-blur-sm overflow-hidden">
 
-      {/* "Todos" fixo à esquerda */}
-      <div className="flex items-stretch shrink-0 border-r border-gold/10">
+      {/* ── Linha 1: fixos (mobile: row completa | desktop: inline com marquee) ── */}
+      <div className="flex md:hidden items-stretch border-b border-gold/8">
+        {/* Todos — ocupa metade */}
         <Link
           href="/estudos"
-          className={`${linkBase} ${
+          className={`flex-1 font-label text-[10px] font-medium uppercase tracking-[0.18em] min-h-[38px] flex items-center justify-center border-b-2 border-r border-r-gold/10 transition-colors duration-200 ${
             onEstudos && !activeCat
-              ? "border-gold text-gold"
-              : "border-transparent text-muted hover:text-text"
+              ? "border-b-gold text-gold"
+              : "border-b-transparent text-muted"
           }`}
         >
           Todos
         </Link>
-      </div>
 
-      {/* "Fora do Deserto" — link para /noticias */}
-      <div className="flex items-stretch shrink-0 border-r border-gold/10">
+        {/* Fora do Deserto — ocupa metade */}
         <Link
           href="/noticias"
-          className={`${linkBase} gap-1.5 ${
+          className={`flex-1 font-label text-[10px] font-medium uppercase tracking-[0.18em] min-h-[38px] flex items-center justify-center gap-1.5 border-b-2 transition-colors duration-200 ${
             pathname === "/noticias" || pathname.startsWith("/noticias/")
-              ? "border-ember text-ember"
-              : "border-transparent text-muted hover:text-text"
+              ? "border-b-ember text-ember"
+              : "border-b-transparent text-muted"
           }`}
         >
           <span className="animate-blink w-1 h-1 rounded-full bg-ember/60 shrink-0" />
@@ -89,16 +88,47 @@ function Bar({ categories }: { categories: string[] }) {
         </Link>
       </div>
 
-      {/* Marquee das categorias */}
-      <div className="flex-1 overflow-hidden relative">
-        {/* Fade nas bordas */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-bg/98 to-transparent z-10" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-bg/98 to-transparent z-10" />
+      {/* ── Marquee mobile (linha 2) + desktop (linha única com fixos) ── */}
+      <div className="flex items-stretch">
 
-        <div className="flex items-stretch animate-marquee">
-          {categories.map((cat) => renderCat(cat))}
-          {categories.map((cat) => renderCat(cat, true))}
+        {/* Fixos visíveis só no desktop */}
+        <div className="hidden md:flex items-stretch shrink-0 border-r border-gold/10">
+          <Link
+            href="/estudos"
+            className={`${linkBase} ${
+              onEstudos && !activeCat
+                ? "border-gold text-gold"
+                : "border-transparent text-muted hover:text-text"
+            }`}
+          >
+            Todos
+          </Link>
         </div>
+        <div className="hidden md:flex items-stretch shrink-0 border-r border-gold/10">
+          <Link
+            href="/noticias"
+            className={`${linkBase} gap-1.5 ${
+              pathname === "/noticias" || pathname.startsWith("/noticias/")
+                ? "border-ember text-ember"
+                : "border-transparent text-muted hover:text-text"
+            }`}
+          >
+            <span className="animate-blink w-1 h-1 rounded-full bg-ember/60 shrink-0" />
+            Fora do Deserto
+          </Link>
+        </div>
+
+        {/* Marquee — mais baixo no mobile */}
+        <div className="flex-1 overflow-hidden relative min-h-[36px] md:min-h-[44px]">
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-bg/98 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-bg/98 to-transparent z-10" />
+
+          <div className="flex items-center h-full animate-marquee">
+            {categories.map((cat) => renderCat(cat))}
+            {categories.map((cat) => renderCat(cat, true))}
+          </div>
+        </div>
+
       </div>
     </div>
   );

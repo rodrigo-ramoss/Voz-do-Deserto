@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { NoticiaMeta } from "@/lib/noticias";
 import { formatDateSmart } from "@/lib/utils";
 
@@ -58,10 +59,10 @@ export default function NoticiasCarousel({ noticias }: Props) {
         </div>
 
         {/* Corpo do carrossel */}
-        <div className="flex items-start gap-6 md:items-center">
+        <div className="flex items-center gap-4 md:gap-6">
 
-          {/* Título da caixa — "O que está acontecendo fora do deserto" */}
-          <div className="hidden md:flex shrink-0 flex-col justify-center border border-ember/20 bg-ember/5 px-4 py-3 min-w-[180px]">
+          {/* Caixa "O que está acontecendo fora do deserto" */}
+          <div className="hidden md:flex shrink-0 flex-col justify-center border border-ember/20 bg-ember/5 px-4 py-3 min-w-[150px]">
             <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">
               O que está
             </p>
@@ -73,40 +74,65 @@ export default function NoticiasCarousel({ noticias }: Props) {
             </p>
           </div>
 
-          {/* Notícia em destaque */}
-          <div key={noticia.slug} className="flex-1 min-w-0 animate-fade-in">
-            <Link
-              href={`/noticias/${noticia.slug}`}
-              className="group block"
-            >
-              <h2 className="font-display text-xl leading-snug text-text group-hover:text-gold transition-colors duration-200 mb-2 md:text-2xl">
-                {noticia.title}
-              </h2>
-              {noticia.excerpt && (
-                <p className="font-body text-sm leading-relaxed text-muted line-clamp-2">
-                  {noticia.excerpt}
-                </p>
-              )}
-            </Link>
+          {/* Imagem + Texto (animados juntos na troca de slide) */}
+          <div key={noticia.slug} className="flex-1 min-w-0 flex items-center gap-4 animate-fade-in">
 
-            <div className="flex items-center gap-4 mt-3">
-              <span className="font-label text-[9px] uppercase tracking-widest text-muted/50">
-                {formatDateSmart(noticia.date, "short")}
-              </span>
-              {noticia.source && (
-                <>
-                  <span className="text-gold/15">·</span>
-                  <span className="font-label text-[9px] uppercase tracking-widest text-muted/40">
-                    {noticia.source}
-                  </span>
-                </>
-              )}
+            {/* Imagem em miniatura */}
+            {noticia.image ? (
               <Link
                 href={`/noticias/${noticia.slug}`}
-                className="font-label text-[9px] uppercase tracking-widest text-gold/50 hover:text-gold transition-colors ml-auto"
+                className="relative shrink-0 w-[72px] h-[72px] md:w-24 md:h-24 overflow-hidden border border-ember/20 block group"
+                tabIndex={-1}
+                aria-hidden
               >
-                Ler →
+                <Image
+                  src={noticia.image}
+                  alt={noticia.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </Link>
+            ) : (
+              <div className="relative shrink-0 w-[72px] h-[72px] md:w-24 md:h-24 border border-ember/20 bg-ember/5 flex items-center justify-center">
+                <span className="font-display text-2xl text-ember/20 select-none">✦</span>
+              </div>
+            )}
+
+            {/* Texto */}
+            <div className="flex-1 min-w-0">
+              <Link
+                href={`/noticias/${noticia.slug}`}
+                className="group block"
+              >
+                <h2 className="font-display text-lg leading-snug text-text group-hover:text-gold transition-colors duration-200 mb-1.5 md:text-xl line-clamp-2">
+                  {noticia.title}
+                </h2>
+                {noticia.excerpt && (
+                  <p className="font-body text-sm leading-relaxed text-muted line-clamp-1 hidden md:block">
+                    {noticia.excerpt}
+                  </p>
+                )}
+              </Link>
+
+              <div className="flex items-center gap-3 mt-2">
+                <span className="font-label text-[9px] uppercase tracking-widest text-muted/50">
+                  {formatDateSmart(noticia.date, "short")}
+                </span>
+                {noticia.source && (
+                  <>
+                    <span className="text-gold/15">·</span>
+                    <span className="font-label text-[9px] uppercase tracking-widest text-muted/40 hidden sm:inline">
+                      {noticia.source}
+                    </span>
+                  </>
+                )}
+                <Link
+                  href={`/noticias/${noticia.slug}`}
+                  className="font-label text-[9px] uppercase tracking-widest text-gold/50 hover:text-gold transition-colors ml-auto"
+                >
+                  Ler →
+                </Link>
+              </div>
             </div>
           </div>
 

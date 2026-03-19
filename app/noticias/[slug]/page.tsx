@@ -92,7 +92,7 @@ export default async function NoticiaPage({
 
         {/* Conteúdo */}
         <article
-          className="font-body text-lg leading-relaxed text-text/85 prose-headings:font-display prose-headings:text-text prose-a:text-gold prose-a:no-underline hover:prose-a:underline"
+          className="prose-study max-w-prose"
           dangerouslySetInnerHTML={{ __html: noticia.contentHtml }}
         />
 

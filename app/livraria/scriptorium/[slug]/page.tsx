@@ -66,7 +66,7 @@ export default async function ScriptoriumArticlePage({
 
   // Chave definida na variável de ambiente OWNER_KEY do Vercel
   // Fallback: "vozdodeserto" — troque nas configurações do Vercel
-  const ownerKey = process.env.OWNER_KEY ?? "vozdodeserto";
+  const ownerKey = process.env.OWNER_KEY ?? "ramos-vozz";
   const isOwner = key === ownerKey;
 
   const formattedDate = new Date(

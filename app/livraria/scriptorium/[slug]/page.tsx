@@ -1,22 +1,16 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getAllScriptoriumSlugs,
-  getScriptoriumBySlug,
-} from "@/lib/scriptorium";
+import { getScriptoriumBySlug } from "@/lib/scriptorium";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
 import NewsletterForm from "@/app/components/NewsletterForm";
 import AuthorCard from "@/app/components/AuthorCard";
 
-// Renderização dinâmica (SSR) para poder verificar a chave na URL
+// SSR dinâmico — necessário para ler searchParams (chave do dono)
+// Não usa generateStaticParams pois force-dynamic já cobre todas as rotas
 export const dynamic = "force-dynamic";
-
-export async function generateStaticParams() {
-  return getAllScriptoriumSlugs().map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

@@ -57,9 +57,9 @@ export default function Navbar() {
           <Image
             src="/logo.svg"
             alt="Voz do Deserto"
-            width={200}
-            height={40}
-            className="h-10 w-auto transition-opacity duration-200 group-hover:opacity-75"
+            width={240}
+            height={48}
+            className="h-12 w-auto transition-opacity duration-200 group-hover:opacity-75"
             priority
           />
         </Link>
@@ -80,9 +80,9 @@ export default function Navbar() {
           <Image
             src="/logo.svg"
             alt="Voz do Deserto"
-            width={160}
-            height={32}
-            className="h-8 w-auto transition-opacity duration-200 group-hover:opacity-75"
+            width={200}
+            height={40}
+            className="h-10 w-auto transition-opacity duration-200 group-hover:opacity-75"
             priority
           />
         </Link>

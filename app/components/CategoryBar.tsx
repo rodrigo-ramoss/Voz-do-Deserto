@@ -41,13 +41,21 @@ function Bar({ categories }: { categories: string[] }) {
             <Link
               key={cat}
               href={`/estudos?cat=${encodeURIComponent(cat)}`}
-              className={`${linkBase} ${
+              className={`${linkBase} gap-2 ${
                 activeCat === cat
                   ? "border-gold text-gold"
                   : "border-transparent text-muted hover:text-text"
               }`}
             >
               {cat}
+              {cat === "Escatologia Digital" && (
+                <span className="inline-flex items-center gap-1 ml-1">
+                  <span className="animate-blink w-1 h-1 rounded-full bg-gold/70 shrink-0" />
+                  <span className="font-label text-[8px] uppercase tracking-[0.15em] text-gold/60 leading-none whitespace-nowrap">
+                    artigo premium grátis
+                  </span>
+                </span>
+              )}
             </Link>
           ))}
         </div>

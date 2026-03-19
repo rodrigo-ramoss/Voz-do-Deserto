@@ -19,7 +19,7 @@ const ALL_CATEGORIES = [
     icon: "⚙",
   },
   {
-    name: "Escatologia Digital 2.0",
+    name: "Escatologia Digital 2.0 - IA e Controle",
     description:
       "O fim dos tempos reimaginado para uma era de algoritmos, deep fakes e vigilância total.",
     icon: "◈",
@@ -65,6 +65,12 @@ const ALL_CATEGORIES = [
     description:
       "Padrões que se repetem na história, nos mercados e nas Escrituras — e o que eles apontam.",
     icon: "◇",
+  },
+  {
+    name: "Igreja & CIA",
+    description:
+      "Conteúdo digno de excomunhão instantânea em pelo menos seis denominações. A engrenagem oculta do poder eclesiástico, o mercado da fé e tudo que o Banco Espiritual nunca deveria ter se tornado.",
+    icon: "✝",
   },
 ];
 

@@ -3,111 +3,104 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
-const links = [
+const leftLinks = [
   { label: "Estudos", href: "/estudos" },
   { label: "Categorias", href: "/categorias" },
+];
+
+const rightLinks = [
   { label: "Arquivo Secreto", href: "/livraria" },
   { label: "Sobre", href: "/sobre" },
 ];
 
-/*
- * LEGIBILIDADE (T2) + ACESSIBILIDADE (T1 WCAG)
- * ─────────────────────────────────────────────────────────────────────────
- * Desktop: text-sm (14px) — era text-[11px] (11px), abaixo do mínimo legível
- * Mobile drawer: text-base (16px) — mínimo WCAG para toque confortável
- * Hambúrguer: min-h-[44px] min-w-[44px] — área de toque WCAG 2.5.5 AA
- * Itens do drawer: py-4 (48px de área vertical) — toque sem erro
- * aria-controls + aria-expanded + aria-current: mantidos de versão anterior
- * ─────────────────────────────────────────────────────────────────────────
- */
+const allLinks = [...leftLinks, ...rightLinks];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [logoError, setLogoError] = useState(false);
   const pathname = usePathname();
+
+  const navLink = (label: string, href: string) => {
+    const isActive = pathname === href || pathname.startsWith(href + "/");
+    return (
+      <Link
+        key={href}
+        href={href}
+        aria-current={isActive ? "page" : undefined}
+        className={`font-label text-sm uppercase tracking-widest transition-colors duration-200 whitespace-nowrap ${
+          isActive ? "text-gold" : "text-muted hover:text-gold"
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-gold/10 bg-bg/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
 
-        {/* Logo + nome do site */}
-        <Link
-          href="/"
-          className="flex items-center gap-3 group"
-          aria-label="Voz do Deserto — página inicial"
-        >
-          {!logoError && (
-            <div className="relative w-9 h-9 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo.webp"
-                alt="Voz do Deserto"
-                onError={() => setLogoError(true)}
-                className="w-full h-full object-contain transition-opacity duration-200 group-hover:opacity-80"
-              />
-            </div>
-          )}
-          <span className="font-display text-xl tracking-wide text-gold leading-none">
-            Voz do Deserto
-          </span>
-        </Link>
+      {/* ── Desktop: 3 colunas (nav esq | logo centro | nav dir) ───── */}
+      <div className="hidden md:grid grid-cols-3 items-center max-w-6xl mx-auto px-6 py-4">
 
-        {/* Navegação desktop
-            text-sm (14px) — era text-[11px], tornava os itens quase invisíveis.
-            text-muted = #B8A98A (contraste 8.6:1) sem qualquer opacity redutora. */}
-        <nav
-          className="hidden items-center gap-8 md:flex"
-          aria-label="Navegação principal"
-        >
-          {links.map(({ label, href }) => {
-            const isActive = pathname === href || pathname.startsWith(href + "/");
-            return (
-              <Link
-                key={href}
-                href={href}
-                aria-current={isActive ? "page" : undefined}
-                className={`font-label text-sm uppercase tracking-widest transition-colors duration-200 ${
-                  isActive
-                    ? "text-gold"
-                    : "text-muted hover:text-gold"
-                }`}
-              >
-                {label}
-              </Link>
-            );
-          })}
+        {/* Esquerda */}
+        <nav className="flex items-center gap-8" aria-label="Navegação esquerda">
+          {leftLinks.map(({ label, href }) => navLink(label, href))}
         </nav>
 
-        {/* Hambúrguer — min-h/w 44px para área de toque WCAG 2.5.5 */}
+        {/* Centro — logo */}
+        <Link
+          href="/"
+          className="flex justify-center items-center group"
+          aria-label="Voz do Deserto — página inicial"
+        >
+          <Image
+            src="/logo.svg"
+            alt="Voz do Deserto"
+            width={200}
+            height={40}
+            className="h-10 w-auto transition-opacity duration-200 group-hover:opacity-75"
+            priority
+          />
+        </Link>
+
+        {/* Direita */}
+        <nav className="flex items-center justify-end gap-8" aria-label="Navegação direita">
+          {rightLinks.map(({ label, href }) => navLink(label, href))}
+        </nav>
+      </div>
+
+      {/* ── Mobile: logo + hambúrguer ───────────────────────────────── */}
+      <div className="flex md:hidden items-center justify-between px-6 py-4">
+        <Link
+          href="/"
+          aria-label="Voz do Deserto — página inicial"
+          className="group"
+        >
+          <Image
+            src="/logo.svg"
+            alt="Voz do Deserto"
+            width={160}
+            height={32}
+            className="h-8 w-auto transition-opacity duration-200 group-hover:opacity-75"
+            priority
+          />
+        </Link>
+
         <button
           onClick={() => setOpen((prev) => !prev)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           aria-controls="mobile-nav-menu"
-          className="relative flex flex-col items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 md:hidden"
+          className="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] gap-1.5"
         >
-          <span
-            className={`block h-px w-5 bg-muted transition-all duration-300 ${
-              open ? "rotate-45 translate-y-[5px]" : ""
-            }`}
-          />
-          <span
-            className={`block h-px w-5 bg-muted transition-all duration-300 ${
-              open ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-px w-5 bg-muted transition-all duration-300 ${
-              open ? "-rotate-45 -translate-y-[5px]" : ""
-            }`}
-          />
+          <span className={`block h-px w-5 bg-muted transition-all duration-300 ${open ? "rotate-45 translate-y-[5px]" : ""}`} />
+          <span className={`block h-px w-5 bg-muted transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+          <span className={`block h-px w-5 bg-muted transition-all duration-300 ${open ? "-rotate-45 -translate-y-[5px]" : ""}`} />
         </button>
       </div>
 
-      {/* Menu mobile colapsável
-          text-base (16px) — mínimo legível e confortável em mobile.
-          py-4 por link → área de toque ≥ 44px (WCAG 2.5.5 ✓).
-          text-muted = #B8A98A sem opacity → contraste 8.6:1 ✓           */}
+      {/* ── Menu mobile colapsável ──────────────────────────────────── */}
       <div
         id="mobile-nav-menu"
         className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
@@ -119,7 +112,7 @@ export default function Navbar() {
           aria-label="Menu mobile"
         >
           <div className="flex flex-col">
-            {links.map(({ label, href }) => {
+            {allLinks.map(({ label, href }) => {
               const isActive = pathname === href;
               return (
                 <Link

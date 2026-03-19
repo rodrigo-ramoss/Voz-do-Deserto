@@ -5,6 +5,8 @@ category: "Tecnologia & Teologia"
 image: "/imagens/herege-de-silicio.webp"
 description: "O transhumanismo não ataca a fé cristã — ele herda seu erro mais antigo: o desprezo platônico pelo corpo, travestido de esperança tecnológica."
 keywords: "#ImortabilidadeDigital #Transhumanismo #Gnosticismo #Ressurreição #Desigrejado"
+price: "R$ 19,90"
+paymentUrl: "COLE_AQUI_O_LINK_DO_STRIPE_HOTMART_OU_KIWIFY"
 faq:
   - question: "Is digital immortality compatible with Christian theology?"
     answer: "Not with biblical Christianity, which insists on bodily resurrection. However, it is remarkably compatible with the Platonic dualism that much of popular Christianity quietly adopted — the idea that the real self is an immaterial soul that merely inhabits a body. The transhumanist just renamed the soul 'data pattern.'"

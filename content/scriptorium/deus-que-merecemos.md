@@ -5,6 +5,8 @@ category: "Tecnologia & Teologia"
 image: "/imagens/deus-que-merecemos.webp"
 description: "Kurzweil não inventou o Deus de Silício. Teilhard construiu a pista de decolagem. E a Igreja aplaudiu cada passo do processo."
 keywords: "#Superinteligência #TeilhardDeChardin #PontoÔmega #Pelagianismo #Escatologia"
+price: "R$ 19,90"
+paymentUrl: "COLE_AQUI_O_LINK_DO_STRIPE_HOTMART_OU_KIWIFY"
 faq:
   - question: "Is Teilhard de Chardin's Omega Point compatible with transhumanism?"
     answer: "Structurally, yes — far more than most theologians are comfortable admitting. Teilhard described the Omega Point as a convergence of all consciousness toward a divine attractor through an evolutionary process driven by increasing complexity. Kurzweil adopted this exact framework, removing only the theological label. The architecture is identical: history has a direction, intelligence is its arrow, and the endpoint is something indistinguishable from omniscience. Teilhard called it Christ. Kurzweil calls it the Singularity. The metaphysical scaffold is the same."

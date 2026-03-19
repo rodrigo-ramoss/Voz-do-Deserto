@@ -16,15 +16,32 @@ export interface ScriptoriumMeta {
   description?: string;
   keywords?: string;
   readTime?: string;
+  price?: string;        // ex: "R$ 19,90"
+  paymentUrl?: string;   // link Stripe / Hotmart / Kiwify
 }
 
 export interface ScriptoriumArticle extends ScriptoriumMeta {
   contentHtml: string;
+  previewHtml: string;   // primeiros parágrafos para o paywall
   faqItems?: { question: string; answer: string }[];
 }
 
+// Converte markdown para HTML de forma assíncrona
+async function toHtml(md: string): Promise<string> {
+  const result = await remark().use(html).process(md);
+  return result.toString();
+}
+
+// Extrai os primeiros N parágrafos do markdown (evita cortar no meio de bloco)
+function firstParagraphs(content: string, count = 3): string {
+  const blocks = content
+    .split(/\n{2,}/)
+    .map((b) => b.trim())
+    .filter((b) => b && !b.startsWith("#")); // ignora headings
+  return blocks.slice(0, count).join("\n\n");
+}
+
 export function getAllScriptorium(): ScriptoriumMeta[] {
-  // Retorna lista vazia se a pasta ainda não tiver artigos
   if (!fs.existsSync(scriptoriumDir)) return [];
 
   const files = fs
@@ -63,6 +80,8 @@ export function getAllScriptorium(): ScriptoriumMeta[] {
         description: data.description,
         keywords: data.keywords,
         readTime,
+        price: data.price,
+        paymentUrl: data.paymentUrl,
       };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
@@ -77,8 +96,11 @@ export async function getScriptoriumBySlug(
   const raw = fs.readFileSync(filepath, "utf-8");
   const { data, content } = matter(raw);
 
-  const processed = await remark().use(html).process(content);
-  const contentHtml = processed.toString();
+  // HTML completo e preview parcial (3 primeiros parágrafos)
+  const [contentHtml, previewHtml] = await Promise.all([
+    toHtml(content),
+    toHtml(firstParagraphs(content, 3)),
+  ]);
 
   const excerpt =
     data.description ??
@@ -104,7 +126,10 @@ export async function getScriptoriumBySlug(
     description: data.description,
     keywords: data.keywords,
     readTime,
+    price: data.price,
+    paymentUrl: data.paymentUrl,
     contentHtml,
+    previewHtml,
     faqItems,
   };
 }

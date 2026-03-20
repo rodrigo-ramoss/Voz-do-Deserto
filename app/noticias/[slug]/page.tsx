@@ -4,6 +4,7 @@ import { getAllNoticiasSlugs, getNoticiaBySlug } from "@/lib/noticias";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
 import NewsletterForm from "@/app/components/NewsletterForm";
+import NewsletterPopup from "@/app/components/NewsletterPopup";
 
 export async function generateStaticParams() {
   return getAllNoticiasSlugs().map((slug) => ({ slug }));
@@ -51,6 +52,7 @@ export default async function NoticiaPage({
   return (
     <>
       <ReadingProgress />
+      <NewsletterPopup />
 
       <main className="mx-auto max-w-3xl px-6 py-16">
         {/* Breadcrumb manual */}
@@ -91,16 +93,41 @@ export default async function NoticiaPage({
 
         <div className="h-px w-16 bg-gold/25 mb-10" />
 
-        {/* Conteúdo */}
-        <article
-          className="prose-study max-w-prose"
-          dangerouslySetInnerHTML={{ __html: noticia.contentHtml }}
-        />
-
-        {/* Newsletter */}
-        <div className="mt-14">
-          <NewsletterForm context="article" />
-        </div>
+        {/* Conteúdo — injeta NewsletterForm inline se artigo contém {{NEWSLETTER}} */}
+        {(() => {
+          const MARKER = "<p>{{NEWSLETTER}}</p>";
+          const idx = noticia.contentHtml.indexOf(MARKER);
+          if (idx === -1) {
+            return (
+              <>
+                <article
+                  className="prose-study max-w-prose"
+                  dangerouslySetInnerHTML={{ __html: noticia.contentHtml }}
+                />
+                <div className="mt-14">
+                  <NewsletterForm context="article" />
+                </div>
+              </>
+            );
+          }
+          const before = noticia.contentHtml.slice(0, idx);
+          const after = noticia.contentHtml.slice(idx + MARKER.length);
+          return (
+            <>
+              <article
+                className="prose-study max-w-prose"
+                dangerouslySetInnerHTML={{ __html: before }}
+              />
+              <div className="mt-10 mb-10">
+                <NewsletterForm context="article" />
+              </div>
+              <article
+                className="prose-study max-w-prose"
+                dangerouslySetInnerHTML={{ __html: after }}
+              />
+            </>
+          );
+        })()}
 
         {/* Compartilhar */}
         <div className="mt-12 pt-8 border-t border-gold/10">

@@ -93,24 +93,11 @@ Nomear isso agora, enquanto ainda parece distante, não é paranoia.
 
 ---
 
-## Fique um passo à frente
+{{NEWSLETTER}}
 
-Os sinais estão visíveis para quem sabe onde olhar. Cadastra seu e-mail e garante que a próxima análise chega direto pra você — antes que o algoritmo decida se você merece ver.
+*Continuação desta análise disponível apenas para os membros do Arquivo Secreto.*
 
-**[👉 Quero receber as próximas análises](https://vozdo deserto.com.br/newsletter)**
-
----
-
-## Isso é apenas a superfície. O Arquivo Secreto vai mais fundo.
-
-Na continuação desta análise, disponível apenas para membros do Arquivo Secreto, exploramos:
-
-- o paralelo entre nanotecnologia interna ao corpo e o conceito profético de marca que altera a identidade do portador
-- por que o transumanismo médico e o controle sistêmico convergem para o mesmo ponto
-- a distinção bíblica entre curar o corpo e redefinir o que o corpo é
-- e o que os textos de Daniel e Apocalipse dizem sobre a dissolução da fronteira entre humano e artefato
-
-**[👉 Acesse o Arquivo Secreto e continue essa leitura](https://vozdo deserto.com.br/arquivo-secreto)**
+[Acesse o Arquivo Secreto](/livraria)
 
 ---
 

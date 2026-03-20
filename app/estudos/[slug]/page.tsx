@@ -8,6 +8,7 @@ import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
 import NewsletterForm from "@/app/components/NewsletterForm";
 import AuthorCard from "@/app/components/AuthorCard";
+import NewsletterPopup from "@/app/components/NewsletterPopup";
 
 export async function generateStaticParams() {
   return getAllStudySlugs().map((slug) => ({ slug }));
@@ -139,6 +140,7 @@ export default async function StudyPage({
 
       {/* Barra de progresso de leitura (dourada, topo fixo) */}
       <ReadingProgress />
+      <NewsletterPopup />
 
       {/* Cabeçalho do artigo */}
       <div className="border-b border-gold/10 px-6 py-14">

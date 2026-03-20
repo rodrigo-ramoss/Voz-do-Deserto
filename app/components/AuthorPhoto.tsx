@@ -37,7 +37,7 @@ export default function AuthorPhoto({ size = "md" }: AuthorPhotoProps) {
         src="/rodrigo.webp"
         alt="Rodrigo Ramos — Voz do Deserto"
         onError={() => setError(true)}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-top"
       />
     </div>
   );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getAllNoticiasSlugs, getNoticiaBySlug } from "@/lib/noticias";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
+import NewsletterForm from "@/app/components/NewsletterForm";
 
 export async function generateStaticParams() {
   return getAllNoticiasSlugs().map((slug) => ({ slug }));
@@ -96,6 +97,12 @@ export default async function NoticiaPage({
           dangerouslySetInnerHTML={{ __html: noticia.contentHtml }}
         />
 
+        {/* Newsletter */}
+        <div className="mt-14">
+          <NewsletterForm context="article" />
+        </div>
+
+        {/* Compartilhar */}
         <div className="mt-12 pt-8 border-t border-gold/10">
           <ShareButtons title={noticia.title} url={`/noticias/${noticia.slug}`} />
         </div>

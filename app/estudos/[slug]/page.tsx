@@ -240,8 +240,10 @@ export default async function StudyPage({
               </div>
             )}
 
-            {/* Card do autor — estilo revista */}
-            <AuthorCard />
+            {/* Newsletter ao final do artigo */}
+            <div className="mt-14">
+              <NewsletterForm context="article" />
+            </div>
 
             {/* Compartilhar */}
             <ShareButtons
@@ -249,10 +251,8 @@ export default async function StudyPage({
               url={canonicalUrl}
             />
 
-            {/* Newsletter ao final do artigo */}
-            <div className="mt-14">
-              <NewsletterForm context="article" />
-            </div>
+            {/* Card do autor — estilo revista */}
+            <AuthorCard />
 
             {/* Voltar */}
             <div className="mt-10 pt-8 border-t border-gold/10">

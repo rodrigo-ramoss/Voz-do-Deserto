@@ -119,14 +119,17 @@ export default function NewsletterForm({
   return (
     <div className="border border-gold/15 bg-card p-6 md:p-8">
       <p className="font-label text-[9px] uppercase tracking-[0.3em] text-gold mb-3">
-        Não perca nenhum estudo
+        Não perca nenhum artigo
       </p>
       <p className="font-display text-xl text-text mb-2">
         Receba os próximos estudos no seu e-mail
       </p>
       <p className="font-body text-sm text-text/50 leading-relaxed mb-5">
-        Sem spam. Apenas novos estudos publicados — apócrifos, exegese,
-        história da Igreja. Cancele quando quiser.
+        Estamos mapeando como sobreviver ao futuro que está sendo construído
+        agora. Esse tipo de conteúdo não dura para sempre na internet —
+        algoritmos censuram, plataformas derrubam, sistemas ignoram. Cadastre
+        seu e-mail e garanta acesso direto antes que alguém decida que você
+        não deveria estar lendo isso.
       </p>
 
       <form onSubmit={handleSubmit} className="flex gap-3 flex-wrap">

@@ -25,9 +25,12 @@ export default function AuthorCard() {
             Evangelista · Pesquisador · Voz do Deserto
           </p>
           <p className="font-body text-sm leading-relaxed text-text/50 mb-4 max-w-md">
-            Convertido em 2016, mais de 50 cursos de teologia depois. Estuda
-            apócrifos, história da Igreja e exegese do original grego e hebraico.
-            Escreve para quem quer profundidade — não motivacional barato.
+            Rodrigo Ramos estuda o que ninguém ensina na faculdade de teologia
+            e o que ninguém quer ouvir na faculdade de tecnologia: que os dois
+            estão descrevendo a mesma coisa. Origens cristãs. Manuscritos
+            esquecidos. Escatologia tecnológica. O sistema que está sendo
+            construído — e o chamado para sair dele antes que as portas fechem.
+            Voz do Deserto — para quem ainda está acordado.
           </p>
 
           {/* Redes sociais */}

@@ -132,85 +132,38 @@ export default function SobrePage() {
           Usar um H2 aqui criaria ruído na navegação por headings sem benefício. */}
       <section className="prose-study">
         <p>
-          Rodrigo Ramos não veio da teologia. Veio da vida real.
+          Rodrigo Ramos não estuda o que está nos currículos. Estuda o que está acontecendo.
         </p>
         <p>
-          Foi convertido em 2016, aos 23 anos. E diferente da maioria que entra
-          numa igreja e senta no banco por anos esperando alguém explicar o que
-          está acontecendo, Rodrigo fez o que pessoas com fome genuína fazem:
-          foi estudar. No mesmo ano da conversão, já estava mergulhado em cursos
-          de teologia — do básico ao bacharelado. Mais de 50 cursos ao longo
-          dos anos seguintes. Não por obrigação. Por necessidade.
+          Enquanto o mundo religioso debate dízimo e cobertura espiritual, Rodrigo
+          investiga a convergência entre profecia bíblica e a arquitetura tecnológica
+          que está sendo construída em tempo real — algoritmos que tomam decisões sem
+          supervisão humana, moedas digitais programadas para expirar, sistemas de
+          vigilância que conhecem seu rosto antes de você entrar numa sala.
         </p>
         <p>
-          Porque quanto mais estudava, mais a distância entre o que as fontes
-          originais diziam e o que os púlpitos pregavam ficava impossível de
-          ignorar.
+          Não é ficção científica. É Apocalipse 13 com código-fonte aberto.
         </p>
         <p>
-          Hoje, aos 32 anos, Rodrigo é evangelista — não por cargo, não por
-          salário, não por título. Por missão. Pertence a uma congregação
-          pequena onde o pastor não é sustentado financeiramente pela igreja,
-          todos se ajudam, e há liberdade real de ensinar a Palavra com
-          honestidade. O tipo de comunidade que o livro de Atos descreve e que
-          o sistema denominacional moderno raramente consegue reproduzir.
+          Formado na escola do que ninguém ensina — manuscritos que foram enterrados
+          no deserto, textos que o cânon rejeitou, histórias que a instituição religiosa
+          suprimiu por conveniência — Rodrigo chegou à conclusão que a maioria dos
+          estudiosos evita: o sistema que a Escritura chama de Besta não chegará como
+          um ditador com um exército. Chegará como conveniência. Como conforto. Como
+          a solução para todos os seus problemas — desde que você aceite os termos de uso.
         </p>
         <p>
-          Mas Rodrigo viu o outro lado também.
+          A Voz do Deserto existe para os que ainda têm ouvidos. Para os que saíram
+          do sistema religioso institucional não porque perderam a fé, mas porque a fé
+          os tornou incapazes de continuar fingindo que está tudo bem.
         </p>
         <p>
-          Viu o que acontece quando a fé se torna produto. Quando o templo vira
-          centro de convenções. Quando o dízimo substitui a graça e o pastor
-          substitui o Espírito Santo. Viu cristãos sendo transformados em
-          clientes — pagando para receber um serviço espiritual semanal, sem
-          perguntas, sem profundidade, sem liberdade de duvidar.
+          O chamado já começou. O deserto está cheio de pessoas que ainda não sabem
+          que estão nele.
         </p>
-        <p>
-          E viu o resultado: 16 milhões de brasileiros que saíram das igrejas
-          mas não saíram da fé. Pessoas que leram demais para aceitar menos. Que
-          sofreram demais para continuar fingindo. Que amam a Deus profundamente
-          demais para deixar que uma instituição defina os limites desse amor.
-        </p>
-        <p>
-          A Voz do Deserto nasceu para essas pessoas.
-        </p>
-        <p>
-          Não é uma plataforma de desconstrução pela desconstrução. Não é ateísmo
-          com versículos. É teologia séria, com fontes reais, para adultos que
-          acreditam que a fé mais sólida não é a que nunca foi testada — é a que
-          foi ao fogo e voltou.
-        </p>
-        <p>
-          Aqui você vai encontrar a história da Igreja que ninguém conta no culto
-          dominical. Os manuscritos que foram enterrados porque faziam perguntas
-          inconvenientes. Os textos que Atanásio baniu, que Erasmo resgatou, que
-          Lutero questionou. A crítica textual que explica por que sua Bíblia tem
-          versículos que não existiam nos manuscritos originais. A geopolítica do
-          Oriente Médio lida à luz da escatologia — com fontes verificáveis, sem
-          histeria profética.
-        </p>
-        <p>
-          E vai encontrar cuidado. Porque cada artigo, cada pesquisa, cada
-          análise é escrita com consciência de que do outro lado da tela há
-          alguém que foi ferido pelo sistema religioso. Alguém que ainda busca.
-          Alguém que merece mais do que foi dado a ele dentro de quatro paredes
-          com telão e QR code para dízimo.
-        </p>
-        <p>
-          Rodrigo escreve no deserto — não porque abandonou Deus, mas porque o
-          deserto é onde Deus sempre falou com mais clareza. É onde Moisés
-          encontrou a sarça ardente. Onde Elias ouviu a voz mansa e delicada.
-          Onde Jesus se preparou para tudo que viria depois.
-        </p>
-        <p>
-          O templo pode fechar as portas da sua congregação. Pode te expulsar.
-          Pode te chamar de herege por fazer as perguntas certas.
-        </p>
-        <blockquote>
-          Mas o deserto não tem porteiro.
-        </blockquote>
         <p className="font-label text-[10px] uppercase tracking-widest text-muted">
-          — Rodrigo Ramos · Evangelista. Pesquisador. Voz do Deserto.
+          — Rodrigo Ramos · Pesquisador de origens cristãs, escatologia tecnológica
+          e o Cristianismo que sobreviveu ao deserto.
         </p>
       </section>
 

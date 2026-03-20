@@ -132,38 +132,83 @@ export default function SobrePage() {
           Usar um H2 aqui criaria ruído na navegação por headings sem benefício. */}
       <section className="prose-study">
         <p>
-          Rodrigo Ramos não estuda o que está nos currículos. Estuda o que está acontecendo.
+          Rodrigo Ramos não estuda o que está nos currículos. Ele estuda o que está
+          acontecendo — e o que foi deliberadamente enterrado para que você não pudesse
+          ver a conexão.
         </p>
         <p>
-          Enquanto o mundo religioso debate dízimo e cobertura espiritual, Rodrigo
-          investiga a convergência entre profecia bíblica e a arquitetura tecnológica
-          que está sendo construída em tempo real — algoritmos que tomam decisões sem
-          supervisão humana, moedas digitais programadas para expirar, sistemas de
-          vigilância que conhecem seu rosto antes de você entrar numa sala.
+          Convertido em 2016, Rodrigo não seguiu o caminho padrão de quem entra numa
+          igreja evangélica brasileira. Enquanto a maioria aprendia a aplaudir no momento
+          certo do culto, ele mergulhava nos manuscritos de Nag Hammadi, na crítica
+          textual do Novo Testamento, na história das controvérsias cristológicas do
+          século II, nos textos que Atanásio mandou queimar e que o deserto egípcio
+          guardou por 1.600 anos. Não como curiosidade acadêmica — como necessidade.
+          Porque a fé que ele havia encontrado exigia mais do que o sistema conseguia oferecer.
         </p>
         <p>
-          Não é ficção científica. É Apocalipse 13 com código-fonte aberto.
+          Com o tempo, percebeu que havia dois tipos de pesquisadores no mundo. Os que
+          estudam o passado e os que analisam o presente. Ele decidiu ser o terceiro
+          tipo: o que percebe que os dois estão descrevendo a mesma coisa.
         </p>
         <p>
-          Formado na escola do que ninguém ensina — manuscritos que foram enterrados
-          no deserto, textos que o cânon rejeitou, histórias que a instituição religiosa
-          suprimiu por conveniência — Rodrigo chegou à conclusão que a maioria dos
-          estudiosos evita: o sistema que a Escritura chama de Besta não chegará como
-          um ditador com um exército. Chegará como conveniência. Como conforto. Como
-          a solução para todos os seus problemas — desde que você aceite os termos de uso.
+          Os textos proféticos do século I falam de um sistema de controle econômico
+          global vinculado à identidade, à conformidade e à lealdade a um poder que
+          reivindica autoridade absoluta. A arquitetura tecnológica do século XXI —
+          inteligência artificial autônoma, moedas digitais programáveis, biometria
+          universal, sistemas de vigilância de massa — está construindo, peça por peça,
+          exatamente esse sistema. Não como plano conspiratório de bastidor. Como
+          conveniência. Como progresso. Como a solução natural para os problemas que
+          o mundo enfrenta.
         </p>
         <p>
-          A Voz do Deserto existe para os que ainda têm ouvidos. Para os que saíram
-          do sistema religioso institucional não porque perderam a fé, mas porque a fé
-          os tornou incapazes de continuar fingindo que está tudo bem.
+          Rodrigo não grita. Ele mostra. Com fontes verificáveis, com exegese
+          responsável, com a mesma disciplina intelectual que levaria qualquer
+          pesquisador sério a qualquer outra conclusão — se estivesse disposto a
+          olhar para o conjunto em vez de para as partes isoladas.
         </p>
         <p>
-          O chamado já começou. O deserto está cheio de pessoas que ainda não sabem
-          que estão nele.
+          A Voz do Deserto é o resultado dessa visão de conjunto.
         </p>
+
+        <h2 className="font-display text-xl text-text mt-10 mb-4">Para quem é este blog</h2>
+        <p>
+          É para você que saiu de uma igreja — ou que ainda está dentro, mas sente que
+          algo não encaixa. Para você que leu a Bíblia com atenção suficiente para
+          perceber que o que é pregado no domingo raramente é o que o texto realmente
+          diz. Para você que olha para as notícias sobre IA, CBDCs e vigilância digital
+          e sente uma ressonância estranha com versículos que nunca ouviu pregados
+          com seriedade.
+        </p>
+        <p>
+          Você não perdeu a fé. Você ficou grande demais para o molde que o sistema
+          oferecia.
+        </p>
+
+        <h2 className="font-display text-xl text-text mt-10 mb-4">O que você encontra aqui</h2>
+        <p>
+          Encontra o que é mais raro na internet hoje: profundidade sem agenda
+          institucional. Cada artigo começa com o dado verificável — histórico, textual
+          ou tecnológico — antes de qualquer interpretação. Cada conclusão nomeia os
+          próprios limites. Cada fonte é real e checável.
+        </p>
+        <p>
+          Você vai entender o Cristianismo primitivo como ele realmente era — plural,
+          disputado, muito mais rico do que o cânon do século IV deixou transparecer.
+          Vai entender como a arquitetura digital do presente se encaixa no quadro
+          profético com uma precisão que exige mais do que coincidência para explicar.
+          E vai entender que o chamado para fora do sistema — que João Batista pregou
+          no deserto, que os Padres do Deserto viveram no século IV, que os 16 milhões
+          de desigrejados brasileiros estão experimentando agora sem ainda ter nome
+          para isso — não é abandono da fé.
+        </p>
+        <p>
+          É a fé funcionando exatamente como deveria.
+        </p>
+        <blockquote>
+          O deserto não é o fim. É onde a voz ainda é clara.
+        </blockquote>
         <p className="font-label text-[10px] uppercase tracking-widest text-muted">
-          — Rodrigo Ramos · Pesquisador de origens cristãs, escatologia tecnológica
-          e o Cristianismo que sobreviveu ao deserto.
+          — Rodrigo Ramos · Fundador da Voz do Deserto
         </p>
       </section>
 

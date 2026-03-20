@@ -5,6 +5,7 @@ import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
 import NewsletterForm from "@/app/components/NewsletterForm";
 import NewsletterPopup from "@/app/components/NewsletterPopup";
+import ArquivoSecretoCTA from "@/app/components/ArquivoSecretoCTA";
 
 export async function generateStaticParams() {
   return getAllNoticiasSlugs().map((slug) => ({ slug }));
@@ -93,40 +94,64 @@ export default async function NoticiaPage({
 
         <div className="h-px w-16 bg-gold/25 mb-10" />
 
-        {/* Conteúdo — injeta NewsletterForm inline se artigo contém {{NEWSLETTER}} */}
+        {/* Conteúdo — injeta componentes nos marcadores {{NEWSLETTER}} e {{ARQUIVO_SECRETO}} */}
         {(() => {
-          const MARKER = "<p>{{NEWSLETTER}}</p>";
-          const idx = noticia.contentHtml.indexOf(MARKER);
-          if (idx === -1) {
+          const NL = "<p>{{NEWSLETTER}}</p>";
+          const AS = "<p>{{ARQUIVO_SECRETO}}</p>";
+          const html = noticia.contentHtml;
+
+          const nlIdx = html.indexOf(NL);
+          const hasNL = nlIdx !== -1;
+
+          // Sem marcadores — artigo completo + newsletter no final
+          if (!hasNL && html.indexOf(AS) === -1) {
             return (
               <>
-                <article
-                  className="prose-study max-w-prose"
-                  dangerouslySetInnerHTML={{ __html: noticia.contentHtml }}
-                />
-                <div className="mt-14">
-                  <NewsletterForm context="article" />
-                </div>
+                <article className="prose-study max-w-prose" dangerouslySetInnerHTML={{ __html: html }} />
+                <div className="mt-14"><NewsletterForm context="article" /></div>
               </>
             );
           }
-          const before = noticia.contentHtml.slice(0, idx);
-          const after = noticia.contentHtml.slice(idx + MARKER.length);
-          return (
-            <>
-              <article
-                className="prose-study max-w-prose"
-                dangerouslySetInnerHTML={{ __html: before }}
-              />
-              <div className="mt-10 mb-10">
-                <NewsletterForm context="article" />
-              </div>
-              <article
-                className="prose-study max-w-prose"
-                dangerouslySetInnerHTML={{ __html: after }}
-              />
-            </>
-          );
+
+          // Monta segmentos dividindo pelos marcadores em ordem
+          const segments: React.ReactNode[] = [];
+          let remaining = html;
+
+          while (remaining.length > 0) {
+            const i_nl = remaining.indexOf(NL);
+            const i_as = remaining.indexOf(AS);
+            const first = [i_nl, i_as].filter((i) => i !== -1).sort((a, b) => a - b)[0];
+
+            if (first === undefined) {
+              segments.push(
+                <article key={segments.length} className="prose-study max-w-prose"
+                  dangerouslySetInnerHTML={{ __html: remaining }} />
+              );
+              break;
+            }
+
+            const before = remaining.slice(0, first);
+            if (before) {
+              segments.push(
+                <article key={segments.length} className="prose-study max-w-prose"
+                  dangerouslySetInnerHTML={{ __html: before }} />
+              );
+            }
+
+            if (first === i_nl) {
+              segments.push(
+                <div key={segments.length} className="mt-10 mb-10">
+                  <NewsletterForm context="article" />
+                </div>
+              );
+              remaining = remaining.slice(first + NL.length);
+            } else {
+              segments.push(<ArquivoSecretoCTA key={segments.length} />);
+              remaining = remaining.slice(first + AS.length);
+            }
+          }
+
+          return <>{segments}</>;
         })()}
 
         {/* Compartilhar */}

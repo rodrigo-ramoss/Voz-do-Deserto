@@ -98,6 +98,48 @@ body {
   animation-play-state: paused;
 }
 
+/* ── Arquivo Secreto CTA ─────────────────────────────────────────────── */
+
+/* Borda pulsante dourada (glow in/out a cada 2.5s) */
+@keyframes arquivo-glow {
+  0%, 100% {
+    box-shadow:
+      0 0  8px rgba(212, 183, 106, 0.05),
+      0 0 24px rgba(212, 183, 106, 0.03);
+    border-color: rgba(212, 183, 106, 0.20);
+  }
+  50% {
+    box-shadow:
+      0 0 18px rgba(212, 183, 106, 0.22),
+      0 0 50px rgba(212, 183, 106, 0.10);
+    border-color: rgba(212, 183, 106, 0.65);
+  }
+}
+
+/* Sweep de luz que passa da esquerda para a direita */
+@keyframes arquivo-sweep {
+  0%   { left: -40%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: 130%;  opacity: 0; }
+}
+
+.arquivo-secreto-cta {
+  animation: arquivo-glow 2.5s ease-in-out infinite;
+}
+
+.arquivo-sweep {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 183, 106, 0.05) 50%,
+    transparent 100%
+  );
+  animation: arquivo-sweep 5s ease-in-out infinite;
+  animation-delay: 1s;
+  transform: skewX(-12deg);
+}
+
 /* Piscar suave para badge premium */
 @keyframes blink {
   0%, 100% { opacity: 1; }

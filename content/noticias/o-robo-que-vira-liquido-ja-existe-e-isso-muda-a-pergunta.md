@@ -95,9 +95,7 @@ Nomear isso agora, enquanto ainda parece distante, não é paranoia.
 
 {{NEWSLETTER}}
 
-*Continuação desta análise disponível apenas para os membros do Arquivo Secreto.*
-
-[Acesse o Arquivo Secreto](/livraria)
+{{ARQUIVO_SECRETO}}
 
 ---
 

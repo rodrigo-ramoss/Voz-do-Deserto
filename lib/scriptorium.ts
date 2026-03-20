@@ -84,7 +84,7 @@ export function getAllScriptorium(): ScriptoriumMeta[] {
         paymentUrl: data.paymentUrl,
       };
     })
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
 }
 
 export async function getScriptoriumBySlug(

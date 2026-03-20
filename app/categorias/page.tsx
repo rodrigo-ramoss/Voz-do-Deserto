@@ -1,28 +1,19 @@
 import Link from "next/link";
 import { getAllStudies } from "@/lib/studies";
+import StudiesCarousel from "@/app/components/StudiesCarousel";
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("pt-BR", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
-export default function CategoriasPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ categoria?: string }>;
-}) {
+export default function CategoriasPage() {
   const studies = getAllStudies();
 
-  // Gather unique categories from real content
-  const allCategories = Array.from(
-    new Set(studies.map((s) => s.category).filter(Boolean))
-  ).sort();
-
-  // This is a server component — searchParams is a Promise in Next 15
-  // We resolve it synchronously by using a client trick: read via URL below.
-  // For now we list all studies grouped by category.
+  // Categorias únicas preservando a ordem de aparição (mais recente primeiro)
+  const seen = new Set<string>();
+  const allCategories: string[] = [];
+  for (const s of studies) {
+    if (s.category && !seen.has(s.category)) {
+      seen.add(s.category);
+      allCategories.push(s.category);
+    }
+  }
 
   const grouped = allCategories.reduce<Record<string, typeof studies>>(
     (acc, cat) => {
@@ -52,53 +43,39 @@ export default function CategoriasPage({
           Nenhum estudo publicado ainda.
         </p>
       ) : (
-        <div className="space-y-16">
+        <div className="space-y-14">
           {allCategories.map((cat) => (
-            <div key={cat}>
-              {/* Category heading */}
-              <div className="mb-8 flex items-center gap-4">
-                <span className="font-label text-[11px] uppercase tracking-[0.25em] text-gold">
+            <section key={cat} aria-labelledby={`cat-${cat}`}>
+              {/* Cabeçalho da categoria */}
+              <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gold/10">
+                <h2
+                  id={`cat-${cat}`}
+                  className="font-label text-[11px] uppercase tracking-[0.25em] text-gold"
+                >
                   {cat}
-                </span>
-                <div className="h-px flex-1 bg-gold/15" />
-                <span className="font-label text-[10px] text-muted">
-                  {grouped[cat].length}{" "}
-                  {grouped[cat].length === 1 ? "estudo" : "estudos"}
-                </span>
-              </div>
-
-              {/* Articles in this category */}
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {grouped[cat].map((study) => (
-                  <article
-                    key={study.slug}
-                    className="group flex flex-col border border-gold/10 bg-card p-6 transition-colors duration-300 hover:border-gold/25"
+                </h2>
+                <div className="h-px flex-1 bg-gold/10" />
+                <div className="flex items-center gap-3 shrink-0">
+                  <span className="font-label text-[10px] text-muted">
+                    {grouped[cat].length}{" "}
+                    {grouped[cat].length === 1 ? "estudo" : "estudos"}
+                  </span>
+                  <Link
+                    href={`/estudos?cat=${encodeURIComponent(cat)}`}
+                    className="font-label text-[9px] uppercase tracking-widest text-gold/50 hover:text-gold transition-colors"
                   >
-                    <h3 className="font-display text-lg leading-snug text-text mb-3 transition-colors duration-200 group-hover:text-gold">
-                      {study.title}
-                    </h3>
-
-                    {study.excerpt && (
-                      <p className="font-body text-sm leading-relaxed text-text/50 flex-1 mb-6">
-                        {study.excerpt}
-                      </p>
-                    )}
-
-                    <div className="flex items-center justify-between border-t border-gold/10 pt-4 mt-auto">
-                      <Link
-                        href={`/estudos/${study.slug}`}
-                        className="font-label text-[10px] uppercase tracking-widest text-gold/55 transition-colors hover:text-gold"
-                      >
-                        Ler →
-                      </Link>
-                      <span className="font-label text-[10px] text-muted">
-                        {formatDate(study.date)}
-                      </span>
-                    </div>
-                  </article>
-                ))}
+                    Ver todos →
+                  </Link>
+                </div>
               </div>
-            </div>
+
+              {/* Carrossel com os 5 mais recentes */}
+              <StudiesCarousel
+                articles={grouped[cat]}
+                linkBase="/estudos"
+                limit={5}
+              />
+            </section>
           ))}
         </div>
       )}

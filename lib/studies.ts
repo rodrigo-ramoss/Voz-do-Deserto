@@ -52,7 +52,8 @@ export function getAllStudies(): StudyMeta[] {
         readTime,
       };
     })
-    .sort((a, b) => b.date.localeCompare(a.date));
+    // Mais recente primeiro; mesmo dia → ordem decrescente por slug (estabiliza a ordem)
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
 }
 
 export interface Study extends StudyMeta {

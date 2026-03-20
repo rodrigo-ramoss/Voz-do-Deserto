@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
 import NewsletterForm from "@/app/components/NewsletterForm";
+import StudiesCarousel from "@/app/components/StudiesCarousel";
 import { getScriptoriumByCategory } from "@/lib/scriptorium";
 
 export const metadata: Metadata = {
@@ -75,7 +74,6 @@ const ALL_CATEGORIES = [
 ];
 
 export default function ArquivoSecretoPage() {
-  // Artigos reais agrupados por categoria
   const byCategory = getScriptoriumByCategory();
 
   return (
@@ -94,8 +92,8 @@ export default function ArquivoSecretoPage() {
         que o mainstream prefere ignorar — com fontes, exegese e argumento.
       </p>
 
-      {/* ── Grade de categorias ──────────────────────────────────────── */}
-      <div className="space-y-16">
+      {/* ── Categorias com carrossel ──────────────────────────────────── */}
+      <div className="space-y-14">
         {ALL_CATEGORIES.map((cat) => {
           const articles = byCategory[cat.name] ?? [];
           const hasArticles = articles.length > 0;
@@ -104,7 +102,7 @@ export default function ArquivoSecretoPage() {
             <section key={cat.name} aria-labelledby={`cat-${cat.name}`}>
 
               {/* Cabeçalho da categoria */}
-              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-gold/10">
+              <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gold/10">
                 <span className="font-display text-xl text-gold/40" aria-hidden>
                   {cat.icon}
                 </span>
@@ -126,56 +124,18 @@ export default function ArquivoSecretoPage() {
                 )}
               </div>
 
-              {/* Descrição da categoria */}
-              <p className="font-body text-sm text-text/45 leading-relaxed mb-6 max-w-2xl">
+              {/* Descrição */}
+              <p className="font-body text-sm text-text/45 leading-relaxed mb-5 max-w-2xl">
                 {cat.description}
               </p>
 
               {hasArticles ? (
-                /* ── Artigos disponíveis ── */
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {articles.map((article) => (
-                    <Link
-                      key={article.slug}
-                      href={`/livraria/scriptorium/${article.slug}`}
-                      className="group border border-gold/15 bg-card overflow-hidden hover:border-gold/40 transition-colors duration-200"
-                    >
-                      {/* Imagem */}
-                      {article.image && (
-                        <div className="relative h-32 overflow-hidden">
-                          <Image
-                            src={article.image}
-                            alt={article.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                        </div>
-                      )}
-
-                      <div className="p-5">
-                        {/* Preço */}
-                        {article.price && (
-                          <p className="font-label text-[8px] uppercase tracking-[0.3em] text-gold mb-2">
-                            {article.price}
-                          </p>
-                        )}
-
-                        <h3 className="font-display text-base text-text mb-2 leading-snug group-hover:text-gold transition-colors duration-200">
-                          {article.title}
-                        </h3>
-
-                        <p className="font-body text-xs text-text/45 leading-relaxed line-clamp-2">
-                          {article.excerpt}
-                        </p>
-
-                        <p className="mt-4 font-label text-[8px] uppercase tracking-widest text-gold/60">
-                          Ler estudo →
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                /* ── Carrossel com os 5 mais recentes ── */
+                <StudiesCarousel
+                  articles={articles}
+                  linkBase="/livraria/scriptorium"
+                  limit={5}
+                />
               ) : (
                 /* ── Placeholder vazio ── */
                 <div className="border border-gold/8 bg-card/40 px-6 py-8 flex items-center gap-4">

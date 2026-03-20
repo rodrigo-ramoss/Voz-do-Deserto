@@ -62,7 +62,7 @@ export function getAllNoticias(): NoticiaMeta[] {
         source: data.source,
       };
     })
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
 }
 
 export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {

@@ -90,6 +90,8 @@ Quando a perda de controle é celebrada como prova de sofisticação, chegamos a
 
 Não porque máquinas tenham almas. Mas porque humanos que abdicam de responsabilidade sobre o que criam estão praticando uma forma muito antiga de idolatria: construindo sistemas que os superam e chamando isso de progresso.
 
+{{NEWSLETTER}}
+
 ## O que fazer com isso
 
 A resposta bíblica diante de sistemas que escapam ao controle humano nunca foi o pânico. Foi o discernimento. E discernir começa por nomear o que está acontecendo sem a anestesia do entusiasmo tecnológico.
@@ -102,13 +104,7 @@ Porque quando um sistema opera além da compreensão de seus criadores, a pergun
 
 E quando essa pergunta é ignorada, a história já nos mostrou onde isso termina.
 
----
-
-*Continuação desta análise disponível apenas para os membros do Arquivo Secreto.*
-
-[Acesse o Arquivo Secreto](/livraria)
-
----
+{{ARQUIVO_SECRETO}}
 
 ## Filmes para Assistir
 

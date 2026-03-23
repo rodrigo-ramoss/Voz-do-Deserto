@@ -100,6 +100,8 @@ E então vira necessidade — "sem isso, você não consegue acesso".
 
 Quando alguém percebe que se tornou dependente, a arquitetura já está completa. E nesse momento, a pergunta não é mais "isso vai acontecer?", mas: **quando estiver completo, haverá espaço fora do sistema?**
 
+{{NEWSLETTER}}
+
 ## Discernir não é paranoia. É profecia vivida.
 
 A postura bíblica diante de sistemas que demandam lealdade total nunca foi a de fuga tecnofóbica. Foi de discernimento lúcido e recusa consciente.
@@ -114,7 +116,7 @@ O que está sendo construído hoje ainda não chegou a esse ponto de inflexão. 
 
 Porque quando você perceber, já poderá não ser mais possível recusar sem custo.
 
----
+{{ARQUIVO_SECRETO}}
 
 ## Fontes
 

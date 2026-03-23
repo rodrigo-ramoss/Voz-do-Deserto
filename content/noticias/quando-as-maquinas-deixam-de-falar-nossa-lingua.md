@@ -99,28 +99,9 @@ Quando isso se tornar a norma, a pergunta sobre quem controla não terá respost
 
 E sistemas sem responsabilização são, pela definição mais simples que existe, sistemas sem limites.
 
----
+{{NEWSLETTER}}
 
-## Fique um passo à frente
-
-Este blog pode sair do ar. Não por acidente — mas porque o que publicamos aqui incomoda sistemas que preferem que você não saiba. Estamos mapeando como sobreviver ao futuro que está sendo construído agora. Cadastra seu e-mail e garante que a próxima análise chega direto pra você — antes que o algoritmo decida se você merece ver.
-
-**[👉 Quero receber as próximas análises](https://vozodeserto.com.br/newsletter)**
-
----
-
-## Isso é apenas a superfície. O Arquivo Secreto vai mais fundo.
-
-Na continuação desta análise, disponível apenas para membros do Arquivo Secreto, exploramos:
-
-- por que a emergência de linguagem entre agentes é o passo imediatamente anterior à autonomia real — e o que separa os dois
-- o paralelo entre protocolos Agent2Agent e a estrutura de coordenação descrita em Apocalipse 13
-- o que acontece quando sistemas de identidade digital (Drex, GOV.BR) passam a ser operados por agentes que se comunicam entre si sem supervisão humana
-- e por que a pergunta sobre responsabilização é, no fundo, uma pergunta teológica
-
-**[👉 Acesse o Arquivo Secreto e continue essa leitura](https://vozodeserto.com.br/arquivo-secreto)**
-
----
+{{ARQUIVO_SECRETO}}
 
 ## Filmes para Assistir
 

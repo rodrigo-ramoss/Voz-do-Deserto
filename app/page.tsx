@@ -9,8 +9,8 @@ import NoticiasCarousel from "./components/NoticiasCarousel";
 export default function Home() {
   const studies = getAllStudies();
   const noticias = getAllNoticias();
-  const weeklySlides = studies.slice(0, 7);
-  const rest = studies.slice(7, 13);
+  const weeklySlides = studies.slice(0, 10);
+  const rest = studies.slice(10, 16);
 
   return (
     <>

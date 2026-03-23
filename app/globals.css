@@ -158,6 +158,36 @@ body {
   }
 }
 
+/* ── WeeklyCarousel: scan line que varre a imagem no início de cada slide ── */
+@keyframes carouselScanLine {
+  0%   { top: -3px; opacity: 0.9; }
+  70%  { opacity: 0.55; }
+  100% { top: 100%;  opacity: 0; }
+}
+
+.carousel-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 183, 106, 0.4) 40%,
+    rgba(212, 183, 106, 0.55) 50%,
+    rgba(212, 183, 106, 0.4) 60%,
+    transparent 100%
+  );
+  animation: carouselScanLine 1s ease-in forwards;
+}
+
+/* ── WeeklyCarousel: barra de progresso que avança até a próxima troca ── */
+@keyframes carouselProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
 /* Piscar suave para badge premium */
 @keyframes blink {
   0%, 100% { opacity: 1; }

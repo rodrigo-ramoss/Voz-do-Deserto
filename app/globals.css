@@ -140,6 +140,24 @@ body {
   transform: skewX(-12deg);
 }
 
+/* Seta que se move para a direita (CTA Arquivo Secreto) */
+@keyframes arrowBounce {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50%       { transform: translateX(6px); opacity: 1; }
+}
+
+/* Glow pulsante no botão de e-mail */
+@keyframes btnGlow {
+  0%, 100% {
+    box-shadow: 0 0 6px rgba(212, 183, 106, 0.15), 0 0 18px rgba(212, 183, 106, 0.08);
+    border-color: rgba(212, 183, 106, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(212, 183, 106, 0.50), 0 0 36px rgba(212, 183, 106, 0.22);
+    border-color: rgba(212, 183, 106, 0.90);
+  }
+}
+
 /* Piscar suave para badge premium */
 @keyframes blink {
   0%, 100% { opacity: 1; }
@@ -148,6 +166,15 @@ body {
 
 .animate-blink {
   animation: blink 1.4s step-end infinite;
+}
+
+.animate-arrow-bounce {
+  display: inline-block;
+  animation: arrowBounce 1.2s ease-in-out infinite;
+}
+
+.animate-btn-glow {
+  animation: btnGlow 1.8s ease-in-out infinite;
 }
 
 /* Classes utilitárias */
@@ -273,12 +300,26 @@ select:focus-visible {
 
 .prose-study ul,
 .prose-study ol {
-  padding-left: 1.5rem;
+  padding-left: 1.75rem;
   margin-bottom: 1.5rem;
   color: rgba(240, 232, 204, 0.75);
 }
 
+.prose-study ul {
+  list-style-type: disc;
+}
+
+.prose-study ol {
+  list-style-type: decimal;
+}
+
 .prose-study li {
-  margin-bottom: 0.4rem;
-  line-height: 1.7;
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+  font-family: var(--font-crimson), Georgia, serif;
+  font-size: 1.125rem;
+}
+
+.prose-study li::marker {
+  color: rgba(212, 183, 106, 0.5);
 }

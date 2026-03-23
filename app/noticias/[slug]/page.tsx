@@ -4,6 +4,7 @@ import { getAllNoticiasSlugs, getNoticiaBySlug } from "@/lib/noticias";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
 import NewsletterForm from "@/app/components/NewsletterForm";
+import NewsletterInlineCTA from "@/app/components/NewsletterInlineCTA";
 import NewsletterPopup from "@/app/components/NewsletterPopup";
 import ArquivoSecretoCTA from "@/app/components/ArquivoSecretoCTA";
 
@@ -140,9 +141,7 @@ export default async function NoticiaPage({
 
             if (first === i_nl) {
               segments.push(
-                <div key={segments.length} className="mt-10 mb-10">
-                  <NewsletterForm context="article" />
-                </div>
+                <NewsletterInlineCTA key={segments.length} />
               );
               remaining = remaining.slice(first + NL.length);
             } else {

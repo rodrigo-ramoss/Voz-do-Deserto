@@ -158,6 +158,124 @@ body {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   POPUP NEWSLETTER — animação orb → explosão → modal
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+  Bolinha de luz dourada:
+  - posicionada no centro (top:50% left:50%)
+  - translate inicial coloca-a no canto inferior direito
+  - anima até translate(-50%,-50%) = centro exato
+*/
+.popup-orb {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #e8d070, #d4b76a 55%, #c47c3a);
+  pointer-events: none;
+  z-index: 60;
+}
+
+/* Fase 1 — orb viaja do canto inferior direito para o centro */
+.popup-orb-travel {
+  animation: orbTravel 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes orbTravel {
+  0% {
+    transform: translate(calc(50vw - 28px), calc(50vh - 28px)) scale(1);
+    opacity: 0;
+    box-shadow: 0 0 8px rgba(212,183,106,0.6);
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 1;
+    box-shadow:
+      0 0 20px rgba(212,183,106,0.9),
+      0 0 50px rgba(212,183,106,0.5),
+      0 0 90px rgba(212,183,106,0.2);
+  }
+}
+
+/* Fase 2 — orb escala e desaparece no burst */
+.popup-orb-burst {
+  animation: orbBurst 0.35s ease-out forwards;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes orbBurst {
+  0%   { transform: translate(-50%, -50%) scale(2.5); opacity: 1; }
+  50%  { transform: translate(-50%, -50%) scale(5);   opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(8);   opacity: 0; }
+}
+
+/* Partículas de código que explodem do centro */
+.popup-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  animation: particleFly 0.45s ease-out forwards;
+}
+
+@keyframes particleFly {
+  0% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+      calc(-50% + var(--pdx)),
+      calc(-50% + var(--pdy))
+    ) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Modal: revela-se com clip-path de cima para baixo */
+.popup-modal-reveal {
+  animation: modalReveal 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes modalReveal {
+  0%   { clip-path: inset(0 0 100% 0); opacity: 0.3; }
+  100% { clip-path: inset(0 0 0%   0); opacity: 1;   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NOTICIAS CAROUSEL — radar ping no indicador "ao vivo"
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+  Dois anéis concêntricos se expandem em ondas defasadas,
+  evocando sinal de radar / satélite.
+*/
+.radar-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: rgba(196, 124, 58, 0.7); /* ember */
+  animation: radarPing 2s ease-out infinite;
+}
+
+.radar-ring-2 {
+  animation-delay: 1s;
+}
+
+@keyframes radarPing {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(3);   opacity: 0;   }
+  100% { transform: scale(3);   opacity: 0;   }
+}
+
 /* ── WeeklyCarousel: scan line que varre a imagem no início de cada slide ── */
 @keyframes carouselScanLine {
   0%   { top: -3px; opacity: 0.9; }

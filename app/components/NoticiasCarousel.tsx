@@ -12,10 +12,59 @@ interface Props {
 
 const AUTO_MS = 5000;
 
+// ── Scramble hook: título da notícia "decodifica" na troca de slide ──────────
+// Versão mais rápida e agressiva que a do WeeklyCarousel — evoca "breaking news"
+function useScrambleText(text: string): string {
+  const [display, setDisplay] = useState(text);
+  const frameRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@$%!?";
+    let frame = 0;
+    const TOTAL = 12; // 12 × 22ms ≈ 264ms — mais veloz que o carrossel de estudos
+
+    if (frameRef.current) clearInterval(frameRef.current);
+
+    frameRef.current = setInterval(() => {
+      frame++;
+      const revealed = Math.floor((frame / TOTAL) * text.length);
+      setDisplay(
+        text
+          .split("")
+          .map((char, i) => {
+            if (char === " ") return " ";
+            if (i <= revealed) return char;
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+          })
+          .join("")
+      );
+      if (frame >= TOTAL) {
+        setDisplay(text);
+        if (frameRef.current) clearInterval(frameRef.current);
+      }
+    }, 22);
+
+    return () => {
+      if (frameRef.current) clearInterval(frameRef.current);
+    };
+  }, [text]);
+
+  return display;
+}
+
+// ── Componente principal ──────────────────────────────────────────────────────
 export default function NoticiasCarousel({ noticias }: Props) {
+  if (!noticias.length) return null;
+  return <Inner noticias={noticias} />;
+}
+
+function Inner({ noticias }: { noticias: NoticiaMeta[] }) {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const noticia = noticias[current];
+  const scrambledTitle = useScrambleText(noticia.title);
 
   useEffect(() => {
     if (paused || noticias.length <= 1) return;
@@ -27,10 +76,6 @@ export default function NoticiasCarousel({ noticias }: Props) {
     };
   }, [paused, noticias.length]);
 
-  if (!noticias.length) return null;
-
-  const noticia = noticias[current];
-
   return (
     <section
       className="border-b border-gold/10 bg-card/40"
@@ -40,11 +85,19 @@ export default function NoticiasCarousel({ noticias }: Props) {
     >
       <div className="mx-auto max-w-6xl px-6 py-5">
 
-        {/* Cabeçalho da seção */}
+        {/* Cabeçalho */}
         <div className="flex items-center gap-4 mb-4">
           <div className="flex items-center gap-2 shrink-0">
-            {/* Ponto piscando — indica "ao vivo" / atualizado */}
-            <span className="animate-blink w-1.5 h-1.5 rounded-full bg-ember/70 shrink-0" />
+            {/*
+              Radar ping: ao invés de um simples ponto piscando, dois anéis
+              se expandem em ondas defasadas — evoca sinal de satélite / radar.
+              O ponto central fica fixo sobre as ondas.
+            */}
+            <span className="relative flex items-center justify-center w-3 h-3 shrink-0">
+              <span className="radar-ring radar-ring-1" />
+              <span className="radar-ring radar-ring-2" />
+              <span className="relative w-1.5 h-1.5 rounded-full bg-ember/80" />
+            </span>
             <span className="font-label text-[9px] uppercase tracking-[0.3em] text-ember/80">
               Fora do Deserto
             </span>
@@ -58,26 +111,20 @@ export default function NoticiasCarousel({ noticias }: Props) {
           </Link>
         </div>
 
-        {/* Corpo do carrossel */}
+        {/* Corpo */}
         <div className="flex items-center gap-4 md:gap-6">
 
-          {/* Caixa "O que está acontecendo fora do deserto" */}
+          {/* Label lateral */}
           <div className="hidden md:flex shrink-0 flex-col justify-center border border-ember/20 bg-ember/5 px-4 py-3 min-w-[150px]">
-            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">
-              O que está
-            </p>
-            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">
-              acontecendo
-            </p>
-            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">
-              fora do deserto
-            </p>
+            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">O que está</p>
+            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">acontecendo</p>
+            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">fora do deserto</p>
           </div>
 
-          {/* Imagem + Texto (animados juntos na troca de slide) */}
+          {/* Imagem + texto (re-monta no key para reiniciar scramble) */}
           <div key={noticia.slug} className="flex-1 min-w-0 flex items-center gap-4 animate-fade-in">
 
-            {/* Imagem em miniatura */}
+            {/* Thumbnail */}
             {noticia.image ? (
               <Link
                 href={`/noticias/${noticia.slug}`}
@@ -91,6 +138,8 @@ export default function NoticiasCarousel({ noticias }: Props) {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                {/* Scan line na imagem da notícia */}
+                <div className="carousel-scan-line" />
               </Link>
             ) : (
               <div className="relative shrink-0 w-[72px] h-[72px] md:w-24 md:h-24 border border-ember/20 bg-ember/5 flex items-center justify-center">
@@ -100,12 +149,14 @@ export default function NoticiasCarousel({ noticias }: Props) {
 
             {/* Texto */}
             <div className="flex-1 min-w-0">
-              <Link
-                href={`/noticias/${noticia.slug}`}
-                className="group block"
-              >
+              <Link href={`/noticias/${noticia.slug}`} className="group block">
+                {/*
+                  scrambledTitle: título "decodifica" ao vivo quando o slide muda.
+                  Usa font-display (serifada) — o contraste com os caracteres
+                  aleatórios reforça o efeito de "sinal interceptado".
+                */}
                 <h2 className="font-display text-lg leading-snug text-text group-hover:text-gold transition-colors duration-200 mb-1.5 md:text-xl line-clamp-2">
-                  {noticia.title}
+                  {scrambledTitle}
                 </h2>
                 {noticia.excerpt && (
                   <p className="font-body text-sm leading-relaxed text-muted line-clamp-1 hidden md:block">
@@ -136,7 +187,7 @@ export default function NoticiasCarousel({ noticias }: Props) {
             </div>
           </div>
 
-          {/* Setas + dots */}
+          {/* Setas + dots verticais */}
           <div className="flex flex-col items-center gap-2 shrink-0">
             <button
               onClick={() => setCurrent((c) => (c === 0 ? noticias.length - 1 : c - 1))}

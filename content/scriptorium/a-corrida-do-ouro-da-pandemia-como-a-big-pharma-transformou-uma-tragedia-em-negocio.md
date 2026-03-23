@@ -1,7 +1,7 @@
 ---
 title: "A Corrida do Ouro da Pandemia: Como a Big Pharma Transformou uma Tragédia em Negócio"
 date: 2026-03-20
-category: Pandemia
+category: Pandemias
 folder: Scriptorium
 image: /imagens/a-corrida-do-ouro-da-pandemia-como-a-big-pharma-transformou-uma-tragedia-em-negocio.webp
 description: "USD 90 bilhões em dois anos. Recompra de ações durante luto global. Impostos de 9,3%. Os números da pandemia não precisam de comentário — precisam de leitura."

@@ -1,7 +1,7 @@
 ---
 title: "A Verdade que Não Coube no Noticiário: COVID-19, Origem, Controle e o Colapso da Narrativa Oficial"
 date: 2026-03-20
-category: Pandemia
+category: Pandemias
 folder: Scriptorium
 image: /imagens/a-verdade-que-nao-coube-no-noticiario-covid-19-origem-controle-e-o-colapso-da-narrativa-oficial.webp
 description: "A narrativa oficial da pandemia não desmoronou por conspiração — desmoronou sob o peso de documentos, e-mails e investigações que o sistema preferiu ignorar."

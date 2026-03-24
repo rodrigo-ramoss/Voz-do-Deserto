@@ -520,3 +520,58 @@ select:focus-visible {
 .prose-study li::marker {
   color: rgba(212, 183, 106, 0.5);
 }
+
+/* ── Tabelas nos artigos (geradas via remark-gfm) ───────────────────────── */
+.prose-study table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  display: block;
+}
+
+.prose-study thead tr {
+  border-bottom: 1px solid rgba(212, 183, 106, 0.3);
+}
+
+.prose-study th {
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(212, 183, 106, 0.7);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.prose-study td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(212, 183, 106, 0.08);
+  color: #b8a98a;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.prose-study tr:last-child td {
+  border-bottom: none;
+}
+
+.prose-study tbody tr:hover td {
+  background-color: rgba(212, 183, 106, 0.03);
+}
+
+/* Primeira coluna em destaque (labels em negrito) */
+.prose-study td:first-child,
+.prose-study th:first-child {
+  color: rgba(212, 183, 106, 0.55);
+  padding-left: 0;
+}
+
+/* Borda lateral esquerda sutil para separar a label das colunas de dados */
+.prose-study td:nth-child(2),
+.prose-study th:nth-child(2) {
+  border-left: 1px solid rgba(212, 183, 106, 0.1);
+}

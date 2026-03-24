@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import remarkGfm from "remark-gfm";
 
 const studiesDir = path.join(process.cwd(), "content/studies");
 
@@ -68,7 +69,7 @@ export async function getStudyBySlug(slug: string): Promise<Study | null> {
   const raw = fs.readFileSync(filepath, "utf-8");
   const { data, content } = matter(raw);
 
-  const processed = await remark().use(html).process(content);
+  const processed = await remark().use(remarkGfm).use(html).process(content);
   const contentHtml = processed.toString();
 
   const excerpt =

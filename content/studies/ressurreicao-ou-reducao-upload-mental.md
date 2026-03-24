@@ -1,6 +1,6 @@
 ---
 title: "Ressurreição ou Redução? O Embate Final entre a Esperança Bíblica e o Upload Mental"
-date: 2025-03-06
+date: 2026-03-23
 category: Fé e Tecnologia
 image: /imagens/ressurreicao-ou-reducao-upload-mental.webp
 description: "Upload mental e ressurreição bíblica prometem vencer a morte. Mas partem de visões opostas do humano: uma restaura, a outra reduz a dados."

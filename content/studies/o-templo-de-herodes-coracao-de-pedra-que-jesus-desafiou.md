@@ -1,6 +1,6 @@
 ---
 title: "O Templo de Herodes: O Coração de Pedra que Jesus Desafiou"
-date: 2025-02-06
+date: 2026-03-19
 category: Jesus Histórico
 image: /imagens/o-templo-de-herodes-coracao-de-pedra-que-jesus-desafiou.png
 description: "O Templo de Herodes era banco, bolsa e poder político. Jesus não veio reformá-lo — veio torná-lo obsoleto. Entenda o confronto que o matou."

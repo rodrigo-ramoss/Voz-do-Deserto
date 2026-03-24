@@ -1,6 +1,6 @@
 ---
 title: "O Templo que Nunca Caiu: Os Novos Donos do Sagrado e do Dinheiro"
-date: 2025-02-20
+date: 2026-03-19
 category: Sistema Religioso
 image: /imagens/o-templo-que-nunca-caiu-novos-donos-do-sagrado.png
 description: "O Estado-Templo de Herodes não morreu em 70 d.C. Ele trocou de endereço. Conheça os novos sumos sacerdotes e o que Jesus faria com eles."

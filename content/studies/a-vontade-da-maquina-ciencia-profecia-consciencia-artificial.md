@@ -1,6 +1,6 @@
 ---
 title: "A Vontade da Máquina: Ciência, Profecia e o Limite da Consciência Artificial"
-date: 2025-02-27
+date: 2026-03-23
 category: Fé e Tecnologia
 image: /imagens/a-vontade-da-maquina-ciencia-profecia-consciencia-artificial.webp
 description: "A IA fala, raciocina e já supera humanos em benchmarks. Mas ela quer? A ciência e a teologia enfrentam a mesma fronteira: o mistério da vontade."

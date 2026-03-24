@@ -1,6 +1,6 @@
 ---
 title: "O Grande Outro Está Assistindo: Capitalismo de Vigilância, Privacidade e o Deus que Vê Diferente"
-date: 2025-03-13
+date: 2026-03-24
 category: Fé e Tecnologia
 image: /imagens/o-grande-outro-capitalismo-de-vigilancia.webp
 description: "Suas emoções, rotas e silêncios viram mercadoria sem seu consentimento. A Bíblia tem algo a dizer sobre quem tem o direito de te conhecer assim."

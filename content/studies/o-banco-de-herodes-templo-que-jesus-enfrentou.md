@@ -1,6 +1,6 @@
 ---
 title: "O Banco de Herodes: O Templo que Jesus Enfrentou Não Era Apenas uma Igreja"
-date: 2025-02-13
+date: 2026-03-19
 category: Jesus Histórico
 image: /imagens/o-banco-de-herodes-templo-que-jesus-enfrentou.png
 description: "O Templo de Jerusalém era banco, tribunal e sede do poder. Entenda o sistema que Jesus atacou — e por que essa estrutura ainda existe."

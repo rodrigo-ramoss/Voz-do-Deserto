@@ -1,6 +1,6 @@
 ---
 title: "O Galileu de Pés Sujos: O Homem que a Tradição Escondeu"
-date: 2025-01-30
+date: 2026-03-19
 category: Jesus Histórico
 image: /imagens/o-galileu-de-pes-sujos.png
 description: "A ciência histórica revela um Jesus que as igrejas nunca pregaram: um camponês galileu perigoso, político e profundamente judeu."

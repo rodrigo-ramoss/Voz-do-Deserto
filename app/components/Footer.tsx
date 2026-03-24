@@ -28,17 +28,16 @@ export default function Footer() {
       <div id="newsletter" className="border-b border-gold/10 px-6 py-12">
         <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-center">
           <div>
-            {/* text-xs text-gold sem opacity — era text-[9px] */}
             <p className="font-label text-xs uppercase tracking-[0.3em] text-gold mb-3">
               Newsletter
             </p>
             <p className="font-display text-xl text-text mb-2">
-              Novos estudos no seu e-mail
+              Receba o que não é para todos
             </p>
-            {/* text-sm text-muted (#B8A98A) — era text-text/45 */}
             <p className="font-body text-sm text-muted leading-relaxed">
-              Sem spam. Apenas os estudos publicados — apócrifos, exegese,
-              história da Igreja.
+              Estudos que escapam do filtro editorial, da narrativa oficial e
+              do que o algoritmo aprova. Sem spam — apenas os conteúdos que
+              valem seu tempo.
             </p>
           </div>
           <NewsletterForm context="footer" />
@@ -51,13 +50,11 @@ export default function Footer() {
 
           {/* Marca */}
           <div>
-            {/* text-sm font-semibold text-gold (#D4B76A, 10.5:1) — era text-lg text-gold (#C9A84C) */}
-            <p className="font-display text-sm font-semibold text-gold mb-1">
+            <p className="font-display text-3xl uppercase tracking-[0.12em] text-gold leading-none mb-2">
               Voz do Deserto
             </p>
-            {/* text-xs text-subtle (#8A7A60, 5.1:1) — era text-[10px] text-muted (#5C4F35 = 1.9:1 ✗) */}
-            <p className="font-label text-xs uppercase tracking-[0.2em] text-subtle">
-              Estudos bíblicos profundos
+            <p className="font-label text-[9px] uppercase tracking-[0.35em] text-subtle">
+              O que o sistema prefere que você ignore
             </p>
           </div>
 

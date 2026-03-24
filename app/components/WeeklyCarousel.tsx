@@ -8,6 +8,7 @@ import { getCtaLabel, formatDateSmart } from "@/lib/utils";
 
 interface Props {
   studies: StudyMeta[];
+  isWeeklyMode?: boolean;
 }
 
 const AUTO_PLAY_MS = 6000;
@@ -56,12 +57,12 @@ function useScrambleText(text: string): string {
 
 // ── Componente principal ──────────────────────────────────────────────────────
 // Wrapper que garante que os hooks internos só rodam quando há slides.
-export default function WeeklyCarousel({ studies }: Props) {
+export default function WeeklyCarousel({ studies, isWeeklyMode = false }: Props) {
   if (!studies.length) return null;
-  return <Inner studies={studies} />;
+  return <Inner studies={studies} isWeeklyMode={isWeeklyMode} />;
 }
 
-function Inner({ studies }: { studies: StudyMeta[] }) {
+function Inner({ studies, isWeeklyMode }: { studies: StudyMeta[]; isWeeklyMode: boolean }) {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -91,7 +92,7 @@ function Inner({ studies }: { studies: StudyMeta[] }) {
   return (
     <section
       className="border-b border-gold/10 relative"
-      aria-label="Publicações em destaque"
+      aria-label={isWeeklyMode ? "Destaques da semana" : "Publicações em destaque"}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -99,7 +100,7 @@ function Inner({ studies }: { studies: StudyMeta[] }) {
       <div className="mx-auto max-w-6xl px-6 pt-6 pb-2 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="font-label text-[9px] uppercase tracking-[0.3em] text-ember/80 border border-ember/20 px-2.5 py-1">
-            Destaque
+            {isWeeklyMode ? "Destaques da Semana" : "Destaques"}
           </span>
           {/* Contador terminal */}
           <span className="font-label text-[9px] tracking-[0.15em] text-muted/45">

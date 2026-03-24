@@ -10,13 +10,22 @@ import BookstoreTeaser from "./components/BookstoreTeaser";
 export default function Home() {
   const studies = getAllStudies();
   const noticias = getAllNoticias();
-  const weeklySlides = studies.slice(0, 10);
-  const rest = studies.slice(10, 16);
+
+  // Destaques da Semana: artigos publicados nos últimos 7 dias
+  const now = new Date();
+  const sevenDaysAgo = new Date(now);
+  sevenDaysAgo.setDate(now.getDate() - 7);
+  const thisWeek = studies.filter((s) => new Date(s.date) >= sevenDaysAgo);
+  // Fallback: se nenhum artigo foi publicado nesta semana, usa os 10 mais recentes
+  const weeklySlides = thisWeek.length > 0 ? thisWeek.slice(0, 10) : studies.slice(0, 10);
+  const isWeeklyMode = thisWeek.length > 0;
+
+  const rest = studies.filter((s) => !weeklySlides.find((w) => w.slug === s.slug)).slice(0, 6);
 
   return (
     <>
       {noticias.length > 0 && <NoticiasCarousel noticias={noticias} />}
-      <WeeklyCarousel studies={weeklySlides} />
+      <WeeklyCarousel studies={weeklySlides} isWeeklyMode={isWeeklyMode} />
 
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid gap-12 lg:grid-cols-[1fr_300px]">

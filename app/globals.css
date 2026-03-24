@@ -575,3 +575,76 @@ select:focus-visible {
 .prose-study th:nth-child(2) {
   border-left: 1px solid rgba(212, 183, 106, 0.1);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BOOKSTORE TEASER — livraria digital "em breve"
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Grade digital de fundo: linhas douradas muito sutis */
+.bookstore-grid-bg {
+  background-image:
+    linear-gradient(rgba(212,183,106,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,183,106,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+
+/* Gradientes que "cortam" o carrossel nas bordas */
+.bookstore-fade-left {
+  background: linear-gradient(to right, #080705 0%, transparent 100%);
+}
+.bookstore-fade-right {
+  background: linear-gradient(to left, #080705 0%, transparent 100%);
+}
+
+/* ── Capa do e-book ── */
+
+/* Container da capa: largura fixa, blur + transição no hover */
+.ebook-cover-wrap {
+  width: 180px;
+  height: 270px;
+}
+
+/* Imagem com blur base — hover reduz para "teaser" */
+.ebook-cover-img {
+  filter: blur(6px) brightness(0.6);
+  transition: filter 0.5s ease, transform 0.5s ease;
+  transform: scale(1.04); /* esconde bordas do blur */
+}
+
+.ebook-card:hover .ebook-cover-img {
+  filter: blur(2px) brightness(0.75);
+  transform: scale(1.02);
+}
+
+/* Badge "Em breve" pulsa levemente */
+.ebook-coming-soon {
+  animation: ebookBadgePulse 3s ease-in-out infinite;
+}
+
+@keyframes ebookBadgePulse {
+  0%, 100% { opacity: 0.7; box-shadow: none; }
+  50%       { opacity: 1;   box-shadow: 0 0 12px rgba(212,183,106,0.2); }
+}
+
+/* Brilho sutil que passa pela capa no hover */
+.ebook-card:hover .ebook-cover-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(212,183,106,0.08) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: ebookShimmer 0.8s ease forwards;
+}
+
+@keyframes ebookShimmer {
+  0%   { opacity: 0; transform: translateX(-30%); }
+  50%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(30%); }
+}

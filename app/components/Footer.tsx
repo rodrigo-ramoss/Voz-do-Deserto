@@ -25,7 +25,7 @@ export default function Footer() {
     <footer className="mt-4 border-t border-gold/15 bg-[#050403]">
 
       {/* ── Newsletter ──────────────────────────────────────────────── */}
-      <div className="border-b border-gold/10 px-6 py-12">
+      <div id="newsletter" className="border-b border-gold/10 px-6 py-12">
         <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-center">
           <div>
             {/* text-xs text-gold sem opacity — era text-[9px] */}

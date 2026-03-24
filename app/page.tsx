@@ -5,6 +5,7 @@ import ArticleCard from "./components/ArticleCard";
 import Sidebar from "./components/Sidebar";
 import WeeklyCarousel from "./components/WeeklyCarousel";
 import NoticiasCarousel from "./components/NoticiasCarousel";
+import BookstoreTeaser from "./components/BookstoreTeaser";
 
 export default function Home() {
   const studies = getAllStudies();
@@ -54,6 +55,8 @@ export default function Home() {
           <Sidebar excludeSlug={weeklySlides[0]?.slug} />
         </div>
       </div>
+
+      <BookstoreTeaser />
     </>
   );
 }

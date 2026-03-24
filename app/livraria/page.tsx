@@ -1,3 +1,8 @@
+// ─────────────────────────────────────────────────────────────
+// MODO BLOQUEADO: mude para false quando quiser abrir o Arquivo
+// ─────────────────────────────────────────────────────────────
+const LOCKED = true;
+
 import type { Metadata } from "next";
 import NewsletterForm from "@/app/components/NewsletterForm";
 import StudiesCarousel from "@/app/components/StudiesCarousel";
@@ -73,7 +78,74 @@ const ALL_CATEGORIES = [
   },
 ];
 
+function ArquivoSecretoLocked() {
+  return (
+    <main className="mx-auto max-w-2xl px-6 py-28 flex flex-col items-center text-center">
+
+      {/* Cadeado */}
+      <div className="mb-10 w-16 h-16 border border-gold/25 flex items-center justify-center">
+        <svg className="w-7 h-7 text-gold/50" fill="currentColor" viewBox="0 0 20 20" aria-hidden>
+          <path fillRule="evenodd" d="M5 9V7a5 5 0 0 1 10 0v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2zm8-2v2H7V7a3 3 0 0 1 6 0z" clipRule="evenodd" />
+        </svg>
+      </div>
+
+      {/* Badge */}
+      <p className="font-label text-[9px] uppercase tracking-[0.4em] text-gold/60 mb-6">
+        ✦ &nbsp; Em Preparação &nbsp; ✦
+      </p>
+
+      {/* Headline */}
+      <h1 className="font-display text-4xl text-text leading-tight mb-5 md:text-5xl">
+        O Arquivo Secreto<br />está sendo selado.
+      </h1>
+
+      <div className="h-px w-12 bg-gold/30 mb-7" />
+
+      {/* Corpo */}
+      <p className="font-body text-base text-text/55 leading-relaxed mb-4 max-w-lg">
+        Alguns conteúdos não deveriam estar disponíveis para qualquer um — e este é um deles.
+        Estamos reunindo estudos que o mainstream prefere que você nunca leia.
+      </p>
+      <p className="font-body text-base text-text/40 leading-relaxed mb-12 max-w-lg">
+        Quando o Arquivo abrir, não vai ficar aberto para sempre.
+        Os primeiros a entrar terão acesso a condições que não vão se repetir.
+      </p>
+
+      {/* Teasers */}
+      <ul className="space-y-3 mb-14 text-left w-full max-w-md">
+        {[
+          "Profecias que o sistema tenta desacreditar — com fontes e exegese",
+          "A engrenagem oculta por trás das pandemias, reset global e vigilância",
+          "O que a IA, Hollywood e as Escrituras têm em comum — e ninguém quer juntar",
+        ].map((item) => (
+          <li key={item} className="flex items-start gap-3">
+            <span className="text-gold/40 mt-[4px] text-[10px] shrink-0">◆</span>
+            <span className="font-body text-sm text-text/50 leading-relaxed">{item}.</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA newsletter */}
+      <div className="w-full max-w-md border border-gold/15 bg-card/40 px-8 py-10">
+        <p className="font-label text-[9px] uppercase tracking-[0.35em] text-gold/70 mb-3">
+          Seja avisado primeiro
+        </p>
+        <h2 className="font-display text-xl text-text mb-2">
+          Quero entrar quando abrir
+        </h2>
+        <p className="font-body text-sm text-text/40 leading-relaxed mb-7">
+          Cadastre seu e-mail. Quando o Arquivo abrir, você será um dos primeiros a saber — antes de qualquer anúncio público.
+        </p>
+        <NewsletterForm context="page" />
+      </div>
+
+    </main>
+  );
+}
+
 export default function ArquivoSecretoPage() {
+  if (LOCKED) return <ArquivoSecretoLocked />;
+
   const byCategory = getScriptoriumByCategory();
 
   return (

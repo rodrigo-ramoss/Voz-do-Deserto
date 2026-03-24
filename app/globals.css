@@ -251,6 +251,55 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   ARTICLE CARDS — efeitos hover tech
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+  Barra dourada no rodapé do card: width 0 → 100% no hover.
+  Evoca barra de carregamento / progress bar de terminal.
+*/
+.card-hover-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, rgba(212,183,106,0.6), rgba(196,124,58,0.4));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.group:hover .card-hover-bar {
+  width: 100%;
+}
+
+/*
+  Scan line que varre a imagem do card no hover.
+  Visível apenas na primeira vez que o hover ativa (animation forwards).
+*/
+.card-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  top: -4px;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 183, 106, 0.3) 40%,
+    rgba(212, 183, 106, 0.45) 50%,
+    rgba(212, 183, 106, 0.3) 60%,
+    transparent 100%
+  );
+}
+
+.group:hover .card-scan-line {
+  animation: carouselScanLine 0.8s ease-in forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    NOTICIAS CAROUSEL — radar ping no indicador "ao vivo"
    ═══════════════════════════════════════════════════════════════════════════ */
 

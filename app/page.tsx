@@ -35,7 +35,7 @@ export default function Home() {
             </div>
 
             {rest.length > 0 ? (
-              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2">
                 {rest.map((study, i) => (
                   <ArticleCard key={study.slug} study={study} index={i} />
                 ))}

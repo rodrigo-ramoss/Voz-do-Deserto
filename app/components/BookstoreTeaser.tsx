@@ -66,9 +66,13 @@ export default function BookstoreTeaser() {
           <h2 className="font-display text-3xl text-text mb-3 md:text-4xl">
             Livraria Digital
           </h2>
-          <p className="font-body text-base text-muted/70 max-w-lg mx-auto leading-relaxed">
-            E-books aprofundados sobre os temas que o sistema prefere que você ignore.
-            Acesse quando estiver pronto.
+          <p className="font-body text-base text-muted/70 max-w-xl mx-auto leading-relaxed">
+            E-books escritos sobre o que o Google preferia que ficasse enterrado.
+            Conteúdo que não passa em revisão editorial, não recebe patrocínio e
+            não foi feito para agradar o algoritmo — só para quem está pronto para ler.
+          </p>
+          <p className="font-label text-[10px] uppercase tracking-widest text-ember/50 mt-3">
+            // acesso restrito — em preparação
           </p>
         </div>
       </div>

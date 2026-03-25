@@ -1,6 +1,6 @@
 ---
 title: "Por que Cada Geração Inventa o Profeta que Precisa: Nostradamus e o Viés de Confirmação"
-date: 2026-03-17
+date: 2026-03-24
 category: Escatologia Digital
 image: /imagens/nostradamus-vies-confirmacao-ia.webp
 description: "Nostradamus viraliza toda vez que o mundo entra em crise. Não porque ele previu o futuro — mas porque nossos cérebros são máquinas de encontrar padrões. O que esse fenômeno revela sobre a psicologia humana diante da aceleração tecnológica."

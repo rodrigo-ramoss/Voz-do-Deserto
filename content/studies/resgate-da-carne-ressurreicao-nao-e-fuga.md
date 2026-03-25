@@ -1,6 +1,6 @@
 ---
 title: "O Resgate da Carne: Por que a Ressurreição é uma Vitória — não uma Fuga"
-date: 2026-03-17
+date: 2026-03-24
 category: Pilares da Fé
 image: /imagens/ressurreicao-resgate-da-carne.webp
 description: "O gnosticismo ensinava que o corpo era prisão. Paulo ensinou que é o alvo da redenção. Entenda por que a ressurreição física de Jesus destrói essa distinção de forma irreversível."

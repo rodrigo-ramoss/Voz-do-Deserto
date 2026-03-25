@@ -19,30 +19,35 @@ const EBOOKS = [
     slug: "babel-2",
     title: "Babel 2.0",
     subtitle: "A Coordenação Total das Máquinas e o Fim do Controle Humano",
+    description: "O que acontece quando as máquinas param de falar entre si em linguagem humana? A resposta é mais próxima do que você imagina.",
     cover: "/ebooks/babel-2.jpg",
   },
   {
     slug: "cinco-textos",
     title: "Cinco Textos que a Igreja Não Leu em Voz Alta",
     subtitle: "Exegese histórica sem filtro institucional",
+    description: "Cinco passagens que mudaram o curso da teologia — e que as denominações preferiram guardar no fundo da gaveta.",
     cover: "/ebooks/cinco-textos.jpg",
   },
   {
     slug: "imagem-que-respira",
     title: "A Imagem que Respira",
     subtitle: "Inteligência Artificial, Apocalipse 13 e a Transferência dos Atributos Divinos",
+    description: "A besta do Apocalipse não chega com chifres. Chega com interface amigável e 99,9% de uptime.",
     cover: "/ebooks/imagem-que-respira.jpg",
   },
   {
     slug: "teatro-das-sombras",
     title: "O Teatro das Sombras",
     subtitle: "A Anatomia das Pandemias Planejadas",
+    description: "Quem escreveu o roteiro? Quem pagou pelos atores? E por que a plateia nunca recebe o programa completo?",
     cover: "/ebooks/teatro-das-sombras-voz-do-deserto.png",
   },
   {
     slug: "o-eixo-da-virada",
     title: "O Eixo da Virada",
     subtitle: "Manual de Soberania e Resiliência para a Nova Ordem Global",
+    description: "Enquanto o sistema se reorganiza, quem entende o mapa não precisa pedir permissão para atravessar a fronteira.",
     cover: "/ebooks/o-eixo-da-virada.png",
   },
 ];
@@ -130,10 +135,22 @@ export default function BookstoreTeaser() {
                 </div>
               </div>
 
-              {/* Título abaixo da capa */}
-              <div className="mt-3 w-[180px]">
-                <p className="font-display text-xs leading-snug text-text/50 line-clamp-2 text-center">
+              {/* Caixa digital animada abaixo da capa */}
+              <div className="ebook-info-box mt-3 w-[180px] relative border border-gold/20 px-3 py-2.5">
+                {/* Cantos decorativos */}
+                <span className="ebook-corner ebook-corner-tl" aria-hidden />
+                <span className="ebook-corner ebook-corner-tr" aria-hidden />
+                <span className="ebook-corner ebook-corner-bl" aria-hidden />
+                <span className="ebook-corner ebook-corner-br" aria-hidden />
+                {/* Título */}
+                <p className="font-display text-[11px] leading-snug text-text/70 line-clamp-2 text-center mb-1.5">
                   {book.title}
+                </p>
+                {/* Separador */}
+                <div className="h-px w-8 bg-gold/20 mx-auto mb-1.5" />
+                {/* Descrição */}
+                <p className="font-body text-[10px] leading-relaxed text-text/35 text-center line-clamp-3">
+                  {book.description}
                 </p>
               </div>
             </div>

@@ -648,3 +648,33 @@ select:focus-visible {
   50%  { opacity: 1; }
   100% { opacity: 0; transform: translateX(30%); }
 }
+
+/* ── Caixa de informação digital (título + descrição) ── */
+.ebook-info-box {
+  background: rgba(212,183,106,0.02);
+  transition: border-color 0.4s ease, background 0.4s ease;
+  animation: ebookBoxPulse 4s ease-in-out infinite;
+}
+
+.ebook-card:hover .ebook-info-box {
+  border-color: rgba(212,183,106,0.45);
+  background: rgba(212,183,106,0.05);
+}
+
+@keyframes ebookBoxPulse {
+  0%, 100% { border-color: rgba(212,183,106,0.20); }
+  50%       { border-color: rgba(212,183,106,0.38); box-shadow: 0 0 8px rgba(212,183,106,0.07); }
+}
+
+/* Cantos decorativos */
+.ebook-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: rgba(212,183,106,0.55);
+  border-style: solid;
+}
+.ebook-corner-tl { top: -1px; left: -1px;  border-width: 1px 0 0 1px; }
+.ebook-corner-tr { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+.ebook-corner-bl { bottom: -1px; left: -1px;  border-width: 0 0 1px 1px; }
+.ebook-corner-br { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }

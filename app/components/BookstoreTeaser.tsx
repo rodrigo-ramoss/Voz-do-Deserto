@@ -33,6 +33,18 @@ const EBOOKS = [
     subtitle: "Inteligência Artificial, Apocalipse 13 e a Transferência dos Atributos Divinos",
     cover: "/ebooks/imagem-que-respira.jpg",
   },
+  {
+    slug: "teatro-das-sombras",
+    title: "O Teatro das Sombras",
+    subtitle: "A Anatomia das Pandemias Planejadas",
+    cover: "/ebooks/teatro-das-sombras-voz-do-deserto.png",
+  },
+  {
+    slug: "o-eixo-da-virada",
+    title: "O Eixo da Virada",
+    subtitle: "Manual de Soberania e Resiliência para a Nova Ordem Global",
+    cover: "/ebooks/o-eixo-da-virada.png",
+  },
 ];
 
 // Duplica para o marquee ser contínuo sem gap

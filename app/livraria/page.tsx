@@ -76,6 +76,24 @@ const ALL_CATEGORIES = [
       "Conteúdo digno de excomunhão instantânea em pelo menos seis denominações. A engrenagem oculta do poder eclesiástico, o mercado da fé e tudo que o Banco Espiritual nunca deveria ter se tornado.",
     icon: "✝",
   },
+  {
+    name: "Geopolítica Escatológica",
+    description:
+      "Impérios que colapsam, alianças que se formam e a gramática bíblica por trás dos movimentos que moldam o fim da era.",
+    icon: "◈",
+  },
+  {
+    name: "Profecias e Tempo Presente",
+    description:
+      "Textos proféticos que não ficaram no passado — e o que os eventos de hoje revelam sobre onde estamos na linha do tempo.",
+    icon: "◎",
+  },
+  {
+    name: "Fora do Controle",
+    description:
+      "Ferramentas, movimentos e estratégias que o sistema não consegue silenciar — e como usá-los com sabedoria.",
+    icon: "◇",
+  },
 ];
 
 function ArquivoSecretoLocked() {

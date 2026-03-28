@@ -23,13 +23,14 @@ export default function ScriptoriumContent({
   title,
   canonicalUrl,
 }: Props) {
-  const [isOwner, setIsOwner] = useState(false);
+  // TEMPORÁRIO — artigos abertos para lançamento do blog
+  // Para bloquear novamente: trocar true por false abaixo
+  const [isOwner, setIsOwner] = useState(true);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const key = params.get("key") ?? "";
-    // Chave do proprietário — altere aqui se quiser trocar
-    setIsOwner(key === "ramos-vozz");
+    // const params = new URLSearchParams(window.location.search);
+    // const key = params.get("key") ?? "";
+    // setIsOwner(key === "ramos-vozz");
   }, []);
 
   if (isOwner) {

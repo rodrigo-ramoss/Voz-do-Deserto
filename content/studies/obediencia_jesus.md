@@ -2,12 +2,10 @@
 title: "Shamá: O que Jesus Entendia por Obediência — e o que a Igreja Distorceu"
 title_alt: "A Tirania do Sim e o Resgate da Escuta: O que a Palavra Hebraica Shamá Revela sobre Obedecer a Deus"
 date: 2026-03-17
-categoria: Pilares da Fé
+category: Pilares da Fé
 description: "A palavra hebraica para obediência é shamá — escuta que gera resposta. Não subserviência. Não medo. Jesus obedecia ao Pai exatamente quando desobedecia ao sistema religioso. Entenda a diferença."
-description_alt: "Jesus expulsou os vendilhões do Templo como ato de obediência ao Pai. Esse detalhe muda tudo. A obediência bíblica não é compliance institucional — é escuta do Espírito que frequentemente subverte o sistema."
 cta: "Continuar lendo →"
-imagem: /imagens/obediencia_jesus.webp
-slug: /pilares-da-fe/shama-obediencia-jesus-escuta-profunda
+image: /imagens/obediencia_jesus.webp
 faq:
   - pergunta: "O que significa shamá em hebraico?"
     resposta: "Shamá é o verbo hebraico traduzido como ouvir ou obedecer — mas sua semântica é mais rica do que qualquer tradução captura. Significa escutar com atenção total, atentar ao que foi ouvido e responder com ação concreta. É o verbo do Shemá Israel — Ouve, Israel (Deuteronômio 6:4) — a confissão de fé central do judaísmo. Shamá não é cumprimento mecânico de ordem. É uma postura de escuta que necessariamente produz resposta."

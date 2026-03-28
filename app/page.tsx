@@ -6,6 +6,10 @@ import Sidebar from "./components/Sidebar";
 import WeeklyCarousel from "./components/WeeklyCarousel";
 import NoticiasCarousel from "./components/NoticiasCarousel";
 import BookstoreTeaser from "./components/BookstoreTeaser";
+import Newsletter from "./components/Newsletter";
+
+// Garante dados frescos a cada requisição (necessário para rotação semanal)
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   const studies = getAllStudies();
@@ -20,7 +24,13 @@ export default function Home() {
   const weeklySlides = thisWeek.length > 0 ? thisWeek.slice(0, 10) : studies.slice(0, 10);
   const isWeeklyMode = thisWeek.length > 0;
 
-  const rest = studies.filter((s) => !weeklySlides.find((w) => w.slug === s.slug)).slice(0, 6);
+  // Estudos Mais Lidos: rotação semanal — seleciona 6 artigos diferentes a cada semana
+  const nonWeekly = studies.filter((s) => !weeklySlides.find((w) => w.slug === s.slug));
+  const weekNumber = Math.floor(now.getTime() / (7 * 24 * 60 * 60 * 1000));
+  const offset = nonWeekly.length > 6 ? weekNumber % (nonWeekly.length - 5) : 0;
+  const mostRead = nonWeekly.length > 0
+    ? [...nonWeekly.slice(offset), ...nonWeekly.slice(0, offset)].slice(0, 6)
+    : [];
 
   return (
     <>
@@ -33,7 +43,7 @@ export default function Home() {
           <div>
             <div className="mb-8 flex items-center gap-4">
               <h2 className="font-label text-[10px] uppercase tracking-[0.25em] text-gold">
-                Estudos recentes
+                Estudos mais lidos
               </h2>
               <div className="h-px flex-1 bg-gold/15" />
               <Link
@@ -44,9 +54,9 @@ export default function Home() {
               </Link>
             </div>
 
-            {rest.length > 0 ? (
+            {mostRead.length > 0 ? (
               <div className="grid gap-6 sm:grid-cols-2">
-                {rest.map((study, i) => (
+                {mostRead.map((study, i) => (
                   <ArticleCard key={study.slug} study={study} index={i} />
                 ))}
               </div>
@@ -66,6 +76,10 @@ export default function Home() {
       </div>
 
       <BookstoreTeaser />
+      
+      <div className="mx-auto max-w-4xl px-6 py-16">
+        <Newsletter />
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // MODO BLOQUEADO: mude para false quando quiser abrir o Arquivo
 // ─────────────────────────────────────────────────────────────
-const LOCKED = true;
+const LOCKED = false;
 
 import type { Metadata } from "next";
 import NewsletterForm from "@/app/components/NewsletterForm";

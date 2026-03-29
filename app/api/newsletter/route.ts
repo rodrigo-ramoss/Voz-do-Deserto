@@ -16,33 +16,30 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "E-mail inválido" }, { status: 400 });
   }
 
-  const apiKey = process.env.BREVO_API_KEY;
-  const listId = Number(process.env.BREVO_LIST_ID ?? 2);
+  const token = process.env.HOSTINGER_REACH_API_TOKEN;
+  const profileId = process.env.HOSTINGER_REACH_PROFILE_ID;
 
-  if (!apiKey) {
-    console.error("[newsletter] BREVO_API_KEY não configurada");
+  if (!token || !profileId) {
+    console.error("[newsletter] HOSTINGER_REACH_API_TOKEN ou HOSTINGER_REACH_PROFILE_ID não configurados");
     return NextResponse.json({ error: "Serviço indisponível" }, { status: 500 });
   }
 
-  const res = await fetch("https://api.brevo.com/v3/contacts", {
+  const res = await fetch(`https://developers.hostinger.com/api/reach/v1/profiles/${profileId}/contacts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "api-key": apiKey,
+      "Authorization": `Bearer ${token}`,
     },
     body: JSON.stringify({
       email,
-      listIds: [listId],
-      updateEnabled: true,
     }),
   });
 
-  // 201 = criado, 204 = já existia e foi atualizado — ambos são sucesso
-  if (res.status === 201 || res.status === 204) {
+  if (res.ok || res.status === 201 || res.status === 204) {
     return NextResponse.json({ ok: true });
   }
 
   const payload = await res.json().catch(() => ({}));
-  console.error("[newsletter] Erro Brevo:", res.status, payload);
+  console.error("[newsletter] Erro Hostinger Reach:", res.status, payload);
   return NextResponse.json({ error: "Erro ao cadastrar" }, { status: 500 });
 }

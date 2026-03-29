@@ -6,7 +6,7 @@ import Sidebar from "@/app/components/Sidebar";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
-import NewsletterForm from "@/app/components/NewsletterForm";
+import Newsletter from "@/app/components/Newsletter";
 import AuthorCard from "@/app/components/AuthorCard";
 import NewsletterPopup from "@/app/components/NewsletterPopup";
 
@@ -244,7 +244,7 @@ export default async function StudyPage({
 
             {/* Newsletter ao final do artigo */}
             <div className="mt-14">
-              <NewsletterForm context="article" />
+              <Newsletter />
             </div>
 
             {/* Compartilhar */}

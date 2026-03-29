@@ -1,6 +1,6 @@
 ---
 title: "Schwab Caiu. Quem Assumiu Controla Mais Dinheiro do que Qualquer Nação da Terra"
-date: 2026-03-20
+date: 2026-03-29
 category: Geopolítica Escatológica
 folder: Scriptorium
 image: /imagens/schwab-caiu-quem-assumiu-controla-mais-dinheiro-do-que-qualquer-nacao-da-terra.webp

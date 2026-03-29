@@ -1,6 +1,6 @@
 ---
 title: "O Relógio dos Impérios: As Seis Estações do Destino Imperial e Onde Estamos Agora"
-date: 2026-03-20
+date: 2026-03-29
 category: Geopolítica Escatológica
 folder: Scriptorium
 image: /imagens/o-relogio-dos-imperios-as-seis-estacoes-do-destino-imperial-e-onde-estamos-agora.webp

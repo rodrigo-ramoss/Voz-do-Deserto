@@ -1,6 +1,6 @@
 ---
 title: "Shamá: O que Jesus Entendia por Obediência — e o que a Igreja Distorceu"
-date: 2026-03-17
+date: 2026-03-29
 category: Bíblia & Interpretação
 description: "A palavra hebraica para obediência é shamá — escuta que gera resposta. Não subserviência. Não medo. Jesus obedecia ao Pai exatamente quando desobedecia ao sistema religioso. Entenda a diferença."
 image: /imagens/shama-obediencia-jesus-voz-do-deserto.webp

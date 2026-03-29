@@ -1,6 +1,6 @@
 ---
 title: "O Presidente que Escreveu o Roteiro do Fim do Mundo"
-date: 2026-03-20
+date: 2026-03-29
 category: Profecias e Tempo Presente
 folder: Scriptorium
 image: /imagens/o-presidente-que-escreveu-o-roteiro-do-fim-do-mundo.webp

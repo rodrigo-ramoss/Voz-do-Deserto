@@ -1,7 +1,7 @@
 ---
 title: "Shamá: O que Jesus Entendia por Obediência — e o que a Igreja Distorceu"
 title_alt: "A Tirania do Sim e o Resgate da Escuta: O que a Palavra Hebraica Shamá Revela sobre Obedecer a Deus"
-date: 2026-03-17
+date: 2026-03-29
 category: Pilares da Fé
 description: "A palavra hebraica para obediência é shamá — escuta que gera resposta. Não subserviência. Não medo. Jesus obedecia ao Pai exatamente quando desobedecia ao sistema religioso. Entenda a diferença."
 cta: "Continuar lendo →"

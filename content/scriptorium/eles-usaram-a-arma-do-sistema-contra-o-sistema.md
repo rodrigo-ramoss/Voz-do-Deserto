@@ -1,6 +1,6 @@
 ---
 title: "Eles Usaram a Arma do Sistema Contra o Sistema"
-date: 2026-03-20
+date: 2026-03-29
 category: Fora do Controle
 folder: Scriptorium
 image: /imagens/eles-usaram-a-arma-do-sistema-contra-o-sistema.webp

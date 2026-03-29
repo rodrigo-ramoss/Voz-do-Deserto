@@ -5,7 +5,7 @@ const LOCKED = false;
 
 import type { Metadata } from "next";
 import NewsletterForm from "@/app/components/NewsletterForm";
-import StudiesCarousel from "@/app/components/StudiesCarousel";
+import LibraryGrid from "@/app/components/LibraryGrid";
 import { getScriptoriumByCategory } from "@/lib/scriptorium";
 
 export const metadata: Metadata = {
@@ -220,11 +220,10 @@ export default function ArquivoSecretoPage() {
               </p>
 
               {hasArticles ? (
-                /* ── Carrossel com os 5 mais recentes ── */
-                <StudiesCarousel
+                /* ── Grade estilo biblioteca digital ── */
+                <LibraryGrid
                   articles={articles}
                   linkBase="/livraria/scriptorium"
-                  limit={5}
                 />
               ) : (
                 /* ── Placeholder vazio ── */

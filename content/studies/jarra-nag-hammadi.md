@@ -1,10 +1,10 @@
 ---
 title: "Nag Hammadi: A Jarra que Guardou o Cristianismo que a Igreja Tentou Apagar"
-date: 2026-03-17
+date: 2026-03-29
 category: Apócrifos
 image: /imagens/nag-hammadi-jarra-1945.webp
 description: "Em 1945, um camponês egípcio quebrou uma jarra no deserto e encontrou 52 textos cristãos primitivos. A história do achado que forçou teólogos a repensarem tudo."
-keywords: "#NagHammadi #ApócrifosEvangelhos #CristianismoPrimitivo #TextosAntigos #VozDoDeserto #GnosticismoHistória #ManuscritosAntigos"
+keywords: ["#NagHammadi", "#ApócrifosEvangelhos", "#CristianismoPrimitivo", "#TextosAntigos", "#VozDoDeserto", "#GnosticismoHistória", "#ManuscritosAntigos"]
 faq:
   - question: "O que é a Biblioteca de Nag Hammadi?"
     answer: "Uma coleção de 52 textos cristãos primitivos descoberta em dezembro de 1945 perto de Nag Hammadi, no Alto Egito, por Muhammad Ali al-Samman. Os textos são traduções coptas de originais gregos dos séculos II e III. Junto com os Manuscritos do Mar Morto, constituem o maior achado de textos antigos da era contemporânea."
@@ -16,6 +16,8 @@ faq:
     answer: "Não. Os textos revelam a diversidade do Cristianismo primitivo, mas não provam que o gnosticismo era mais fiel às origens. O que provam é que a questão era disputada — e que quem venceu a disputa não foi necessariamente quem tinha mais antiguidade ou fidelidade histórica."
   - question: "O que é o Códice Jung?"
     answer: "É o Codex I de Nag Hammadi, contrabandeado para fora do Egito e adquirido em 1952 pelo Instituto C.G. Jung em Zurique. Contém o Evangelho da Verdade e o Tratado sobre a Ressurreição. Foi devolvido ao Egito em 1975 após negociações diplomáticas."
+  - question: "Os textos de Nag Hammadi são confiáveis historicamente?"
+    answer: "São documentos históricos reais e valiosos que revelam como comunidades cristãs do século II e III pensavam, oravam e entendiam Jesus. Seu valor histórico não depende de serem 'verdadeiros' no sentido de conterem revelação divina — são fontes primárias de primeira grandeza para entender a diversidade do Cristianismo primitivo."
 ---
 
 Durante minha trajetória como pesquisador das religiões antigas, poucas histórias me fascinam tanto quanto o evento que ocorreu em dezembro de 1945, no Alto Egito. Não porque seja uma história sobre grandes acadêmicos, nem sobre expedições arqueológicas financiadas por universidades, nem sobre pesquisadores com décadas de formação clássica.

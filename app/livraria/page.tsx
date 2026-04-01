@@ -40,12 +40,7 @@ const ALL_CATEGORIES = [
       "Origens, narrativas construídas e o que as pandemias revelam sobre poder e controle social.",
     icon: "◉",
   },
-  {
-    name: "Profecias & Poder",
-    description:
-      "A interseção entre textos proféticos antigos e as estruturas de poder que moldam o presente.",
-    icon: "◎",
-  },
+
   {
     name: "Reset Mundial & Nova Ordem",
     description:

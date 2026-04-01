@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getAllStudies } from "@/lib/studies";
 import { getAllNoticias } from "@/lib/noticias";
-import ArticleCard from "./components/ArticleCard";
-import Sidebar from "./components/Sidebar";
+import { getAllScriptorium } from "@/lib/scriptorium";
 import WeeklyCarousel from "./components/WeeklyCarousel";
 import NoticiasCarousel from "./components/NoticiasCarousel";
-import BookstoreTeaser from "./components/BookstoreTeaser";
 import Newsletter from "./components/Newsletter";
+import HomeHero from "./components/HomeHero";
+import CompactStudyCard from "./components/CompactStudyCard";
+import HomeCategoryIndex from "./components/HomeCategoryIndex";
+import ArquivoSecretoSection from "./components/ArquivoSecretoSection";
 
 // Garante dados frescos a cada requisição (necessário para rotação semanal)
 export const dynamic = "force-dynamic";
@@ -14,6 +16,7 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   const studies = getAllStudies();
   const noticias = getAllNoticias();
+  const premium = getAllScriptorium().slice(0, 3);
 
   // Destaques da Semana: artigos publicados nos últimos 7 dias
   const now = new Date();
@@ -34,52 +37,54 @@ export default function Home() {
 
   return (
     <>
+      <HomeHero />
+
       {noticias.length > 0 && <NoticiasCarousel noticias={noticias} />}
+
       <WeeklyCarousel studies={weeklySlides} isWeeklyMode={isWeeklyMode} />
 
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
-          {/* Article grid */}
-          <div>
-            <div className="mb-8 flex items-center gap-4">
-              <h2 className="font-label text-[10px] uppercase tracking-[0.25em] text-gold">
-                Estudos mais lidos
-              </h2>
-              <div className="h-px flex-1 bg-gold/15" />
-              <Link
-                href="/estudos"
-                className="font-label text-[9px] uppercase tracking-widest text-muted hover:text-gold transition-colors"
-              >
-                Ver todos →
-              </Link>
-            </div>
-
-            {mostRead.length > 0 ? (
-              <div className="grid gap-6 sm:grid-cols-2">
-                {mostRead.map((study, i) => (
-                  <ArticleCard key={study.slug} study={study} index={i} />
-                ))}
-              </div>
-            ) : (
-              <div className="border border-gold/10 bg-card p-10 text-center">
-                <p className="font-display text-xl text-gold/25 mb-3">✦</p>
-                <p className="font-body text-text/30 text-sm">
-                  Novos estudos em breve.
-                </p>
-              </div>
-            )}
+      {/* ── Estudos mais lidos ─────────────────────────────────────── */}
+      <section className="border-b border-gold/10">
+        <div className="mx-auto max-w-6xl px-6 py-10">
+          <div className="mb-6 flex items-center gap-4">
+            <h2 className="font-label text-[10px] uppercase tracking-[0.25em] text-gold">
+              Estudos mais lidos
+            </h2>
+            <div className="h-px flex-1 bg-gold/15" />
+            <Link
+              href="/estudos"
+              className="font-label text-[9px] uppercase tracking-widest text-muted hover:text-gold transition-colors"
+            >
+              Ver todos →
+            </Link>
           </div>
 
-          {/* Sidebar */}
-          <Sidebar excludeSlug={weeklySlides[0]?.slug} />
+          {mostRead.length > 0 ? (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {mostRead.map((study) => (
+                <CompactStudyCard key={study.slug} study={study} />
+              ))}
+            </div>
+          ) : (
+            <div className="border border-gold/10 bg-card p-10 text-center">
+              <p className="font-display text-xl text-gold/25 mb-3">✦</p>
+              <p className="font-body text-text/30 text-sm">
+                Novos estudos em breve.
+              </p>
+            </div>
+          )}
         </div>
-      </div>
+      </section>
 
-      <BookstoreTeaser />
-      
-      <div className="mx-auto max-w-4xl px-6 py-16">
-        <Newsletter />
-      </div>
+      <HomeCategoryIndex studies={studies} />
+
+      <ArquivoSecretoSection premium={premium} />
+
+      <section className="border-t border-gold/10">
+        <div className="mx-auto max-w-4xl px-6 py-14">
+          <Newsletter />
+        </div>
+      </section>
     </>
   );
 }

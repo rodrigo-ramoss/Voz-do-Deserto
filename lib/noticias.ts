@@ -10,7 +10,7 @@ export interface NoticiaMeta {
   slug: string;
   title: string;
   date: string;
-  category: string;       // "Fora do Deserto"
+  category: string;       // "Notícias"
   image?: string;
   excerpt?: string;
   description?: string;
@@ -53,7 +53,7 @@ export function getAllNoticias(): NoticiaMeta[] {
         slug,
         title: data.title ?? slug,
         date: data.date ? new Date(data.date).toISOString().slice(0, 10) : "",
-        category: "Fora do Deserto",
+        category: "Notícias",
         image: data.image,
         excerpt,
         description: data.description,
@@ -90,7 +90,7 @@ export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
     slug,
     title: data.title ?? slug,
     date: data.date ? new Date(data.date).toISOString().slice(0, 10) : "",
-    category: "Fora do Deserto",
+    category: "Notícias",
     image: data.image,
     excerpt,
     description: data.description,

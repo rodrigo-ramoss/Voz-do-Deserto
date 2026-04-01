@@ -82,6 +82,47 @@ body {
   100% { background-position:  200% center; }
 }
 
+/* Reveal suave para títulos (evita tremulação de "scramble/type") */
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes titleSweep {
+  0%   { transform: translateX(-140%); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translateX(140%);  opacity: 0; }
+}
+
+.title-reveal {
+  position: relative;
+  display: inline-block;
+  animation: titleReveal 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.title-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 183, 106, 0.18) 50%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  animation: titleSweep 720ms ease both;
+}
+
 /* Carrossel de categorias — marquee contínuo */
 @keyframes marquee {
   from { transform: translateX(0); }

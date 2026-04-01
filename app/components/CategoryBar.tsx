@@ -74,7 +74,7 @@ function Bar({ categories }: { categories: string[] }) {
           Todos
         </Link>
 
-        {/* Fora do Deserto — ocupa metade */}
+        {/* Notícias — ocupa metade */}
         <Link
           href="/noticias"
           className={`flex-1 font-label text-[10px] font-medium uppercase tracking-[0.18em] min-h-[38px] flex items-center justify-center gap-1.5 border-b-2 transition-colors duration-200 ${
@@ -84,7 +84,7 @@ function Bar({ categories }: { categories: string[] }) {
           }`}
         >
           <span className="animate-blink w-1 h-1 rounded-full bg-ember/60 shrink-0" />
-          Fora do Deserto
+          Notícias
         </Link>
       </div>
 
@@ -114,7 +114,7 @@ function Bar({ categories }: { categories: string[] }) {
             }`}
           >
             <span className="animate-blink w-1 h-1 rounded-full bg-ember/60 shrink-0" />
-            Fora do Deserto
+            Notícias
           </Link>
         </div>
 

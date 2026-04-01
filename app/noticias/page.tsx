@@ -5,9 +5,9 @@ import type { Metadata } from "next";
 import { formatDateSmart } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Fora do Deserto — Voz do Deserto",
+  title: "Notícias — Voz do Deserto",
   description:
-    "O que está acontecendo fora do deserto. Notícias e análises do mundo além dos muros da instituição religiosa.",
+    "Notícias e análises do mundo além dos muros — sem filtro institucional.",
 };
 
 export default function NoticiasPage() {
@@ -19,15 +19,15 @@ export default function NoticiasPage() {
       <div className="flex items-center gap-3 mb-4">
         <span className="animate-blink w-1.5 h-1.5 rounded-full bg-ember/70 shrink-0" />
         <p className="font-label text-[11px] uppercase tracking-[0.25em] text-ember/80">
-          Fora do Deserto
+          Notícias
         </p>
       </div>
       <h1 className="font-display text-4xl text-text mb-4 md:text-5xl">
-        O que está acontecendo fora do deserto
+        Notícias e análises do tempo presente
       </h1>
       <div className="h-px w-16 bg-gold/30 mb-4" />
       <p className="font-body text-lg text-text/55 max-w-xl leading-relaxed mb-16">
-        Notícias, análises e movimentos do mundo além dos muros — sem filtro institucional.
+        O que está acontecendo agora — e por que isso importa para quem quer ver além do templo.
       </p>
 
       {noticias.length === 0 ? (
@@ -64,7 +64,7 @@ export default function NoticiasPage() {
               <div className="flex flex-col flex-1 p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="font-label text-[8px] uppercase tracking-[0.25em] text-ember/60">
-                    Fora do Deserto
+                    Notícias
                   </span>
                   {noticia.source && (
                     <>

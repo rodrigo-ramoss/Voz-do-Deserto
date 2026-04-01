@@ -61,7 +61,7 @@ export default async function NoticiaPage({
         <nav aria-label="Navegação" className="flex items-center gap-2 mb-10">
           <Link href="/" className="font-label text-[9px] uppercase tracking-widest text-muted/50 hover:text-gold transition-colors">Início</Link>
           <span className="text-muted/30 text-[9px]">/</span>
-          <Link href="/noticias" className="font-label text-[9px] uppercase tracking-widest text-muted/50 hover:text-gold transition-colors">Fora do Deserto</Link>
+          <Link href="/noticias" className="font-label text-[9px] uppercase tracking-widest text-muted/50 hover:text-gold transition-colors">Notícias</Link>
           <span className="text-muted/30 text-[9px]">/</span>
           <span className="font-label text-[9px] uppercase tracking-widest text-muted/30 line-clamp-1">{noticia.title}</span>
         </nav>
@@ -69,7 +69,7 @@ export default async function NoticiaPage({
         {/* Meta */}
         <div className="flex items-center gap-3 mb-6">
           <span className="font-label text-[9px] uppercase tracking-[0.3em] text-ember/80 border border-ember/20 px-2.5 py-1">
-            Fora do Deserto
+            Notícias
           </span>
           {noticia.source && (
             <span className="font-label text-[9px] uppercase tracking-widest text-muted/50">
@@ -163,7 +163,7 @@ export default async function NoticiaPage({
             href="/noticias"
             className="font-label text-[10px] uppercase tracking-widest text-muted hover:text-gold transition-colors border-b border-muted/20 pb-0.5"
           >
-            ← Voltar para Fora do Deserto
+            ← Voltar para Notícias
           </Link>
         </div>
       </main>

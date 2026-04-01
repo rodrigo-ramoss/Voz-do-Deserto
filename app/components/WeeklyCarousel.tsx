@@ -13,48 +13,6 @@ interface Props {
 
 const AUTO_PLAY_MS = 6000;
 
-// ── Scramble hook ─────────────────────────────────────────────────────────────
-// Quando o título muda (novo slide), os caracteres "embaralham" aleatoriamente
-// e vão se revelando da esquerda para a direita — estilo terminal/hacker.
-function useScrambleText(text: string): string {
-  const [display, setDisplay] = useState(text);
-  const frameRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    const CHARS =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&<>/\\|";
-    let frame = 0;
-    const TOTAL = 18; // 18 × 28ms ≈ 500ms de efeito
-
-    if (frameRef.current) clearInterval(frameRef.current);
-
-    frameRef.current = setInterval(() => {
-      frame++;
-      const revealed = Math.floor((frame / TOTAL) * text.length);
-      setDisplay(
-        text
-          .split("")
-          .map((char, i) => {
-            if (char === " ") return " ";
-            if (i <= revealed) return char;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join("")
-      );
-      if (frame >= TOTAL) {
-        setDisplay(text);
-        if (frameRef.current) clearInterval(frameRef.current);
-      }
-    }, 28);
-
-    return () => {
-      if (frameRef.current) clearInterval(frameRef.current);
-    };
-  }, [text]);
-
-  return display;
-}
-
 // ── Componente principal ──────────────────────────────────────────────────────
 // Wrapper que garante que os hooks internos só rodam quando há slides.
 export default function WeeklyCarousel({ studies, isWeeklyMode = false }: Props) {
@@ -70,7 +28,6 @@ function Inner({ studies, isWeeklyMode }: { studies: StudyMeta[]; isWeeklyMode: 
   const study = studies[current];
   const ctaLabel = getCtaLabel(study.category);
   const dateLabel = formatDateSmart(study.date, "long");
-  const scrambledTitle = useScrambleText(study.title);
 
   const prev = () => setCurrent((c) => (c === 0 ? studies.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === studies.length - 1 ? 0 : c + 1));
@@ -97,7 +54,7 @@ function Inner({ studies, isWeeklyMode }: { studies: StudyMeta[]; isWeeklyMode: 
       onMouseLeave={() => setPaused(false)}
     >
       {/* ── Cabeçalho ── */}
-      <div className="mx-auto max-w-6xl px-6 pt-6 pb-2 flex items-center justify-between">
+      <div className="mx-auto max-w-6xl px-6 pt-5 pb-2 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="font-label text-[9px] uppercase tracking-[0.3em] text-ember/80 border border-ember/20 px-2.5 py-1">
             {isWeeklyMode ? "Destaques da Semana" : "Destaques"}
@@ -132,7 +89,7 @@ function Inner({ studies, isWeeklyMode }: { studies: StudyMeta[]; isWeeklyMode: 
       </div>
 
       {/* ── Conteúdo do slide ── */}
-      <div className="mx-auto max-w-6xl px-6 py-10 md:py-14">
+      <div className="mx-auto max-w-6xl px-6 py-8 md:py-10">
         <div className="grid items-center gap-10 md:grid-cols-2">
 
           {/* Visual + scan line */}
@@ -179,11 +136,11 @@ function Inner({ studies, isWeeklyMode }: { studies: StudyMeta[]; isWeeklyMode: 
             </div>
 
             {/*
-              scrambledTitle: mesmo texto real, mas ao trocar de slide os
-              caracteres aparecem embaralhados e se revelam da esquerda p/ direita.
+              title-reveal: animação suave (sem embaralhar caracteres) para evitar
+              tremulação/jitter em fontes proporcionais.
             */}
             <h1 className="font-display text-4xl leading-tight text-text mb-5 md:text-5xl">
-              {scrambledTitle}
+              <span className="title-reveal">{study.title}</span>
             </h1>
 
             {study.excerpt && (

@@ -277,10 +277,10 @@ export default function SobrePage() {
         </p>
         <blockquote>
           <p className="font-display text-2xl leading-relaxed text-text/70">
-            "Deus não tem medo da sua dúvida.
+            “Deus não tem medo da sua dúvida.
           </p>
           <p className="font-display text-2xl leading-relaxed text-text/70 mb-6">
-            O sistema tem."
+            O sistema tem.”
           </p>
           <footer className="font-label text-[10px] uppercase tracking-widest text-muted">
             — Rodrigo Ramos · Voz do Deserto

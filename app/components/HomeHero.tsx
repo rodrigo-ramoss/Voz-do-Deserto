@@ -1,0 +1,59 @@
+import Link from "next/link";
+
+export default function HomeHero() {
+  return (
+    <section className="border-b border-gold/10 relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(800px 260px at 20% 0%, rgba(212,183,106,0.10), transparent 60%), radial-gradient(700px 260px at 80% 10%, rgba(196,124,58,0.10), transparent 60%)",
+        }}
+      />
+
+      <div className="mx-auto max-w-6xl px-6 pt-10 pb-8 md:pt-12 md:pb-10 relative">
+        <p className="font-label text-[9px] uppercase tracking-[0.45em] text-gold/55 mb-4">
+          Voz do Deserto
+        </p>
+
+        <h1 className="font-display text-4xl leading-tight text-text md:text-5xl">
+          O que o templo nunca te diz.
+        </h1>
+
+        <p className="font-body text-lg leading-relaxed text-muted/90 max-w-2xl mt-4">
+          Estudos bíblicos profundos, notícias e arquivo premium — sem filtro
+          institucional, sem motivacional barato.
+        </p>
+
+        <div className="mt-7 flex items-center gap-3 flex-wrap">
+          <Link
+            href="/noticias"
+            className="font-label text-[10px] uppercase tracking-widest border border-ember/35 bg-ember/5 px-6 min-h-[44px] inline-flex items-center text-ember hover:border-ember/60 hover:bg-ember/10 transition-colors"
+          >
+            Ver notícias
+          </Link>
+          <Link
+            href="/estudos"
+            className="font-label text-[10px] uppercase tracking-widest border border-gold/45 px-6 min-h-[44px] inline-flex items-center text-gold hover:bg-gold hover:text-bg transition-colors"
+          >
+            Explorar estudos
+          </Link>
+          <Link
+            href="/livraria"
+            className="font-label text-[10px] uppercase tracking-widest text-muted hover:text-gold transition-colors min-h-[44px] inline-flex items-center"
+          >
+            Arquivo secreto →
+          </Link>
+        </div>
+
+        <div className="mt-8 flex items-center gap-6" aria-hidden>
+          <div className="h-px w-16 bg-gold/15" />
+          <span className="text-xs text-gold/25">✦</span>
+          <div className="h-px w-16 bg-gold/15" />
+        </div>
+      </div>
+    </section>
+  );
+}
+

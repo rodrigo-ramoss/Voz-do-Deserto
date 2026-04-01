@@ -141,7 +141,7 @@ export default function Sidebar({ excludeSlug }: { excludeSlug?: string }) {
           <div className="h-px w-8 bg-gold/15" />
         </div>
         <p className="font-display text-sm text-gold/35 leading-relaxed italic animate-fade-in">
-          "O que o templo nunca te disse."
+          “O que o templo nunca te disse.”
         </p>
       </div>
 

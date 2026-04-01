@@ -54,7 +54,7 @@ export default function Footer() {
               Voz do Deserto
             </p>
             <p className="font-label text-[9px] uppercase tracking-[0.35em] text-subtle">
-              O que o sistema prefere que você ignore
+              O que o templo nunca te diz
             </p>
           </div>
 

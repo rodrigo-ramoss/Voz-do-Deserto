@@ -12,46 +12,6 @@ interface Props {
 
 const AUTO_MS = 5000;
 
-// ── Scramble hook: título da notícia "decodifica" na troca de slide ──────────
-// Versão mais rápida e agressiva que a do WeeklyCarousel — evoca "breaking news"
-function useScrambleText(text: string): string {
-  const [display, setDisplay] = useState(text);
-  const frameRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@$%!?";
-    let frame = 0;
-    const TOTAL = 12; // 12 × 22ms ≈ 264ms — mais veloz que o carrossel de estudos
-
-    if (frameRef.current) clearInterval(frameRef.current);
-
-    frameRef.current = setInterval(() => {
-      frame++;
-      const revealed = Math.floor((frame / TOTAL) * text.length);
-      setDisplay(
-        text
-          .split("")
-          .map((char, i) => {
-            if (char === " ") return " ";
-            if (i <= revealed) return char;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join("")
-      );
-      if (frame >= TOTAL) {
-        setDisplay(text);
-        if (frameRef.current) clearInterval(frameRef.current);
-      }
-    }, 22);
-
-    return () => {
-      if (frameRef.current) clearInterval(frameRef.current);
-    };
-  }, [text]);
-
-  return display;
-}
-
 // ── Componente principal ──────────────────────────────────────────────────────
 export default function NoticiasCarousel({ noticias }: Props) {
   if (!noticias.length) return null;
@@ -64,7 +24,6 @@ function Inner({ noticias }: { noticias: NoticiaMeta[] }) {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const noticia = noticias[current];
-  const scrambledTitle = useScrambleText(noticia.title);
 
   useEffect(() => {
     if (paused || noticias.length <= 1) return;
@@ -79,7 +38,7 @@ function Inner({ noticias }: { noticias: NoticiaMeta[] }) {
   return (
     <section
       className="border-b border-gold/10 bg-card/40"
-      aria-label="Fora do Deserto — O que está acontecendo"
+      aria-label="Notícias — O que está acontecendo"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -99,7 +58,7 @@ function Inner({ noticias }: { noticias: NoticiaMeta[] }) {
               <span className="relative w-1.5 h-1.5 rounded-full bg-ember/80" />
             </span>
             <span className="font-label text-[9px] uppercase tracking-[0.3em] text-ember/80">
-              Fora do Deserto
+              Notícias
             </span>
           </div>
           <div className="h-px flex-1 bg-gold/10" />
@@ -118,7 +77,7 @@ function Inner({ noticias }: { noticias: NoticiaMeta[] }) {
           <div className="hidden md:flex shrink-0 flex-col justify-center border border-ember/20 bg-ember/5 px-4 py-3 min-w-[150px]">
             <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">O que está</p>
             <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">acontecendo</p>
-            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">fora do deserto</p>
+            <p className="font-label text-[8px] uppercase tracking-[0.2em] text-ember/60 leading-tight">agora</p>
           </div>
 
           {/* Imagem + texto (re-monta no key para reiniciar scramble) */}
@@ -151,12 +110,11 @@ function Inner({ noticias }: { noticias: NoticiaMeta[] }) {
             <div className="flex-1 min-w-0">
               <Link href={`/noticias/${noticia.slug}`} className="group block">
                 {/*
-                  scrambledTitle: título "decodifica" ao vivo quando o slide muda.
-                  Usa font-display (serifada) — o contraste com os caracteres
-                  aleatórios reforça o efeito de "sinal interceptado".
+                  title-reveal: animação suave (sem embaralhar caracteres) para evitar
+                  tremulação/jitter em fontes proporcionais.
                 */}
                 <h2 className="font-display text-lg leading-snug text-text group-hover:text-gold transition-colors duration-200 mb-1.5 md:text-xl line-clamp-2">
-                  {scrambledTitle}
+                  <span className="title-reveal">{noticia.title}</span>
                 </h2>
                 {noticia.excerpt && (
                   <p className="font-body text-sm leading-relaxed text-muted line-clamp-1 hidden md:block">

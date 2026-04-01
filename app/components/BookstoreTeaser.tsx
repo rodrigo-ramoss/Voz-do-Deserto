@@ -89,7 +89,7 @@ export default function BookstoreTeaser() {
             não foi feito para agradar o algoritmo — só para quem está pronto para ler.
           </p>
           <p className="font-label text-[10px] uppercase tracking-widest text-ember/50 mt-3">
-            // acesso restrito — em preparação
+            Acesso restrito — em preparação
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 ---
 title: "A Besta Não Tem Chifres. Tem Câmera, Microfone e Algoritmo"
 date: 2026-03-20
-category: IA & Controle
+category: "Escatologia Digital 2.0 - IA e Controle"
 folder: Scriptorium
 image: /imagens/a-besta-nao-tem-chifres-tem-camera-microfone-e-algoritmo.webp
 description: "Pastores falsos criados por IA já existem. A palavra 'Cristo' já foi bloqueada por algoritmo. O Vaticano já soou o alarme. Isso não é ficção — é janeiro de 2026."

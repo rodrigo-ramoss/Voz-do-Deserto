@@ -1,13 +1,10 @@
 ---
 title: "O Economista que Stalin Fuzilou tinha Razão — e a Bíblia Sabia Disso há 3.000 Anos"
-title_alt: "Kondratiev, o Jubileu e o Inverno que Estamos Vivendo: Quando a Economia e a Profecia Descrevem o Mesmo Padrão"
-date: 2026-03-17
-categoria: Economia & História
+date: "2026-04-01"
+category: "Economia & História"
+image: /imagens/kondratiev_jubileu_ciclo.webp
 description: "Em 1938, Stalin fuzilou Nikolai Kondratiev por provar que o capitalismo não estava colapsando — apenas passando pelo inverno de um ciclo de 50 a 60 anos. Esse ciclo terminou em 2008. Estamos no vale. E Levítico 25 sabia disso."
-description_alt: "Cada ciclo de Kondratiev termina com guerra. Revoluções de 1848. Primeira Guerra. Segunda Guerra. Corrida nuclear. Hoje: Ucrânia, Gaza, Taiwan. O padrão é o mesmo — e Levítico 25 descreve o mecanismo há 3.000 anos."
-cta: "Entender a fundo →"
-imagem: /imagens/kondratiev-jubileu-ciclo-economico.webp
-slug: /profecias-e-tempo-presente/kondratiev-jubileu-levitico-ciclo-economico
+keywords: ["Kondratiev", "Jubileu", "Economia", "Ciclo", "Escatologia", "VozDoDeserto"]
 faq:
   - pergunta: "Quem foi Nikolai Kondratiev e por que foi fuzilado?"
     resposta: "Nikolai Kondratiev (1892-1938) foi o economista soviético mais original de sua geração. Em 1926, publicou A Grandes Ondas na Vida Econômica, onde documentou ciclos de 50 a 60 anos na economia capitalista. Sua pesquisa provava que a Grande Depressão de 1929 não era o colapso definitivo do capitalismo — era apenas o inverno de um ciclo que se repetiria. Stalin precisava que 1929 fosse o fim do capitalismo para justificar o projeto soviético. Kondratiev mostrou que era apenas uma fase. Foi preso em 1930 e fuzilado em 17 de setembro de 1938."

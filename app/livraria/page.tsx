@@ -94,6 +94,12 @@ const ALL_CATEGORIES = [
       "Ferramentas, movimentos e estratégias que o sistema não consegue silenciar — e como usá-los com sabedoria.",
     icon: "◇",
   },
+  {
+    name: "Economia & Padrões",
+    description:
+      "Kondratiev, o Jubileu, o sistema financeiro paralelo que já existe, o que 2026 significa se o padrão se repetir e como se preparar para o futuro.",
+    icon: "⚖",
+  },
 ];
 
 function ArquivoSecretoLocked() {

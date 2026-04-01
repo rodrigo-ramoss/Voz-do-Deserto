@@ -37,8 +37,9 @@ export default function Newsletter() {
       <div
         role="status"
         aria-live="polite"
-        className="border border-gold/20 bg-card p-7 md:p-9 text-center relative overflow-hidden"
+        className="newsletter-cta border border-gold/20 bg-card p-7 md:p-9 text-center relative overflow-hidden"
       >
+        <div className="newsletter-sweep absolute inset-y-0 w-1/3 pointer-events-none" aria-hidden />
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden
@@ -59,7 +60,8 @@ export default function Newsletter() {
   }
 
   return (
-    <div className="border border-gold/18 bg-card p-7 md:p-9 relative overflow-hidden">
+    <div className="newsletter-cta border border-gold/18 bg-card p-7 md:p-9 relative overflow-hidden">
+      <div className="newsletter-sweep absolute inset-y-0 w-1/3 pointer-events-none" aria-hidden />
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden
@@ -111,7 +113,7 @@ export default function Newsletter() {
             type="submit"
             disabled={status === "loading"}
             aria-label="Inscrever-se na newsletter"
-            className="whitespace-nowrap font-label text-[10px] uppercase tracking-widest border border-gold px-7 min-h-[48px] inline-flex items-center justify-center text-gold hover:bg-gold hover:text-bg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="animate-btn-glow whitespace-nowrap font-label text-[10px] uppercase tracking-widest border border-gold px-7 min-h-[48px] inline-flex items-center justify-center text-gold hover:bg-gold hover:text-bg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status === "loading" ? "Enviando…" : "Quero receber"}
           </button>

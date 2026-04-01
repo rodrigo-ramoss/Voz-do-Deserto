@@ -123,6 +123,62 @@ body {
   animation: titleSweep 720ms ease both;
 }
 
+/* Pop sutil (home — Estudos mais lidos) */
+@keyframes mostReadPop {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0)  scale(1); }
+}
+
+.mostread-card {
+  animation: mostReadPop 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+  will-change: transform, opacity;
+}
+
+.mostread-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Newsletter CTA (home) */
+@keyframes newsletterGlow {
+  0%, 100% {
+    box-shadow:
+      0 0  8px rgba(212, 183, 106, 0.05),
+      0 0 24px rgba(212, 183, 106, 0.03);
+    border-color: rgba(212, 183, 106, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(212, 183, 106, 0.20),
+      0 0 60px rgba(212, 183, 106, 0.08);
+    border-color: rgba(212, 183, 106, 0.55);
+  }
+}
+
+@keyframes newsletterSweep {
+  0%   { left: -45%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 135%; opacity: 0; }
+}
+
+.newsletter-cta {
+  animation: newsletterGlow 3.2s ease-in-out infinite;
+}
+
+.newsletter-sweep {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 183, 106, 0.06) 40%,
+    rgba(212, 183, 106, 0.16) 50%,
+    rgba(212, 183, 106, 0.06) 60%,
+    transparent 100%
+  );
+  filter: blur(0.2px);
+  animation: newsletterSweep 3.6s ease-in-out infinite;
+}
+
 /* Carrossel de categorias — marquee contínuo */
 @keyframes marquee {
   from { transform: translateX(0); }

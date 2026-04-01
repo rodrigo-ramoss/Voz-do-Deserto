@@ -60,9 +60,9 @@ export default function Home() {
           </div>
 
           {mostRead.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {mostRead.map((study) => (
-                <CompactStudyCard key={study.slug} study={study} />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+              {mostRead.map((study, i) => (
+                <CompactStudyCard key={study.slug} study={study} index={i} />
               ))}
             </div>
           ) : (

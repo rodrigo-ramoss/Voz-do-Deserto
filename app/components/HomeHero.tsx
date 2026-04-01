@@ -13,17 +13,13 @@ export default function HomeHero() {
       />
 
       <div className="mx-auto max-w-6xl px-6 pt-10 pb-8 md:pt-12 md:pb-10 relative">
-        <p className="font-label text-[9px] uppercase tracking-[0.45em] text-gold/55 mb-4">
-          Voz do Deserto
-        </p>
-
         <h1 className="font-display text-4xl leading-tight text-text md:text-5xl">
-          O que o templo nunca te diz.
+          Profecia no tempo do algoritmo.
         </h1>
 
         <p className="font-body text-lg leading-relaxed text-muted/90 max-w-2xl mt-4">
-          Estudos bíblicos profundos, notícias e arquivo premium — sem filtro
-          institucional, sem motivacional barato.
+          Tecnologia, geopolítica e o sistema religioso lidos à luz do texto —
+          com fontes verificáveis e exegese responsável, sem agenda institucional.
         </p>
 
         <div className="mt-7 flex items-center gap-3 flex-wrap">

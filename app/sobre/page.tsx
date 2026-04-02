@@ -10,8 +10,8 @@
  *      <h3> História Proibida ...
  *      <h3> Jesus fora do Sermão
  *      <h3> Exegese Profunda
- *      <h3> Fé no Deserto
- *      <h3> Confronto com a Narrativa
+ *      <h3> O Sistema & Você
+ *      <h3> Deserto & Resistência
  *    <h2> Onde me encontrar          ← antes era <p> (apenas visual)
  *
  * Cada <section> tem aria-labelledby apontando para seu heading,
@@ -35,39 +35,39 @@ export const metadata: Metadata = {
 const pillars = [
   {
     icon: "✦",
-    title: "Apócrifos e Cânon",
+    title: "Fé Sem Filtro",
     description:
-      "Livro de Enoque, Evangelho de Tomé, Maria Madalena, Jubileus. O que foi retirado da Bíblia, por quem e por quê.",
+      "Exegese do grego original, apócrifos, Jesus histórico. O texto sem a distorção institucional.",
   },
   {
     icon: "✦",
-    title: "História Proibida da Igreja",
+    title: "Escatologia Digital",
     description:
-      "Concílio de Niceia, Inquisição, alianças com poder político, corrupção institucional ao longo dos séculos.",
+      "IA, Apocalipse 13, imagem da Besta, controle algorítmico. A profecia lida com os olhos abertos.",
   },
   {
     icon: "✦",
-    title: "Jesus fora do Sermão",
+    title: "Geopolítica Profética",
     description:
-      "Jesus histórico. Contexto do século I. O que ele realmente dizia fora da narrativa domesticada pela instituição.",
+      "Impérios, guerras, alianças globais. A gramática bíblica por trás do que os jornais não explicam.",
   },
   {
     icon: "✦",
-    title: "Exegese Profunda",
+    title: "Economia & Padrões",
     description:
-      "Palavras originais grego e hebraico — Hamartia, Ekklesia, Exerchomai, Metanoia. O que a tradução perdeu ou distorceu.",
+      "Ciclos de Kondratiev, Jubileu, juros, soberania financeira. O que o sistema não quer que você entenda sobre dinheiro.",
   },
   {
     icon: "✦",
-    title: "Fé no Deserto",
+    title: "O Sistema & Você",
     description:
-      "Para quem está fora da instituição. Validação da jornada. O deserto bíblico como lugar de encontro com Deus.",
+      "IA, vigilância, CBDCs, controle social. Como não ser escravo do que está sendo construído agora.",
   },
   {
     icon: "✦",
-    title: "Confronto com a Narrativa",
+    title: "Deserto & Resistência",
     description:
-      "Dízimo não está no NT. PEC 5/2023. Aliança templo-política. Babilônia moderna. Apocalipse 18.",
+      "Para quem saiu da instituição. Fé no deserto, comunidade real, preparação prática para o que vem.",
   },
 ];
 
@@ -122,7 +122,7 @@ export default function SobrePage() {
             Rodrigo Ramos
           </h2>
           <p className="font-label text-[9px] uppercase tracking-[0.2em] text-muted">
-            Evangelista · Pesquisador · Voz do Deserto
+            Escritor · Pesquisador · Fundador da Voz do Deserto
           </p>
         </div>
       </section>

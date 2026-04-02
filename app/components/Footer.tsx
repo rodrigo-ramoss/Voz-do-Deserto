@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NewsletterForm from "./NewsletterForm";
 
 /*
  * LEGIBILIDADE (T5)
@@ -23,26 +22,6 @@ import NewsletterForm from "./NewsletterForm";
 export default function Footer() {
   return (
     <footer className="mt-4 border-t border-gold/15 bg-[#050403]">
-
-      {/* ── Newsletter ──────────────────────────────────────────────── */}
-      <div id="newsletter" className="border-b border-gold/10 px-6 py-12">
-        <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-center">
-          <div>
-            <p className="font-label text-xs uppercase tracking-[0.3em] text-gold mb-3">
-              Newsletter
-            </p>
-            <p className="font-display text-xl text-text mb-2">
-              Receba o que não é para todos
-            </p>
-            <p className="font-body text-sm text-muted leading-relaxed">
-              Estudos que escapam do filtro editorial, da narrativa oficial e
-              do que o algoritmo aprova. Sem spam — apenas os conteúdos que
-              valem seu tempo.
-            </p>
-          </div>
-          <NewsletterForm context="footer" />
-        </div>
-      </div>
 
       {/* ── Base do rodapé ──────────────────────────────────────────── */}
       <div className="px-6 py-10">

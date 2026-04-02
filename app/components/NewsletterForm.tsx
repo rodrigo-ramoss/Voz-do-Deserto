@@ -34,6 +34,11 @@ export default function NewsletterForm({
     e.preventDefault();
     if (!email.trim()) return;
 
+    const normalizedEmail = email.trim().toLowerCase();
+    try {
+      localStorage.setItem("vzd_last_email", normalizedEmail);
+    } catch {}
+
     setStatus("loading");
 
     try {
@@ -43,7 +48,7 @@ export default function NewsletterForm({
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email: normalizedEmail }),
         });
         if (!res.ok) throw new Error("Erro na inscrição");
       } else {

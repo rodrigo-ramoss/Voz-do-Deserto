@@ -5,6 +5,7 @@ const LOCKED = false;
 
 import type { Metadata } from "next";
 import NewsletterForm from "@/app/components/NewsletterForm";
+import NonMonthlyOnly from "@/app/components/NonMonthlyOnly";
 import LibraryGrid from "@/app/components/LibraryGrid";
 import { getScriptoriumByCategory } from "@/lib/scriptorium";
 
@@ -99,7 +100,7 @@ const ALL_CATEGORIES = [
 
 function ArquivoSecretoLocked() {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-28 flex flex-col items-center text-center">
+    <>
 
       {/* Cadeado */}
       <div className="mb-10 w-16 h-16 border border-gold/25 flex items-center justify-center">
@@ -144,31 +145,25 @@ function ArquivoSecretoLocked() {
         ))}
       </ul>
 
-      {/* CTA newsletter */}
-      <div className="w-full max-w-md border border-gold/15 bg-card/40 px-8 py-10">
-        <p className="font-label text-[9px] uppercase tracking-[0.35em] text-gold/70 mb-3">
-          Seja avisado primeiro
-        </p>
-        <h2 className="font-display text-xl text-text mb-2">
-          Quero entrar quando abrir
-        </h2>
-        <p className="font-body text-sm text-text/40 leading-relaxed mb-7">
-          Cadastre seu e-mail. Quando o Arquivo abrir, você será um dos primeiros a saber — antes de qualquer anúncio público.
-        </p>
-        <NewsletterForm context="page" />
-      </div>
-
-    </main>
+    </>
   );
 }
 
 export default function ArquivoSecretoPage() {
-  if (LOCKED) return <ArquivoSecretoLocked />;
-
   const byCategory = getScriptoriumByCategory();
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-20">
+    <main
+      className={
+        LOCKED
+          ? "mx-auto max-w-2xl px-6 py-28 flex flex-col items-center text-center"
+          : "mx-auto max-w-6xl px-6 py-20"
+      }
+    >
+      {LOCKED ? (
+        <ArquivoSecretoLocked />
+      ) : (
+        <>
 
       {/* ── Cabeçalho ────────────────────────────────────────────────── */}
       <p className="font-label text-[11px] uppercase tracking-[0.25em] text-gold mb-6">
@@ -259,24 +254,61 @@ export default function ArquivoSecretoPage() {
         <span className="text-xs text-gold/20">✦</span>
         <div className="h-px flex-1 bg-gold/10" />
       </div>
+        </>
+      )}
 
-      {/* ── Newsletter ───────────────────────────────────────────────── */}
-      <section aria-labelledby="newsletter-heading" className="max-w-2xl mx-auto">
-        <p className="font-label text-[10px] uppercase tracking-[0.3em] text-gold mb-4 text-center">
-          Seja o primeiro a saber
-        </p>
-        <h2
-          id="newsletter-heading"
-          className="font-display text-3xl text-text mb-3 text-center"
+      {/* ── Newsletter (somente não-assinantes mensais) ─────────────── */}
+      <NonMonthlyOnly>
+        <section
+          id="newsletter"
+          aria-labelledby="newsletter-heading"
+          className={
+            LOCKED
+              ? "w-full max-w-md border border-gold/15 bg-card/40 px-8 py-10"
+              : "max-w-2xl mx-auto"
+          }
         >
-          Novos estudos no Arquivo Secreto
-        </h2>
-        <p className="font-body text-base text-text/50 leading-relaxed mb-8 text-center">
-          Cadastre seu e-mail e seja avisado quando novos estudos forem
-          publicados — antes de qualquer outra pessoa.
-        </p>
-        <NewsletterForm context="page" />
-      </section>
+          <p
+            className={
+              LOCKED
+                ? "font-label text-[9px] uppercase tracking-[0.35em] text-gold/70 mb-3"
+                : "font-label text-[10px] uppercase tracking-[0.3em] text-gold mb-4 text-center"
+            }
+          >
+            {LOCKED ? "Seja avisado primeiro" : "Seja o primeiro a saber"}
+          </p>
+          <h2
+            id="newsletter-heading"
+            className={
+              LOCKED
+                ? "font-display text-xl text-text mb-2"
+                : "font-display text-3xl text-text mb-3 text-center"
+            }
+          >
+            {LOCKED ? "Quero entrar quando abrir" : "Novos estudos no Arquivo Secreto"}
+          </h2>
+          <p
+            className={
+              LOCKED
+                ? "font-body text-sm text-text/40 leading-relaxed mb-7"
+                : "font-body text-base text-text/50 leading-relaxed mb-8 text-center"
+            }
+          >
+            {LOCKED ? (
+              <>
+                Cadastre seu e-mail. Quando o Arquivo abrir, você será um dos primeiros a saber —
+                antes de qualquer anúncio público.
+              </>
+            ) : (
+              <>
+                Cadastre seu e-mail e seja avisado quando novos estudos forem publicados — antes
+                de qualquer outra pessoa.
+              </>
+            )}
+          </p>
+          <NewsletterForm context="page" />
+        </section>
+      </NonMonthlyOnly>
 
     </main>
   );

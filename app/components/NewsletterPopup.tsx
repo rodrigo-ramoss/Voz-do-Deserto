@@ -84,6 +84,12 @@ export default function NewsletterPopup() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!email.trim()) return;
+
+    const normalizedEmail = email.trim().toLowerCase();
+    try {
+      localStorage.setItem("vzd_last_email", normalizedEmail);
+    } catch {}
+
     setStatus("loading");
     try {
       const ep = process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT;
@@ -91,7 +97,7 @@ export default function NewsletterPopup() {
         const res = await fetch(ep, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email: normalizedEmail }),
         });
         if (!res.ok) throw new Error();
       } else {

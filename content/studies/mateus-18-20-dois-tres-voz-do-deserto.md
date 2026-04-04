@@ -1,7 +1,7 @@
 ---
 title: "Onde Dois ou Três Estiverem Reunidos: O Versículo que Virou Desculpa para Tudo"
 date: 2026-04-03
-category: Pilares da Fé
+category: Bíblia e Interpretação
 description: "Mateus 18.20 não é sobre reuniões pequenas terem a presença de Deus. É sobre disciplina eclesiástica e a autoridade legal da comunidade para lidar com pecado. Jesus estava falando de tribunal — não de culto doméstico."
 image: /imagens/mateus-18-20-dois-tres-voz-do-deserto.webp
 keywords: "#Mateus1820 #DoisOuTres #DisciplinaEclesiastica #ExegeseBiblica #PilaresDaFe"

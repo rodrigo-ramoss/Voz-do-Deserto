@@ -4,47 +4,32 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type AnyRecord = Record<string, unknown>;
 
+function hasMensalTag(contact: unknown, tag: string): boolean {
+  if (!contact || typeof contact !== "object") return false;
+  const obj = contact as AnyRecord;
+  const tags = obj.tags ?? obj.tag_names ?? obj.labels;
+  if (!Array.isArray(tags)) return false;
+  return tags.some((t) =>
+    typeof t === "string"
+      ? t.toLowerCase() === tag.toLowerCase()
+      : typeof t === "object" &&
+        t !== null &&
+        (
+          (t as AnyRecord).name?.toString().toLowerCase() === tag.toLowerCase() ||
+          (t as AnyRecord).slug?.toString().toLowerCase() === tag.toLowerCase()
+        )
+  );
+}
+
 function extractContacts(payload: unknown): unknown[] {
   if (!payload) return [];
   if (Array.isArray(payload)) return payload;
   if (typeof payload !== "object") return [];
   const obj = payload as AnyRecord;
-  const candidates = [obj.contacts, obj.data, obj.items, obj.results];
-  for (const c of candidates) {
-    if (Array.isArray(c)) return c;
+  for (const key of ["contacts", "data", "items", "results"]) {
+    if (Array.isArray(obj[key])) return obj[key] as unknown[];
   }
   return [];
-}
-
-function extractEmail(contact: unknown): string {
-  if (!contact || typeof contact !== "object") return "";
-  const obj = contact as AnyRecord;
-  const val =
-    obj.email ??
-    obj.emailAddress ??
-    obj.email_address ??
-    obj.emailAddressString ??
-    obj.address;
-  if (typeof val !== "string") return "";
-  return val.trim().toLowerCase();
-}
-
-function getNextPageUrl(payload: unknown): string | null {
-  if (!payload || typeof payload !== "object") return null;
-  const obj = payload as AnyRecord;
-  const links =
-    obj.links && typeof obj.links === "object" ? (obj.links as AnyRecord) : null;
-  if (typeof links?.next === "string" && links.next.length > 0) return links.next;
-  const meta =
-    obj.meta && typeof obj.meta === "object" ? (obj.meta as AnyRecord) : null;
-  const pagination =
-    meta?.pagination && typeof meta.pagination === "object"
-      ? (meta.pagination as AnyRecord)
-      : obj.pagination && typeof obj.pagination === "object"
-        ? (obj.pagination as AnyRecord)
-        : null;
-  if (typeof pagination?.next_page_url === "string") return pagination.next_page_url;
-  return null;
 }
 
 export async function POST(req: NextRequest) {
@@ -64,76 +49,89 @@ export async function POST(req: NextRequest) {
   const token = process.env.HOSTINGER_REACH_API_TOKEN;
   const segmentUuid = process.env.HOSTINGER_REACH_MONTHLY_SEGMENT_UUID;
   const profileId = process.env.HOSTINGER_REACH_PROFILE_ID;
-  const maxPages = Math.min(
-    Number(process.env.HOSTINGER_REACH_MONTHLY_MAX_PAGES ?? "50"),
-    200
-  );
+  const mensalTag = process.env.HOSTINGER_REACH_MONTHLY_TAG ?? "mensal";
 
-  if (!token || !segmentUuid) {
+  if (!token) {
+    console.error("[plano-mensal] HOSTINGER_REACH_API_TOKEN não configurado");
     return NextResponse.json({ isMonthly: false, checked: false });
   }
 
-  const authHeaders: Record<string, string> = {
+  const headers: Record<string, string> = {
     Accept: "application/json",
     Authorization: `Bearer ${token}`,
     ...(profileId ? { "X-Profile-ID": profileId } : {}),
   };
 
-  // Estratégia 1: busca direta por e-mail no segmento
-  const directUrl = new URL(
-    `https://developers.hostinger.com/api/reach/v1/segmentation/segments/${segmentUuid}/contacts`
-  );
-  directUrl.searchParams.set("email", email);
-  directUrl.searchParams.set("per_page", "1");
+  // Estratégia 1: buscar contato diretamente por e-mail e checar tag
+  try {
+    const contactUrl = new URL("https://developers.hostinger.com/api/reach/v1/contacts");
+    contactUrl.searchParams.set("email", email);
+
+    const contactRes = await fetch(contactUrl.toString(), {
+      method: "GET",
+      headers,
+      cache: "no-store",
+    });
+
+    console.log(`[plano-mensal] Contatos endpoint status: ${contactRes.status}`);
+
+    if (contactRes.ok) {
+      const payload = await contactRes.json().catch(() => null);
+      console.log("[plano-mensal] Contatos payload:", JSON.stringify(payload).slice(0, 300));
+      const contacts = extractContacts(payload);
+      // Se for um único objeto (não lista), trata como contato direto
+      const contactList = contacts.length > 0 ? contacts : (payload ? [payload] : []);
+      for (const c of contactList) {
+        const cObj = c as AnyRecord;
+        const contactEmail = (cObj.email ?? "").toString().trim().toLowerCase();
+        if (contactEmail === email && hasMensalTag(c, mensalTag)) {
+          return NextResponse.json({ isMonthly: true, checked: true });
+        }
+      }
+      // Contato existe mas não tem tag mensal — nega acesso
+      if (contactList.length > 0) {
+        return NextResponse.json({ isMonthly: false, checked: true });
+      }
+    } else {
+      const errBody = await contactRes.json().catch(() => ({}));
+      console.error(`[plano-mensal] Erro contatos status=${contactRes.status}:`, JSON.stringify(errBody).slice(0, 200));
+    }
+  } catch (e) {
+    console.error("[plano-mensal] Exceção contatos:", e);
+  }
+
+  // Estratégia 2: verificar segmento
+  if (!segmentUuid) {
+    console.error("[plano-mensal] HOSTINGER_REACH_MONTHLY_SEGMENT_UUID não configurado");
+    return NextResponse.json({ isMonthly: false, checked: false });
+  }
 
   try {
-    const directRes = await fetch(directUrl.toString(), {
+    const segUrl = new URL(
+      `https://developers.hostinger.com/api/reach/v1/segmentation/segments/${segmentUuid}/contacts`
+    );
+    segUrl.searchParams.set("email", email);
+    segUrl.searchParams.set("per_page", "1");
+
+    const segRes = await fetch(segUrl.toString(), {
       method: "GET",
-      headers: authHeaders,
+      headers,
       cache: "no-store",
     });
 
-    if (directRes.ok) {
-      const payload = await directRes.json().catch(() => null);
+    console.log(`[plano-mensal] Segmento endpoint status: ${segRes.status}`);
+
+    if (segRes.ok) {
+      const payload = await segRes.json().catch(() => null);
       const contacts = extractContacts(payload);
-      if (contacts.length > 0) {
-        return NextResponse.json({ isMonthly: true, checked: true });
-      }
-      return NextResponse.json({ isMonthly: false, checked: true });
+      return NextResponse.json({ isMonthly: contacts.length > 0, checked: true });
+    } else {
+      const errBody = await segRes.json().catch(() => ({}));
+      console.error(`[plano-mensal] Erro segmento status=${segRes.status}:`, JSON.stringify(errBody).slice(0, 200));
     }
-  } catch {
-    // Fallback para paginação manual
+  } catch (e) {
+    console.error("[plano-mensal] Exceção segmento:", e);
   }
 
-  // Estratégia 2: paginação manual
-  let nextUrl: string | null =
-    `https://developers.hostinger.com/api/reach/v1/segmentation/segments/${segmentUuid}/contacts?page=1`;
-
-  for (let page = 1; page <= maxPages && nextUrl; page++) {
-    const res = await fetch(nextUrl, {
-      method: "GET",
-      headers: authHeaders,
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      console.error("[plano-mensal] Erro Hostinger Reach:", res.status, body);
-      return NextResponse.json({ isMonthly: false, checked: false });
-    }
-
-    const payload = await res.json().catch(() => null);
-    const contacts = extractContacts(payload);
-
-    for (const contact of contacts) {
-      if (extractEmail(contact) === email) {
-        return NextResponse.json({ isMonthly: true, checked: true });
-      }
-    }
-
-    nextUrl = getNextPageUrl(payload);
-    if (!nextUrl && contacts.length === 0) break;
-  }
-
-  return NextResponse.json({ isMonthly: false, checked: true });
+  return NextResponse.json({ isMonthly: false, checked: false });
 }

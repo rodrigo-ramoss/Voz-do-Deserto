@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
 
   const token = process.env.HOSTINGER_REACH_API_TOKEN;
   const segmentUuid = process.env.HOSTINGER_REACH_MONTHLY_SEGMENT_UUID;
+  const profileId = process.env.HOSTINGER_REACH_PROFILE_ID;
   const maxPages = Math.min(
     Number(process.env.HOSTINGER_REACH_MONTHLY_MAX_PAGES ?? "50"),
     200
@@ -71,6 +72,12 @@ export async function POST(req: NextRequest) {
   if (!token || !segmentUuid) {
     return NextResponse.json({ isMonthly: false, checked: false });
   }
+
+  const authHeaders: Record<string, string> = {
+    Accept: "application/json",
+    Authorization: `Bearer ${token}`,
+    ...(profileId ? { "X-Profile-ID": profileId } : {}),
+  };
 
   // Estratégia 1: busca direta por e-mail no segmento
   const directUrl = new URL(
@@ -82,10 +89,7 @@ export async function POST(req: NextRequest) {
   try {
     const directRes = await fetch(directUrl.toString(), {
       method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: authHeaders,
       cache: "no-store",
     });
 
@@ -108,10 +112,7 @@ export async function POST(req: NextRequest) {
   for (let page = 1; page <= maxPages && nextUrl; page++) {
     const res = await fetch(nextUrl, {
       method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: authHeaders,
       cache: "no-store",
     });
 

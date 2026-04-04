@@ -9,7 +9,6 @@ function extractContacts(payload: unknown): unknown[] {
   if (Array.isArray(payload)) return payload;
   if (typeof payload !== "object") return [];
   const obj = payload as AnyRecord;
-
   const candidates = [obj.contacts, obj.data, obj.items, obj.results];
   for (const c of candidates) {
     if (Array.isArray(c)) return c;
@@ -30,32 +29,22 @@ function extractEmail(contact: unknown): string {
   return val.trim().toLowerCase();
 }
 
-function hasMorePages(payload: unknown, page: number, contactsCount: number): boolean {
-  if (!payload || typeof payload !== "object") return contactsCount > 0;
+function getNextPageUrl(payload: unknown): string | null {
+  if (!payload || typeof payload !== "object") return null;
   const obj = payload as AnyRecord;
-
-  const meta = obj.meta && typeof obj.meta === "object" ? (obj.meta as AnyRecord) : null;
+  const links =
+    obj.links && typeof obj.links === "object" ? (obj.links as AnyRecord) : null;
+  if (typeof links?.next === "string" && links.next.length > 0) return links.next;
+  const meta =
+    obj.meta && typeof obj.meta === "object" ? (obj.meta as AnyRecord) : null;
   const pagination =
     meta?.pagination && typeof meta.pagination === "object"
       ? (meta.pagination as AnyRecord)
       : obj.pagination && typeof obj.pagination === "object"
         ? (obj.pagination as AnyRecord)
         : null;
-
-  const totalPages =
-    (typeof pagination?.total_pages === "number" ? pagination.total_pages : undefined) ??
-    (typeof pagination?.totalPages === "number" ? pagination.totalPages : undefined) ??
-    (typeof meta?.total_pages === "number" ? meta.total_pages : undefined) ??
-    (typeof meta?.totalPages === "number" ? meta.totalPages : undefined);
-
-  if (typeof totalPages === "number" && Number.isFinite(totalPages)) {
-    return page < totalPages;
-  }
-
-  const links = obj.links && typeof obj.links === "object" ? (obj.links as AnyRecord) : null;
-  if (typeof links?.next === "string" && links.next.length > 0) return true;
-
-  return contactsCount > 0;
+  if (typeof pagination?.next_page_url === "string") return pagination.next_page_url;
+  return null;
 }
 
 export async function POST(req: NextRequest) {
@@ -73,32 +62,62 @@ export async function POST(req: NextRequest) {
   }
 
   const token = process.env.HOSTINGER_REACH_API_TOKEN;
-  const monthlyGroupUuid = process.env.HOSTINGER_REACH_MONTHLY_GROUP_UUID;
-  const maxPages = Number(process.env.HOSTINGER_REACH_MONTHLY_MAX_PAGES ?? "20");
+  const segmentUuid = process.env.HOSTINGER_REACH_MONTHLY_SEGMENT_UUID;
+  const maxPages = Math.min(
+    Number(process.env.HOSTINGER_REACH_MONTHLY_MAX_PAGES ?? "50"),
+    200
+  );
 
-  if (!token || !monthlyGroupUuid) {
+  if (!token || !segmentUuid) {
     return NextResponse.json({ isMonthly: false, checked: false });
   }
 
-  const safeMaxPages = Number.isFinite(maxPages) && maxPages > 0 ? Math.min(maxPages, 200) : 20;
+  // Estratégia 1: busca direta por e-mail no segmento
+  const directUrl = new URL(
+    `https://developers.hostinger.com/api/reach/v1/segmentation/segments/${segmentUuid}/contacts`
+  );
+  directUrl.searchParams.set("email", email);
+  directUrl.searchParams.set("per_page", "1");
 
-  for (let page = 1; page <= safeMaxPages; page++) {
-    const url = new URL("https://developers.hostinger.com/api/reach/v1/contacts");
-    url.searchParams.set("group_uuid", monthlyGroupUuid);
-    url.searchParams.set("page", String(page));
-
-    const res = await fetch(url.toString(), {
+  try {
+    const directRes = await fetch(directUrl.toString(), {
       method: "GET",
       headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
+
+    if (directRes.ok) {
+      const payload = await directRes.json().catch(() => null);
+      const contacts = extractContacts(payload);
+      if (contacts.length > 0) {
+        return NextResponse.json({ isMonthly: true, checked: true });
+      }
+      return NextResponse.json({ isMonthly: false, checked: true });
+    }
+  } catch {
+    // Fallback para paginação manual
+  }
+
+  // Estratégia 2: paginação manual
+  let nextUrl: string | null =
+    `https://developers.hostinger.com/api/reach/v1/segmentation/segments/${segmentUuid}/contacts?page=1`;
+
+  for (let page = 1; page <= maxPages && nextUrl; page++) {
+    const res = await fetch(nextUrl, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
       cache: "no-store",
     });
 
     if (!res.ok) {
-      const payload = await res.json().catch(() => ({}));
-      console.error("[plano-mensal] Erro Hostinger Reach:", res.status, payload);
+      const body = await res.json().catch(() => ({}));
+      console.error("[plano-mensal] Erro Hostinger Reach:", res.status, body);
       return NextResponse.json({ isMonthly: false, checked: false });
     }
 
@@ -111,9 +130,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    if (!hasMorePages(payload, page, contacts.length)) break;
+    nextUrl = getNextPageUrl(payload);
+    if (!nextUrl && contacts.length === 0) break;
   }
 
   return NextResponse.json({ isMonthly: false, checked: true });
 }
-

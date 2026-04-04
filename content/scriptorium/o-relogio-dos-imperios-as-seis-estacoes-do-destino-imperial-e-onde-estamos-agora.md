@@ -1,7 +1,7 @@
 ---
 title: "O Relógio dos Impérios: As Seis Estações do Destino Imperial e Onde Estamos Agora"
 date: 2026-03-29
-category: Geopolítica Escatológica
+category: Reset Mundial & Nova Ordem
 folder: Scriptorium
 image: /imagens/o-relogio-dos-imperios-as-seis-estacoes-do-destino-imperial-e-onde-estamos-agora.webp
 description: "Sir John Glubb documentou que todo império colapsa em ~250 anos. Os Estados Unidos completam 250 anos em 2026. O relógio não para por conveniência política."

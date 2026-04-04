@@ -1,7 +1,7 @@
 ---
 title: "O Homem Que Quer Escanear o Olho de 8 Bilhões de Pessoas — e Já Está na Metade do Caminho"
 date: 2026-04-04
-category: Geopolítica Escatológica
+category: Reset Mundial & Nova Ordem
 folder: Scriptorium
 image: /imagens/o-homem-que-quer-escanear-o-olho-de-8-bilhoes-de-pessoas.webp
 description: "Sam Altman criou a IA que destrói a confiança online. Agora vende a solução: escanear sua íris, criar seu ID global, distribuir renda por isso. O problema não é a intenção. É a arquitetura."

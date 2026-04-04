@@ -1,7 +1,7 @@
 ---
 title: "A Marca da Besta: Como Dois Mil Anos de Medo Tornaram um Texto Político em Horror Cinematográfico"
 date: 2026-04-04
-category: Bíblia e Interpretação
+category: Bíblia & Interpretação
 description: "Apocalipse 13 não é sobre microchips, vacinas, carteiras digitais ou qualquer tecnologia futura. É um texto político do século I escrito em código para cristãos sob o Império Romano — e quando você entende o código, o texto é mais radical e mais relevante do que qualquer especulação moderna."
 image: /imagens/apocalipse-13-marca-da-besta-voz-do-deserto.webp
 ---

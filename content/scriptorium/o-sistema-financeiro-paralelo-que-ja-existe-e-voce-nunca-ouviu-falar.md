@@ -1,7 +1,7 @@
 ---
 title: "O Sistema Financeiro Paralelo Que Já Existe e Você Nunca Ouviu Falar"
 date: 2026-03-20
-category: Geopolítica Escatológica
+category: Reset Mundial & Nova Ordem
 folder: Scriptorium
 image: /imagens/o-sistema-financeiro-paralelo-que-ja-existe-e-voce-nunca-ouviu-falar.webp
 description: "O mBridge já processou US$ 55 bilhões fora do sistema ocidental. O Reset Financeiro não será anunciado. Está acontecendo em tempo real, em transações que você nunca verá."

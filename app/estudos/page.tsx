@@ -3,18 +3,34 @@ import Sidebar from "@/app/components/Sidebar";
 import EstudosClient from "./EstudosClient";
 import type { Metadata } from "next";
 
+const CATEGORY_OVERRIDES: Record<
+  string,
+  { title: string; description: string }
+> = {
+  "Escatologia Digital": {
+    title: "Escatologia Digital 1.0",
+    description: "Só uma prévia do que tem no Arquivo Secreto.",
+  },
+  "IA & Controle": {
+    title: "IA e Controle 1.0",
+    description: "Só uma prévia do que tem no Arquivo Secreto.",
+  },
+};
+
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: Promise<{ cat?: string }>;
 }): Promise<Metadata> {
   const { cat } = await searchParams;
+  const override = cat ? CATEGORY_OVERRIDES[cat] : undefined;
+  const pageTitle = override?.title ?? cat;
   return {
-    title: cat
-      ? `${cat} — Voz do Deserto`
+    title: pageTitle
+      ? `${pageTitle} — Voz do Deserto`
       : "Estudos Bíblicos — Voz do Deserto",
-    description: cat
-      ? `Estudos da categoria ${cat} no blog Voz do Deserto.`
+    description: pageTitle
+      ? `Estudos da categoria ${pageTitle} no blog Voz do Deserto.`
       : "Todos os estudos bíblicos profundos do blog Voz do Deserto.",
   };
 }
@@ -25,6 +41,7 @@ export default async function EstudosPage({
   searchParams: Promise<{ cat?: string }>;
 }) {
   const { cat } = await searchParams;
+  const override = cat ? CATEGORY_OVERRIDES[cat] : undefined;
   const allStudies = getAllStudies();
   const filtered = cat
     ? allStudies.filter((s) => s.category === cat)
@@ -39,13 +56,20 @@ export default async function EstudosPage({
             Arquivo
           </p>
           <h1 className="font-display text-4xl text-text md:text-5xl">
-            {cat ? cat : "Estudos Bíblicos"}
+            {cat ? (override?.title ?? cat) : "Estudos Bíblicos"}
           </h1>
           {cat && (
-            <p className="font-label text-[9px] text-muted mt-3 uppercase tracking-widest">
-              {filtered.length}{" "}
-              {filtered.length === 1 ? "estudo" : "estudos"}
-            </p>
+            <>
+              <p className="font-label text-[9px] text-muted mt-3 uppercase tracking-widest">
+                {filtered.length}{" "}
+                {filtered.length === 1 ? "estudo" : "estudos"}
+              </p>
+              {override?.description ? (
+                <p className="font-body text-sm leading-relaxed text-text/55 mt-4 max-w-2xl">
+                  {override.description}
+                </p>
+              ) : null}
+            </>
           )}
         </div>
       </div>

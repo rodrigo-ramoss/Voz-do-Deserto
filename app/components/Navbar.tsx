@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import LoginModal from "./LoginModal";
 
 const leftLinks = [
   { label: "Estudos", href: "/estudos" },
@@ -19,7 +20,9 @@ const allLinks = [...leftLinks, ...rightLinks];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const navLink = (label: string, href: string) => {
     const isActive = pathname === href || pathname.startsWith(href + "/");
@@ -89,6 +92,7 @@ export default function Navbar() {
           {/* Assinar */}
           <button
             type="button"
+            onClick={() => router.push("/livraria")}
             className="font-label text-[10px] uppercase tracking-widest border border-gold/50 px-4 py-2 text-gold/80 hover:bg-gold/10 hover:border-gold transition-colors duration-200 whitespace-nowrap"
           >
             Assinar
@@ -97,6 +101,7 @@ export default function Navbar() {
           {/* Entrar */}
           <button
             type="button"
+            onClick={() => setShowLogin(true)}
             className="font-label text-[10px] uppercase tracking-widest bg-gold/8 border border-gold/20 px-4 py-2 text-muted hover:bg-gold/15 hover:text-text transition-colors duration-200 whitespace-nowrap"
           >
             Entrar
@@ -167,12 +172,14 @@ export default function Navbar() {
             <div className="flex items-center gap-3 pt-4">
               <button
                 type="button"
+                onClick={() => { setOpen(false); router.push("/livraria"); }}
                 className="flex-1 font-label text-[10px] uppercase tracking-widest border border-gold/50 py-3 text-gold/80 hover:bg-gold/10 transition-colors duration-200"
               >
                 Assinar
               </button>
               <button
                 type="button"
+                onClick={() => { setOpen(false); setShowLogin(true); }}
                 className="flex-1 font-label text-[10px] uppercase tracking-widest bg-gold/8 border border-gold/20 py-3 text-muted hover:bg-gold/15 transition-colors duration-200"
               >
                 Entrar
@@ -192,6 +199,15 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
+      {showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+          onAccessGranted={() => {
+            setShowLogin(false);
+            router.push("/livraria");
+          }}
+        />
+      )}
     </header>
   );
 }

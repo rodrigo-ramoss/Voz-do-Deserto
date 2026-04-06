@@ -4,7 +4,11 @@ import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
 import { Suspense } from "react";
 
-const PREMIUM_CAT = "Escatologia Digital";
+const FEATURED_CATS = new Set(["Escatologia Digital", "IA & Controle"]);
+const FEATURED_SUBLABEL = "artigo, premium, grátis";
+const CAT_DISPLAY_NAMES: Record<string, string> = {
+  "IA & Controle": "IA e Controle",
+};
 
 function Bar({ categories }: { categories: string[] }) {
   const searchParams = useSearchParams();
@@ -18,8 +22,9 @@ function Bar({ categories }: { categories: string[] }) {
   const renderCat = (cat: string, dup = false) => {
     const isActive = activeCat === cat;
     const key = dup ? `${cat}__dup` : cat;
+    const label = CAT_DISPLAY_NAMES[cat] ?? cat;
 
-    if (cat === PREMIUM_CAT) {
+    if (FEATURED_CATS.has(cat)) {
       return (
         <Link
           key={key}
@@ -32,9 +37,9 @@ function Bar({ categories }: { categories: string[] }) {
               : "border-gold/50 text-muted hover:border-gold hover:text-text"
           }`}
         >
-          <span className="leading-tight">{cat}</span>
+          <span className="leading-tight">{label}</span>
           <span className="font-label text-[7px] uppercase tracking-[0.14em] text-gold/60 leading-tight mt-0.5">
-            artigo premium grátis
+            {FEATURED_SUBLABEL}
           </span>
         </Link>
       );
@@ -52,7 +57,7 @@ function Bar({ categories }: { categories: string[] }) {
             : "border-transparent text-muted hover:text-text"
         }`}
       >
-        {cat}
+        {label}
       </Link>
     );
   };

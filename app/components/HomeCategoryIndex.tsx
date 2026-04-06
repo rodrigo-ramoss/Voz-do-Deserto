@@ -2,6 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import type { StudyMeta } from "@/lib/studies";
 
+const CAT_DISPLAY_NAMES: Record<string, string> = {
+  "IA & Controle": "IA e Controle",
+};
+
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   "Fé no Deserto": "Fé sem muros: reconstrução, comunidade e vida no deserto.",
   "Jesus Histórico": "Contexto, fontes e leitura histórica do Nazareno.",
@@ -10,11 +14,12 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   Desigrejados: "O depois do templo: fé, trauma religioso e liberdade.",
   Sobrevivência: "Prática: autonomia, preparo e lucidez no caos.",
   "Fé e Tecnologia": "IA, vigilância e o impacto espiritual do mundo digital.",
-  "Escatologia Digital": "Profecia, controle e a arquitetura da marca.",
+  "Escatologia Digital":
+    "Escatologia Digital 1.0. Só uma prévia do que tem no Arquivo Secreto.",
   "Geopolítica Escatológica": "Guerras, poderes e sinais no tabuleiro global.",
   "Profecias e Tempo Presente": "Leitura do agora à luz do texto — sem hype.",
   "Economia & História": "Ciclos, impérios e o preço invisível do futuro.",
-  "IA & Controle": "Governamentalidade, dados e a nova religião algorítmica.",
+  "IA & Controle": "IA e Controle 1.0. Só uma prévia do que tem no Arquivo Secreto.",
   "Bíblia & Interpretação": "Hermenêutica, contexto e o que o texto realmente diz.",
   "Sistema Religioso": "Estruturas, poder e o negócio do sagrado.",
   "Pilares da Fé": "Fundamentos: Cristo, obediência e vida prática.",
@@ -118,15 +123,15 @@ export default function HomeCategoryIndex({ studies }: { studies: StudyMeta[] })
                       </span>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-bg/10 to-transparent" />
-                  <div className="absolute left-4 bottom-3 right-4 flex items-end justify-between gap-3">
-                    <h3 className="font-display text-xl leading-snug text-text">
-                      {cat}
-                    </h3>
-                    <span className="font-label text-[10px] uppercase tracking-widest text-gold/80 border border-gold/20 bg-[#0a0806]/70 px-2 py-1 shrink-0">
-                      {count} {count === 1 ? "estudo" : "estudos"}
-                    </span>
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-bg/10 to-transparent" />
+                <div className="absolute left-4 bottom-3 right-4 flex items-end justify-between gap-3">
+                  <h3 className="font-display text-xl leading-snug text-text">
+                      {CAT_DISPLAY_NAMES[cat] ?? cat}
+                  </h3>
+                  <span className="font-label text-[10px] uppercase tracking-widest text-gold/80 border border-gold/20 bg-[#0a0806]/70 px-2 py-1 shrink-0">
+                    {count} {count === 1 ? "estudo" : "estudos"}
+                  </span>
+                </div>
                 </div>
 
                 <div className="p-5">

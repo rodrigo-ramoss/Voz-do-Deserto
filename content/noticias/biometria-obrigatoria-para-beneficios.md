@@ -1,5 +1,5 @@
 ---
-title: Biometria Obrigatória para Benefícios: O Estado Digitaliza o Acesso à Sobrevivência
+title: "Biometria Obrigatória para Benefícios: O Estado Digitaliza o Acesso à Sobrevivência"
 date: 2026-04-06
 category: Noticias
 description: A partir de maio, o governo brasileiro exige biometria para acesso a programas sociais. O que parece combate à fraude esconde um passo decisivo rumo à identidade digital universal.

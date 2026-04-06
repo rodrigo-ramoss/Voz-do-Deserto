@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllStudySlugs, getStudyBySlug } from "@/lib/studies";
+import { getStudyBySlug } from "@/lib/studies";
 import Sidebar from "@/app/components/Sidebar";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import ReadingProgress from "@/app/components/ReadingProgress";
@@ -9,10 +9,6 @@ import ShareButtons from "@/app/components/ShareButtons";
 import Newsletter from "@/app/components/Newsletter";
 import AuthorCard from "@/app/components/AuthorCard";
 import NewsletterPopup from "@/app/components/NewsletterPopup";
-
-export async function generateStaticParams() {
-  return getAllStudySlugs().map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

@@ -1,16 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllNoticiasSlugs, getNoticiaBySlug } from "@/lib/noticias";
+import { getNoticiaBySlug } from "@/lib/noticias";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ShareButtons from "@/app/components/ShareButtons";
 import NewsletterForm from "@/app/components/NewsletterForm";
 import NewsletterInlineCTA from "@/app/components/NewsletterInlineCTA";
 import NewsletterPopup from "@/app/components/NewsletterPopup";
 import ArquivoSecretoCTA from "@/app/components/ArquivoSecretoCTA";
-
-export async function generateStaticParams() {
-  return getAllNoticiasSlugs().map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

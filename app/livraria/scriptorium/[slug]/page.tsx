@@ -1,14 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { getScriptoriumBySlug, getAllScriptoriumSlugs } from "@/lib/scriptorium";
+import { getScriptoriumBySlug } from "@/lib/scriptorium";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ScriptoriumContent from "../ScriptoriumContent";
-
-export async function generateStaticParams() {
-  return getAllScriptoriumSlugs().map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

@@ -211,13 +211,13 @@ export default async function StudyPage({
       </div>
 
       {/* Corpo do artigo — duas colunas */}
-      <div className="mx-auto max-w-6xl px-6 py-12">
+      <div className="mx-auto max-w-6xl px-6 py-12 w-full">
         <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
           {/* Conteúdo */}
-          <div>
+          <div className="min-w-0">
             {/* Texto do artigo com largura máxima de leitura */}
             <article
-              className="prose-study max-w-prose"
+              className="prose-study max-w-prose w-full"
               dangerouslySetInnerHTML={{ __html: study.contentHtml }}
             />
 

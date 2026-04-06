@@ -673,6 +673,33 @@ select:focus-visible {
   border-left: 1px solid rgba(212, 183, 106, 0.1);
 }
 
+/* Blocos de código / pre */
+.prose-study pre {
+  max-width: 100%;
+  overflow-x: auto;
+  background-color: var(--color-card);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(212, 183, 106, 0.15);
+  margin: 2rem 0;
+}
+
+.prose-study pre code {
+  font-family: var(--font-label), monospace;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  white-space: pre;
+}
+
+.prose-study code:not(pre code) {
+  font-family: var(--font-label), monospace;
+  font-size: 0.85em;
+  background-color: rgba(212, 183, 106, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  color: var(--color-gold);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    BOOKSTORE TEASER — livraria digital "em breve"
    ═══════════════════════════════════════════════════════════════════════════ */

@@ -27,13 +27,13 @@ export async function GET(req: NextRequest) {
 
     const subscriptions = await stripe.subscriptions.list({
       customer: customer.id,
-      status: "all",
-      limit: 5,
-      expand: ["data.items.data.price.product"],
+      limit: 10,
     });
 
     const active = subscriptions.data.find((s) => s.status === "active");
     const sub = active ?? subscriptions.data[0] ?? null;
+
+    const interval = sub?.items?.data?.[0]?.price?.recurring?.interval ?? "month";
 
     return NextResponse.json({
       name: (customer as Stripe.Customer).name ?? "",
@@ -43,8 +43,7 @@ export async function GET(req: NextRequest) {
             status: sub.status,
             cancelAtPeriodEnd: sub.cancel_at_period_end,
             currentPeriodEnd: sub.current_period_end,
-            interval:
-              (sub.items.data[0]?.price as Stripe.Price)?.recurring?.interval ?? "month",
+            interval,
           }
         : null,
     });

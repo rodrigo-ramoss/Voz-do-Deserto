@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import LoginModal from "./LoginModal";
@@ -21,8 +21,14 @@ const allLinks = [...leftLinks, ...rightLinks];
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    const cookie = document.cookie.match(/(?:^|; )vzd_plan=([^;]*)/);
+    setIsLoggedIn(cookie?.[1] === "monthly");
+  }, [pathname]);
 
   const navLink = (label: string, href: string) => {
     const isActive = pathname === href || pathname.startsWith(href + "/");
@@ -89,23 +95,38 @@ export default function Navbar() {
             </svg>
           </Link>
 
-          {/* Assinar */}
-          <button
-            type="button"
-            onClick={() => router.push("/livraria")}
-            className="font-label text-[10px] uppercase tracking-widest border border-gold/50 px-4 py-2 text-gold/80 hover:bg-gold/10 hover:border-gold transition-colors duration-200 whitespace-nowrap"
-          >
-            Assinar
-          </button>
+          {isLoggedIn ? (
+            /* Ícone de perfil quando logado */
+            <Link
+              href="/perfil"
+              aria-label="Meu perfil"
+              className="border border-gold/30 p-2 text-gold/70 hover:bg-gold/10 hover:border-gold transition-colors duration-200 flex items-center"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </Link>
+          ) : (
+            <>
+              {/* Assinar */}
+              <button
+                type="button"
+                onClick={() => router.push("/livraria")}
+                className="font-label text-[10px] uppercase tracking-widest border border-gold/50 px-4 py-2 text-gold/80 hover:bg-gold/10 hover:border-gold transition-colors duration-200 whitespace-nowrap"
+              >
+                Assinar
+              </button>
 
-          {/* Entrar */}
-          <button
-            type="button"
-            onClick={() => setShowLogin(true)}
-            className="font-label text-[10px] uppercase tracking-widest bg-gold/8 border border-gold/20 px-4 py-2 text-muted hover:bg-gold/15 hover:text-text transition-colors duration-200 whitespace-nowrap"
-          >
-            Entrar
-          </button>
+              {/* Entrar */}
+              <button
+                type="button"
+                onClick={() => setShowLogin(true)}
+                className="font-label text-[10px] uppercase tracking-widest bg-gold/8 border border-gold/20 px-4 py-2 text-muted hover:bg-gold/15 hover:text-text transition-colors duration-200 whitespace-nowrap"
+              >
+                Entrar
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -170,20 +191,32 @@ export default function Navbar() {
 
             {/* Ações mobile */}
             <div className="flex items-center gap-3 pt-4">
-              <button
-                type="button"
-                onClick={() => { setOpen(false); router.push("/livraria"); }}
-                className="flex-1 font-label text-[10px] uppercase tracking-widest border border-gold/50 py-3 text-gold/80 hover:bg-gold/10 transition-colors duration-200"
-              >
-                Assinar
-              </button>
-              <button
-                type="button"
-                onClick={() => { setOpen(false); setShowLogin(true); }}
-                className="flex-1 font-label text-[10px] uppercase tracking-widest bg-gold/8 border border-gold/20 py-3 text-muted hover:bg-gold/15 transition-colors duration-200"
-              >
-                Entrar
-              </button>
+              {isLoggedIn ? (
+                <Link
+                  href="/perfil"
+                  onClick={() => setOpen(false)}
+                  className="flex-1 text-center font-label text-[10px] uppercase tracking-widest border border-gold/50 py-3 text-gold/80 hover:bg-gold/10 transition-colors duration-200"
+                >
+                  Meu Perfil
+                </Link>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => { setOpen(false); router.push("/livraria"); }}
+                    className="flex-1 font-label text-[10px] uppercase tracking-widest border border-gold/50 py-3 text-gold/80 hover:bg-gold/10 transition-colors duration-200"
+                  >
+                    Assinar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setOpen(false); setShowLogin(true); }}
+                    className="flex-1 font-label text-[10px] uppercase tracking-widest bg-gold/8 border border-gold/20 py-3 text-muted hover:bg-gold/15 transition-colors duration-200"
+                  >
+                    Entrar
+                  </button>
+                </>
+              )}
               <Link
                 href="/estudos"
                 onClick={() => setOpen(false)}

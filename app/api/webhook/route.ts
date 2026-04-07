@@ -5,46 +5,46 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: "2025-02-24.acacia",
 });
 
-async function addSubscriberToReach(email: string): Promise<void> {
-  const token = process.env.HOSTINGER_REACH_API_TOKEN;
-  const tag = process.env.HOSTINGER_REACH_MONTHLY_TAG ?? "mensal";
+// Lista Brevo: "Assinantes Arquivo Secreto" (ID 3)
+const BREVO_PAID_LIST_ID = 3;
 
-  if (!token) {
-    console.warn("[webhook] HOSTINGER_REACH_API_TOKEN não configurado.");
+async function addSubscriberToBrevo(email: string, name?: string): Promise<void> {
+  const apiKey = process.env.BREVO_API_KEY;
+
+  if (!apiKey) {
+    console.warn("[webhook] BREVO_API_KEY não configurado.");
     return;
   }
 
-  const res = await fetch("https://developers.hostinger.com/api/reach/v1/contacts", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ email, tags: [tag] }),
-  });
+  const body: Record<string, unknown> = {
+    email,
+    listIds: [BREVO_PAID_LIST_ID],
+    updateEnabled: true,
+  };
 
-  if (res.ok) {
-    console.log("[webhook] Contato adicionado no Hostinger Reach:", email);
-    return;
+  if (name) {
+    const parts = name.trim().split(" ");
+    body.attributes = {
+      FIRSTNAME: parts[0] ?? "",
+      LASTNAME: parts.slice(1).join(" ") ?? "",
+    };
   }
 
-  // Fallback sem tags
-  const fallbackRes = await fetch("https://developers.hostinger.com/api/reach/v1/contacts", {
+  const res = await fetch("https://api.brevo.com/v3/contacts", {
     method: "POST",
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      accept: "application/json",
+      "content-type": "application/json",
+      "api-key": apiKey,
     },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify(body),
   });
 
-  if (!fallbackRes.ok) {
-    const err = await fallbackRes.json().catch(() => ({}));
-    console.error("[webhook] Erro ao criar contato no Reach:", fallbackRes.status, err);
+  if (res.ok || res.status === 201 || res.status === 204) {
+    console.log("[webhook] Assinante adicionado no Brevo (lista paga):", email);
   } else {
-    console.log("[webhook] Contato criado (sem tag) no Reach:", email);
+    const err = await res.json().catch(() => ({}));
+    console.error("[webhook] Erro ao adicionar no Brevo:", res.status, err);
   }
 }
 
@@ -73,9 +73,9 @@ export async function POST(req: NextRequest) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         if (session.mode !== "subscription") break;
-        const email =
-          session.customer_email ?? session.customer_details?.email ?? "";
-        if (email) await addSubscriberToReach(email);
+        const email = session.customer_email ?? session.customer_details?.email ?? "";
+        const name = session.customer_details?.name ?? "";
+        if (email) await addSubscriberToBrevo(email, name);
         break;
       }
 
@@ -89,7 +89,8 @@ export async function POST(req: NextRequest) {
         const customer = await stripe.customers.retrieve(customerId);
         if (customer.deleted) break;
         const email = (customer as Stripe.Customer).email ?? "";
-        if (email) await addSubscriberToReach(email);
+        const name = (customer as Stripe.Customer).name ?? "";
+        if (email) await addSubscriberToBrevo(email, name);
         break;
       }
 

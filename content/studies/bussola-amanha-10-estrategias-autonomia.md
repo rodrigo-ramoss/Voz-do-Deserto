@@ -1,7 +1,7 @@
 ---
 title: "A Bússola do Amanhã: 10 Preparações para Quem Não Vai Ser Pego Dormindo"
 date: 2026-03-17
-category: Sobrevivência
+category: Sobrevivencialismo
 image: /imagens/artigo_42_v1_bussola_amanha_sobrevivencia.png
 description: "O sistema global está sendo redesenhado. Não é teoria — é política declarada. Dez preparações práticas para atravessar a transição com autonomia e discernimento."
 ---

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllOOriginal } from "@/lib/o-original";
+import { getAllOOriginal, getLatestOOriginal } from "@/lib/o-original";
 import OOriginalContent from "./OOriginalContent";
 
 export const metadata: Metadata = {
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function OOriginalPage() {
-  const articles = getAllOOriginal();
-  return <OOriginalContent articles={articles} />;
+  const all = getAllOOriginal();
+  const latest = getLatestOOriginal(4);
+  return <OOriginalContent latest={latest} totalCount={all.length} />;
 }

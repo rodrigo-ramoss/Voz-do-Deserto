@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import remarkGfm from "remark-gfm";
 
 // ─── Diretórios ───────────────────────────────────────────────────────────────
 // Artigos:  content/o-original/*.md
@@ -35,7 +36,7 @@ export interface OOriginalArticle extends OOriginalMeta {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 async function toHtml(md: string): Promise<string> {
-  const result = await remark().use(html).process(md);
+  const result = await remark().use(remarkGfm).use(html).process(md);
   return result.toString();
 }
 
@@ -160,6 +161,16 @@ export function getOOriginalByCategory(): Record<string, OOriginalMeta[]> {
     acc[cat].push(article);
     return acc;
   }, {});
+}
+
+/** Retorna artigos de uma categoria específica */
+export function getOOriginalBySpecificCategory(category: string): OOriginalMeta[] {
+  return getAllOOriginal().filter((a) => a.category === category);
+}
+
+/** Retorna os N artigos mais recentes */
+export function getLatestOOriginal(limit = 4): OOriginalMeta[] {
+  return getAllOOriginal().slice(0, limit);
 }
 
 /** Retorna todos os slugs (para generateStaticParams), incluindo subpastas */

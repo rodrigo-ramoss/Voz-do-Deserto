@@ -188,10 +188,3 @@ Resposta: Medo é paralisia. Prudência é movimento. "Não temas" não signific
 > - Novum Testamentum Graece (Mateus 25, Tiago 5).
 
 ---
-
-## Prompt para capa (formato 16:9 — foto realista)
-
-```text
-Crie uma imagem realista, formato 16:9, para um artigo sobre sobrevivencialismo bíblico e preparação para colapsos sistêmicos.
-
-Cena: Uma despensa doméstica simples e organizada, vista em ângulo médio. Prateleiras de madeira contêm potes de vidro com grãos (arroz, feijão, lentilha), garrafas de água, velas, uma lanterna e uma Bíblia aberta sobre um pano rústico. Ao fundo, uma pequena horta em vasos numa janela com luz natural. Não há armas, não há cenários apocalípticos. A atmosfera é tranquila, sóbria, prática — como uma despensa de uma família preparada, mas não paranoica. Estilo documentário, iluminação suave. Sem textos, sem logotipos. Transmitir a ideia de "prudência, não medo".

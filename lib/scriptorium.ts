@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import remarkGfm from "remark-gfm";
 
 const scriptoriumDir = path.join(process.cwd(), "content/scriptorium");
 
@@ -28,7 +29,7 @@ export interface ScriptoriumArticle extends ScriptoriumMeta {
 
 // Converte markdown para HTML de forma assíncrona
 async function toHtml(md: string): Promise<string> {
-  const result = await remark().use(html).process(md);
+  const result = await remark().use(remarkGfm).use(html).process(md);
   return result.toString();
 }
 

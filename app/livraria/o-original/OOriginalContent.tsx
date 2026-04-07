@@ -180,8 +180,62 @@ function ArticleCard({ article }: { article: OOriginalMeta }) {
   );
 }
 
+/* ─── Card de seção (Livros / Doutrinas) ─────────────────────── */
+function SectionCard({
+  href, icon, title, description, count, badge,
+}: {
+  href: string; icon: string; title: string; description: string;
+  count?: number; badge?: string;
+}) {
+  const [hov, setHov] = useState(false);
+  return (
+    <Link
+      href={href}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      className={`relative flex flex-col border overflow-hidden transition-all duration-300 p-7 md:p-9
+        ${hov ? "border-gold/40 bg-gold/[0.03] shadow-[0_6px_32px_rgba(0,0,0,0.4)]"
+               : "border-gold/12 bg-card/50"}`}
+    >
+      {/* Linha topo */}
+      <div className={`absolute top-0 left-0 right-0 h-[1px] transition-all duration-500
+        ${hov ? "bg-gradient-to-r from-transparent via-gold/55 to-transparent"
+               : "bg-gradient-to-r from-transparent via-gold/15 to-transparent"}`} />
+      {/* Lombada lateral */}
+      <div className={`absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b transition-all duration-300
+        ${hov ? "from-gold/50 via-gold/25 to-transparent" : "from-gold/15 via-gold/8 to-transparent"}`} />
+
+      <div className="flex items-start justify-between mb-5">
+        <span className="font-display text-3xl text-gold/35" aria-hidden>{icon}</span>
+        {badge && (
+          <span className="font-label text-[7px] uppercase tracking-widest border border-gold/20 bg-gold/5 text-gold/55 px-2 py-0.5">
+            ↻ {badge}
+          </span>
+        )}
+      </div>
+
+      <h3 className={`font-display text-2xl mb-3 transition-colors duration-200 ${hov ? "text-gold" : "text-text"}`}>
+        {title}
+      </h3>
+      <p className="font-body text-sm text-text/45 leading-relaxed flex-1 mb-6">{description}</p>
+
+      <div className="flex items-center justify-between">
+        {count !== undefined && (
+          <span className="font-label text-[8px] uppercase tracking-widest text-gold/35">
+            {count} {count === 1 ? "estudo" : "estudos"}
+          </span>
+        )}
+        <span className={`font-label text-[9px] uppercase tracking-widest transition-colors duration-200 ml-auto
+          ${hov ? "text-gold" : "text-gold/45"}`}>
+          Acessar →
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 /* ─── Página principal ───────────────────────────────────────── */
-export default function OOriginalPage({ articles }: { articles: OOriginalMeta[] }) {
+export default function OOriginalPage({ latest, totalCount }: { latest: OOriginalMeta[]; totalCount: number }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -425,61 +479,50 @@ export default function OOriginalPage({ articles }: { articles: OOriginalMeta[] 
         </div>
       </section>
 
-      {/* ── Artigos publicados OU placeholder ───────────────────── */}
-      {articles.length > 0 ? (
+      {/* ── Últimos Estudos ─────────────────────────────────────── */}
+      {latest.length > 0 && (
         <section className="mx-auto max-w-5xl px-6 py-10">
           <div className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-gold/10" />
             <span className="font-label text-[9px] uppercase tracking-[0.4em] text-gold/40">
-              {articles.length} {articles.length === 1 ? "estudo publicado" : "estudos publicados"}
+              Últimos estudos · {totalCount} publicados
             </span>
             <div className="h-px flex-1 bg-gold/10" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {articles.map((article) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {latest.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}
           </div>
         </section>
-      ) : (
-        <section className="mx-auto max-w-4xl px-6 py-10">
-          <div className="border border-gold/15 bg-card/40 p-10 md:p-14 text-center relative overflow-hidden">
-            <div
-              className="absolute inset-0 pointer-events-none"
-              aria-hidden
-              style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(212,183,106,0.04) 0%, transparent 70%)" }}
-            />
-            <p className="font-label text-[9px] uppercase tracking-[0.4em] text-gold/50 mb-5">
-              Conteúdo chegando
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl text-text leading-tight mb-5">
-              Os primeiros estudos<br />estão sendo preparados.
-            </h2>
-            <div className="h-px w-12 bg-gold/25 mx-auto mb-6" />
-            <p className="font-body text-sm text-text/45 leading-relaxed max-w-lg mx-auto mb-10">
-              Cada estudo publicado aqui passa por um processo rigoroso — fontes primárias,
-              contexto histórico, palavras originais. Não publicamos rápido. Publicamos certo.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mb-10">
-              {["Gênesis 1–3", "O Sermão da Montanha", "Daniel e os Impérios",
-                "Apocalipse — texto original", "O Sheol e o Inferno", "Paulo e a Lei"].map((tag) => (
-                <span key={tag}
-                  className="font-label text-[8px] uppercase tracking-widest border border-gold/15 bg-gold/4 px-3 py-1.5 text-gold/50">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <NonMonthlyOnly>
-              <div className="max-w-md mx-auto">
-                <p className="font-label text-[9px] uppercase tracking-[0.35em] text-gold/55 mb-5">
-                  Avise-me quando publicar
-                </p>
-                <NewsletterForm context="page" />
-              </div>
-            </NonMonthlyOnly>
-          </div>
-        </section>
       )}
+
+      {/* ── Duas câmaras: Livros Bíblicos + Doutrinas ───────────── */}
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="h-px flex-1 bg-gold/10" />
+          <span className="font-label text-[9px] uppercase tracking-[0.4em] text-gold/40">
+            Navegue por seção
+          </span>
+          <div className="h-px flex-1 bg-gold/10" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <SectionCard
+            href="/livraria/o-original/livros-biblicos"
+            icon="◎"
+            title="Livros Bíblicos"
+            description="Interpretação livro por livro — no idioma original, no contexto histórico em que foi escrito, sem filtro de denominação e sem leitura retroativa."
+            badge="Atualizado semanalmente"
+          />
+          <SectionCard
+            href="/livraria/o-original/doutrinas"
+            icon="◈"
+            title="Doutrinas"
+            description="Doutrinas amplamente aceitas colocadas sob exame direto do texto — arrebatamento, inferno, trindade e outros temas que a tradição ensinou diferente do que está escrito."
+            badge="Atualizado semanalmente"
+          />
+        </div>
+      </section>
 
       {/* ── Rodapé ──────────────────────────────────────────────── */}
       <div className="mx-auto max-w-5xl px-6 pb-20 pt-10 flex flex-col items-center gap-6">

@@ -31,11 +31,13 @@ function ThemeCard({
   icon,
   title,
   body,
+  badge,
   delay = 0,
 }: {
   icon: string;
   title: string;
   body: string;
+  badge?: string;
   delay?: number;
 }) {
   const { ref, visible } = useReveal();
@@ -66,7 +68,14 @@ function ThemeCard({
           }`}
       />
 
-      <span className="font-display text-2xl text-gold/40 mb-4 block" aria-hidden>{icon}</span>
+      <div className="flex items-start justify-between gap-2 mb-4">
+        <span className="font-display text-2xl text-gold/40" aria-hidden>{icon}</span>
+        {badge && (
+          <span className="font-label text-[7px] uppercase tracking-widest border border-gold/25 bg-gold/5 text-gold/60 px-2 py-0.5 shrink-0">
+            ↻ {badge}
+          </span>
+        )}
+      </div>
       <h3
         className={`font-display text-lg leading-snug mb-3 transition-colors duration-200
           ${hov ? "text-gold" : "text-text"}`}
@@ -361,6 +370,20 @@ export default function OOriginalPage({ articles }: { articles: OOriginalMeta[] 
             icon="◐"
             title="Aplicação Contemporânea"
             body="O passado não é museu. O que esses textos, lidos como foram escritos, têm a dizer sobre o tempo em que vivemos agora."
+          />
+          <ThemeCard
+            delay={480}
+            icon="◬"
+            title="Doutrinas"
+            badge="Atualizado semanalmente"
+            body="Doutrinas amplamente aceitas colocadas sob exame direto do texto original — arrebatamento, inferno, trindade, dízimo e outros temas que a tradição ensinou diferente do que está escrito."
+          />
+          <ThemeCard
+            delay={560}
+            icon="☷"
+            title="Interpretando a Bíblia"
+            badge="Atualizado semanalmente"
+            body="Livro por livro, capítulo por capítulo — no contexto histórico, no idioma original, com o que o autor queria dizer. Sem filtro de denominação, sem leitura retroativa."
           />
         </div>
       </section>

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { getOOriginalBySlug, getAllOOriginalSlugs } from "@/lib/o-original";
+import { getOOriginalBySlugRecursive, getAllOOriginalSlugs } from "@/lib/o-original";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import ReadingProgress from "@/app/components/ReadingProgress";
 import ScriptoriumContent from "@/app/livraria/scriptorium/ScriptoriumContent";
@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = await getOOriginalBySlug(slug);
+  const article = await getOOriginalBySlugRecursive(slug);
   if (!article) return {};
 
   const baseUrl =
@@ -56,7 +56,7 @@ export default async function OOriginalArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = await getOOriginalBySlug(slug);
+  const article = await getOOriginalBySlugRecursive(slug);
   if (!article) notFound();
 
   const formattedDate = new Date(

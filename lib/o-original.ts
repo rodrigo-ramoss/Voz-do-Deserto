@@ -49,20 +49,31 @@ function firstParagraphs(content: string, count = 3): string {
 
 // ─── Funções públicas ─────────────────────────────────────────────────────────
 
-/** Lista todos os artigos de O Original, ordenados do mais recente ao mais antigo */
+/** Coleta todos os .md de forma recursiva dentro de oOriginalDir */
+function collectMdFiles(dir: string): { slug: string; filepath: string }[] {
+  if (!fs.existsSync(dir)) return [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const results: { slug: string; filepath: string }[] = [];
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...collectMdFiles(full));
+    } else if (entry.name.endsWith(".md")) {
+      // slug = nome do arquivo sem extensão (único por convenção de nomes)
+      results.push({ slug: entry.name.replace(/\.md$/, ""), filepath: full });
+    }
+  }
+  return results;
+}
+
+/** Lista todos os artigos de O Original (incluindo subpastas), ordenados do mais recente */
 export function getAllOOriginal(): OOriginalMeta[] {
-  if (!fs.existsSync(oOriginalDir)) return [];
-
-  const files = fs
-    .readdirSync(oOriginalDir)
-    .filter((f) => f.endsWith(".md"));
-
+  const files = collectMdFiles(oOriginalDir);
   if (files.length === 0) return [];
 
   return files
-    .map((filename) => {
-      const slug = filename.replace(/\.md$/, "");
-      const raw = fs.readFileSync(path.join(oOriginalDir, filename), "utf-8");
+    .map(({ slug, filepath }) => {
+      const raw = fs.readFileSync(filepath, "utf-8");
       const { data, content } = matter(raw);
 
       const excerpt =
@@ -151,11 +162,53 @@ export function getOOriginalByCategory(): Record<string, OOriginalMeta[]> {
   }, {});
 }
 
-/** Retorna todos os slugs (para generateStaticParams) */
+/** Retorna todos os slugs (para generateStaticParams), incluindo subpastas */
 export function getAllOOriginalSlugs(): string[] {
-  if (!fs.existsSync(oOriginalDir)) return [];
-  return fs
-    .readdirSync(oOriginalDir)
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => f.replace(/\.md$/, ""));
+  return collectMdFiles(oOriginalDir).map(({ slug }) => slug);
+}
+
+/** Carrega um artigo de O Original pelo slug, buscando recursivamente */
+export async function getOOriginalBySlugRecursive(
+  slug: string
+): Promise<OOriginalArticle | null> {
+  const files = collectMdFiles(oOriginalDir);
+  const found = files.find((f) => f.slug === slug);
+  if (!found) return null;
+
+  const raw = fs.readFileSync(found.filepath, "utf-8");
+  const { data, content } = matter(raw);
+
+  const [contentHtml, previewHtml] = await Promise.all([
+    toHtml(content),
+    toHtml(firstParagraphs(content, 3)),
+  ]);
+
+  const excerpt =
+    data.description ??
+    content
+      .split("\n")
+      .find((line) => line.trim() && !line.startsWith("#"))
+      ?.slice(0, 180) ??
+    "";
+
+  const words = content.split(/\s+/).filter(Boolean).length;
+  const readTime = `${Math.max(1, Math.round(words / 220))} min`;
+
+  return {
+    slug,
+    title:       data.title    ?? slug,
+    date:        data.date     ? new Date(data.date).toISOString().slice(0, 10) : "",
+    category:    data.category ?? "O Original",
+    image:       data.image,
+    excerpt,
+    description: data.description,
+    keywords:    data.keywords,
+    readTime,
+    language:    data.language,
+    book:        data.book,
+    verse:       data.verse,
+    premium:     data.premium  ?? false,
+    contentHtml,
+    previewHtml,
+  };
 }

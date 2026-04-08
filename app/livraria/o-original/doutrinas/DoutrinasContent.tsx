@@ -6,14 +6,37 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { OOriginalMeta } from "@/lib/o-original";
 
-// ─── Agrupa por tema ──────────────────────────────────────────
+function getLayerNumber(article: OOriginalMeta): number | null {
+  const slugMatch = article.slug.match(/camada(\d+)/i);
+  if (slugMatch?.[1]) return Number.parseInt(slugMatch[1], 10);
+
+  const titleMatch = article.title.match(/camada\s+(\d+)/i);
+  if (titleMatch?.[1]) return Number.parseInt(titleMatch[1], 10);
+
+  return null;
+}
+
+// ─── Agrupa por tema (camadas 1 → 4) ──────────────────────────
 function groupByTheme(articles: OOriginalMeta[]): Record<string, OOriginalMeta[]> {
-  return articles.reduce<Record<string, OOriginalMeta[]>>((acc, a) => {
+  const grouped = articles.reduce<Record<string, OOriginalMeta[]>>((acc, a) => {
     const theme = a.title.split(":")[0].split("—")[0].trim();
     if (!acc[theme]) acc[theme] = [];
     acc[theme].push(a);
     return acc;
   }, {});
+
+  for (const theme in grouped) {
+    grouped[theme].sort((a, b) => {
+      const la = getLayerNumber(a);
+      const lb = getLayerNumber(b);
+      if (la !== null && lb !== null) return la - lb;
+      if (la !== null) return -1;
+      if (lb !== null) return 1;
+      return a.slug.localeCompare(b.slug);
+    });
+  }
+
+  return grouped;
 }
 
 // Pega a imagem representativa do tema (primeira disponível)
@@ -111,14 +134,14 @@ function DoctrineModal({
                                 justify-center shrink-0 mt-0.5
                                 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-200">
                   <span className="font-label text-[9px] text-gold/60 group-hover:text-gold transition-colors">
-                    {String(index + 1).padStart(2, "0")}
+                    {String(getLayerNumber(article) ?? (index + 1)).padStart(2, "0")}
                   </span>
                 </div>
 
                 {/* Conteúdo */}
                 <div className="flex-1 min-w-0">
                   <p className="font-label text-[8px] uppercase tracking-widest text-gold/40 mb-1">
-                    Camada {index + 1}
+                    Camada {getLayerNumber(article) ?? (index + 1)}
                     {article.verse && ` · ${article.verse}`}
                   </p>
                   <h3 className="font-display text-sm leading-snug text-text group-hover:text-gold transition-colors line-clamp-2">

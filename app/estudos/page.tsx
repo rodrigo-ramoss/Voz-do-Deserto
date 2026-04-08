@@ -2,6 +2,7 @@ import { getAllStudies } from "@/lib/studies";
 import Sidebar from "@/app/components/Sidebar";
 import EstudosClient from "./EstudosClient";
 import type { Metadata } from "next";
+import ArquivoSecretoPromo from "@/app/components/ArquivoSecretoPromo";
 
 const CATEGORY_OVERRIDES: Record<
   string,
@@ -81,6 +82,8 @@ export default async function EstudosPage({
           <Sidebar />
         </div>
       </div>
+
+      <ArquivoSecretoPromo />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getAllStudies } from "@/lib/studies";
 import StudiesCarousel from "@/app/components/StudiesCarousel";
+import ArquivoSecretoPromo from "@/app/components/ArquivoSecretoPromo";
 
 const CAT_DISPLAY_NAMES: Record<string, string> = {
   "IA & Controle": "IA e Controle",
@@ -99,6 +100,8 @@ export default function CategoriasPage() {
           })}
         </div>
       )}
+
+      <ArquivoSecretoPromo />
     </main>
   );
 }

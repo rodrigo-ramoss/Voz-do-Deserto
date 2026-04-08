@@ -9,6 +9,7 @@ import HomeHero from "./components/HomeHero";
 import CompactStudyCard from "./components/CompactStudyCard";
 import HomeCategoryIndex from "./components/HomeCategoryIndex";
 import ArquivoSecretoSection from "./components/ArquivoSecretoSection";
+import ArquivoSecretoPromo from "./components/ArquivoSecretoPromo";
 
 // Garante dados frescos a cada requisição (necessário para rotação semanal)
 export const dynamic = "force-dynamic";
@@ -85,6 +86,8 @@ export default function Home() {
           <Newsletter />
         </div>
       </section>
+
+      <ArquivoSecretoPromo />
     </>
   );
 }

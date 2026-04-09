@@ -1,7 +1,7 @@
 ---
 title: "O Algoritmo que Comprou Sua Atenção: Como a Arquitetura de Escolha da IA Decide o Que Você Quer Antes de Você Querer"
 date: 2026-04-08
-category: Como Não Ser Escravo da IA — Guia Prático de Resistência Cognitiva
+category: Como Não Ser Escravo da IA
 folder: Scriptorium
 description: "Sistemas de recomendação não mostram o que você procura — mostram o que o algoritmo quer que você escolha. Eis como a arquitetura de escolha da IA sequestra sua vontade e como recuperá-la."
 keywords: "#VozDoDeserto #ResistenciaCognitiva #Algoritmo #ViesDeOrdenacao #ArquiteturaDeEscolha #GuiaPratico #ArquivoSecreto"

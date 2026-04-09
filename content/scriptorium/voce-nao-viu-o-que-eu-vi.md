@@ -1,7 +1,7 @@
 ---
 title: "Você Não Viu o Que Eu Vi: Como a IA Matou a Confiança na Imagem e no Áudio"
 date: 2026-04-06
-category: Como Não Ser Escravo da IA — Guia Prático de Resistência Cognitiva
+category: Como Não Ser Escravo da IA
 folder: Scriptorium
 description: "Deepfakes hiper-realistas, áudio clonado em tempo real, vídeos que nunca aconteceram. A evidência visual morreu. Eis como reconstruir uma epistemologia de sobrevivência na era da pós-verdade generativa."
 keywords: "#VozDoDeserto #ResistenciaCognitiva #Deepfake #IA #Desinformacao #GuiaPratico #ArquivoSecreto"

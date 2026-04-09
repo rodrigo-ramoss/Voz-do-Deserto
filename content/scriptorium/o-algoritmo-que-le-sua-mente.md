@@ -1,7 +1,7 @@
 ---
 title: "O Algoritmo Que Lê Sua Mente: Como Seus Dados São Usados Para Prever e Controlar Seus Próximos Passos"
 date: 2026-04-08
-category: Como Não Ser Escravo da IA — Guia Prático de Resistência Cognitiva
+category: Como Não Ser Escravo da IA
 folder: Scriptorium
 description: "Do varejo às seguradoras, modelos preditivos constroem seu 'gêmeo digital' e manipulam decisões antes mesmo de você pensar nelas. Eis como retomar o controle."
 keywords: "#VozDoDeserto #ResistenciaCognitiva #Dados #AlgoritmoPreditivo #GêmeoDigital #GuiaPratico #ArquivoSecreto"

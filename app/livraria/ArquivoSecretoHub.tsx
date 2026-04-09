@@ -209,6 +209,7 @@ export default function ArquivoSecretoHubPage() {
   const [headerVisible, setHeaderVisible] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeaderVisible(true);
   }, []);
 

@@ -27,6 +27,7 @@ export default function LoginModal({ onClose, onAccessGranted }: Props) {
   useEffect(() => {
     try {
       const saved = localStorage.getItem(LOCAL_EMAIL_KEY) ?? "";
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved) setEmail(saved);
     } catch {}
     setTimeout(() => inputRef.current?.focus(), 80);

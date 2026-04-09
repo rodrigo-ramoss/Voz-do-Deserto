@@ -27,6 +27,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const cookie = document.cookie.match(/(?:^|; )vzd_plan=([^;]*)/);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoggedIn(cookie?.[1] === "monthly");
   }, [pathname]);
 

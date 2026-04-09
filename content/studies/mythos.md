@@ -1,5 +1,5 @@
 ---
-title: Mythos: A IA que a própria criadora teme libertar
+title: "Mythos: A IA que a própria criadora teme libertar"
 date: 2026-04-09
 category: Escatologia Digital
 image: /imagens/mythos.webp

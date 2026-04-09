@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
-  apiVersion: "2025-02-24.acacia",
+  apiVersion: "2026-03-25.dahlia",
 });
 
 export async function GET(req: NextRequest) {
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
         ? {
             status: sub.status,
             cancelAtPeriodEnd: sub.cancel_at_period_end,
-            currentPeriodEnd: sub.current_period_end,
+            currentPeriodEnd: sub.items?.data?.[0]?.current_period_end ?? null,
             interval,
           }
         : null,

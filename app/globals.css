@@ -195,6 +195,40 @@ body {
   animation-play-state: paused;
 }
 
+.animate-marquee-reverse {
+  animation-direction: reverse;
+}
+
+/* Label “Conteúdo premium” — brilho pulsante */
+@keyframes premiumTextGlow {
+  0%, 100% {
+    opacity: 0.72;
+    text-shadow:
+      0 0 10px rgba(212, 183, 106, 0.18),
+      0 0 24px rgba(212, 183, 106, 0.10);
+  }
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 14px rgba(212, 183, 106, 0.42),
+      0 0 40px rgba(212, 183, 106, 0.22);
+  }
+}
+
+.premium-text-glow {
+  color: rgba(212, 183, 106, 0.92);
+  animation: premiumTextGlow 2.6s ease-in-out infinite;
+  will-change: opacity, text-shadow;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-text-glow {
+    animation: none;
+    text-shadow: none;
+    opacity: 1;
+  }
+}
+
 /* ── Arquivo Secreto CTA ─────────────────────────────────────────────── */
 
 /* Borda pulsante dourada (glow in/out a cada 2.5s) */

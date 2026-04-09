@@ -9,7 +9,6 @@ import HomeHero from "./components/HomeHero";
 import CompactStudyCard from "./components/CompactStudyCard";
 import HomeCategoryIndex from "./components/HomeCategoryIndex";
 import ArquivoSecretoSection from "./components/ArquivoSecretoSection";
-import ArquivoSecretoPromo from "./components/ArquivoSecretoPromo";
 
 // Garante dados frescos a cada requisição (necessário para rotação semanal)
 export const dynamic = "force-dynamic";
@@ -17,7 +16,7 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   const studies = getAllStudies();
   const noticias = getAllNoticias();
-  const premium = getAllScriptorium().slice(0, 3);
+  const premium = getAllScriptorium().slice(0, 18);
 
   // Destaques da Semana: artigos publicados nos últimos 7 dias
   const now = new Date();
@@ -86,8 +85,6 @@ export default function Home() {
           <Newsletter />
         </div>
       </section>
-
-      <ArquivoSecretoPromo />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ScriptoriumMeta } from "@/lib/scriptorium";
-import { formatDateSmart } from "@/lib/utils";
 
 function LockIcon({ className }: { className?: string }) {
   return (
@@ -27,6 +26,85 @@ function LockIcon({ className }: { className?: string }) {
   );
 }
 
+function PremiumMarqueeRow({
+  premium,
+  reverse,
+  durationMs,
+}: {
+  premium: ScriptoriumMeta[];
+  reverse?: boolean;
+  durationMs: number;
+}) {
+  const items = premium.length <= 1 ? premium : [...premium, ...premium];
+
+  return (
+    <div className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bg to-transparent"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg to-transparent"
+        aria-hidden
+      />
+
+      <div
+        className={[
+          "flex w-max gap-4 py-1",
+          "animate-marquee motion-reduce:animate-none",
+          reverse ? "animate-marquee-reverse" : "",
+        ].join(" ")}
+        style={{ animationDuration: `${durationMs}ms` }}
+      >
+        {items.map((article, idx) => (
+          <Link
+            key={`${article.slug}-${idx}`}
+            href={`/livraria/scriptorium/${article.slug}`}
+            className="group shrink-0 w-[190px] sm:w-[210px] lg:w-[220px] border border-gold/10 bg-card/60 hover:bg-gold/[0.03] hover:border-gold/30 transition-colors overflow-hidden"
+            aria-label={`Conteúdo premium — ${article.title}`}
+          >
+            <div className="relative h-[92px] bg-[#0b0907]">
+              {article.image ? (
+                <Image
+                  src={article.image}
+                  alt=""
+                  fill
+                  sizes="220px"
+                  className="object-cover brightness-[0.75] saturate-[0.90] scale-[1.02] transition-transform duration-700 group-hover:scale-[1.05]"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.10] via-transparent to-ember/[0.06] flex items-center justify-center">
+                  <span className="font-display text-4xl text-gold/[0.10] select-none">
+                    ✦
+                  </span>
+                </div>
+              )}
+
+              <div className="absolute inset-0 bg-gradient-to-t from-bg/85 via-bg/10 to-transparent" />
+
+              <div className="absolute left-3 top-3 flex items-center gap-2 border border-gold/30 bg-[#0a0806]/70 px-2 py-1">
+                <LockIcon className="w-3.5 h-3.5 text-gold" />
+                <span className="font-label text-[8px] uppercase tracking-widest text-gold/90">
+                  Premium
+                </span>
+              </div>
+            </div>
+
+            <div className="p-3">
+              <p className="font-label text-[8px] uppercase tracking-[0.22em] text-muted/70 line-clamp-1">
+                {article.category}
+              </p>
+              <h3 className="font-display text-[14px] leading-snug text-text mt-1 line-clamp-2 group-hover:text-gold transition-colors">
+                {article.title}
+              </h3>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ArquivoSecretoSection({
   premium,
 }: {
@@ -39,7 +117,7 @@ export default function ArquivoSecretoSection({
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div className="max-w-2xl">
-            <p className="font-label text-[9px] uppercase tracking-[0.4em] text-gold/55 mb-3">
+            <p className="premium-text-glow font-label text-[9px] uppercase tracking-[0.4em] mb-3">
               Conteúdo premium
             </p>
             <h2 className="font-display text-3xl text-text leading-tight">
@@ -72,64 +150,9 @@ export default function ArquivoSecretoSection({
           </Link>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {premium.map((article) => (
-            <Link
-              key={article.slug}
-              href={`/livraria/scriptorium/${article.slug}`}
-              className="group border border-gold/10 bg-card transition-colors duration-200 hover:border-gold/25 overflow-hidden"
-              aria-label={`Assinante Premium — ${article.title}`}
-            >
-              <div className="relative aspect-[16/9] overflow-hidden bg-card">
-                {article.image ? (
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover blur-[2px] brightness-[0.70] scale-[1.03] transition-transform duration-700 group-hover:scale-[1.05]"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.10] via-transparent to-ember/[0.06] flex items-center justify-center">
-                    <span className="font-display text-5xl text-gold/[0.08] select-none">
-                      ✦
-                    </span>
-                  </div>
-                )}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-bg/85 via-bg/10 to-transparent" />
-
-                <div className="absolute left-4 top-4 flex items-center gap-2 border border-gold/35 bg-[#0a0806]/70 px-2.5 py-1">
-                  <LockIcon className="w-3.5 h-3.5 text-gold" />
-                  <span className="font-label text-[9px] uppercase tracking-widest text-gold/90">
-                    Assinante premium
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-5">
-                <p className="font-label text-[9px] uppercase tracking-[0.22em] text-muted/80">
-                  {formatDateSmart(article.date, "short")}
-                </p>
-                <h3 className="font-display text-lg leading-snug text-text mt-2 group-hover:text-gold transition-colors line-clamp-2">
-                  {article.title}
-                </h3>
-                {article.excerpt && (
-                  <p className="font-body text-sm leading-relaxed text-muted mt-2 line-clamp-2">
-                    {article.excerpt}
-                  </p>
-                )}
-
-                <div className="mt-4 pt-3 border-t border-gold/8 flex items-center justify-between gap-3">
-                  <span className="font-label text-[9px] uppercase tracking-widest text-subtle">
-                    Conteúdo bloqueado
-                  </span>
-                  <span className="font-label text-[10px] uppercase tracking-widest text-gold/70 group-hover:text-gold transition-colors">
-                    Abrir →
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
+        <div className="mt-10 space-y-5">
+          <PremiumMarqueeRow premium={premium} durationMs={32000} />
+          <PremiumMarqueeRow premium={premium} durationMs={36000} reverse />
         </div>
       </div>
     </section>

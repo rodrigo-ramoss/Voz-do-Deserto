@@ -1,7 +1,7 @@
 ---
 title: "O Jubileu Esquecido: Como a Dívida se Tornou a Nova Escravidão"
 date: 2026-04-08
-category: Economia e História
+category: "Economia & História"
 description: "Levítico 25 instituiu o perdão total das dívidas a cada 50 anos. Hoje, o estoque global de dívida ultrapassa US$ 315 trilhões. O que a história econômica e o texto bíblico revelam sobre a escravidão moderna?"
 keywords: "#VozDoDeserto #EconomiaEHistória #Jubileu #Dívida #EscravidãoModerna"
 image: /imagens/o-jubileu-esquecido.webp

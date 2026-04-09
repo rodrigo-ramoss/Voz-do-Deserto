@@ -1,7 +1,7 @@
 ---
 title: "O Economista que Stalin Matou Sabia Que Estamos Aqui"
 date: 2026-03-20
-category: "Economia & Padrões"
+category: "PADRÕES - ECONOMIA E SISTEMA"
 folder: Scriptorium
 image: /imagens/o-economista-que-stalin-matou-sabia-que-estamos-aqui.webp
 description: "Kondratiev descobriu que a história econômica se move em ondas de 50 anos terminando em guerra e colapso. Stalin o executou. O padrão continuou sem ele — e aponta para 2026."

@@ -49,16 +49,10 @@ const ALL_CATEGORIES = [
     icon: "◑",
   },
   {
-    name: "Preparação & Novo Mundo",
+    name: "PADRÕES - ECONOMIA E SISTEMA",
     description:
-      "O que fazer quando o sistema falha — e como se posicionar antes que o mapa mude de novo.",
-    icon: "◌",
-  },
-  {
-    name: "Previsões & Padrões do Sistema",
-    description:
-      "Padrões que se repetem na história, nos mercados e nas Escrituras — e o que eles apontam.",
-    icon: "◇",
+      "Ciclos econômicos, padrões históricos e o funcionamento real do sistema — e como ler os sinais antes que a janela feche.",
+    icon: "⚖",
   },
   {
     name: "Igreja & CIA",
@@ -83,12 +77,6 @@ const ALL_CATEGORIES = [
     description:
       "Ferramentas, movimentos e estratégias que o sistema não consegue silenciar — e como usá-los com sabedoria.",
     icon: "◇",
-  },
-  {
-    name: "Economia & Padrões",
-    description:
-      "Kondratiev, o Jubileu, o sistema financeiro paralelo que já existe, o que 2026 significa se o padrão se repetir e como se preparar para o futuro.",
-    icon: "⚖",
   },
 ];
 

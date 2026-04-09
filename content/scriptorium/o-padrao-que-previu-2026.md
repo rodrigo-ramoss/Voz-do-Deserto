@@ -1,7 +1,7 @@
 ---
 title: "O Padrão que Previu 2026: Como os Ciclos Econômicos de 50 Anos Estão se Repetindo Diante dos Nossos Olhos"
 date: 2026-04-09
-category: Preparação & Novo Mundo
+category: "PADRÕES - ECONOMIA E SISTEMA"
 folder: Scriptorium
 image: /imagens/o-padrao-que-previu-2026.webp
 description: "Em 1926, um economista soviético descobriu um padrão de 50 anos na economia global. Cem anos depois, estamos vivendo exatamente o que ele previu — e a maioria não está prestando atenção."

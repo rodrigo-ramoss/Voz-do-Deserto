@@ -53,9 +53,9 @@ const pillars = [
   },
   {
     icon: "✦",
-    title: "Economia & Padrões",
+    title: "PADRÕES - ECONOMIA E SISTEMA",
     description:
-      "Ciclos de Kondratiev, Jubileu, juros, soberania financeira. O que o sistema não quer que você entenda sobre dinheiro.",
+      "Ciclos de Kondratiev, Jubileu, juros, soberania financeira. Como ler os padrões e entender o sistema antes que a janela feche.",
   },
   {
     icon: "✦",

@@ -1,186 +1,173 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllEbooks } from "@/lib/ebooks";
+import { getEbooksByTrilogy } from "@/lib/ebooks";
+import {
+  ContinueReadingBanner,
+  EbookProgressBadge,
+} from "./EbookProgressBadge";
 
 export const metadata: Metadata = {
   title: "Livraria — Voz do Deserto",
   description:
-    "Trilogia O Mapa Antes da Tempestade — leitura gratuita e completa no próprio site. Geopolítica, ciclos históricos e preparação para o interregno.",
+    "Trilogias completas para leitura gratuita no próprio site. Geopolítica, ciclos históricos e preparação para o interregno.",
 };
 
 export default function EbooksPage() {
-  const ebooks = getAllEbooks();
+  const trilogies = getEbooksByTrilogy();
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
-      {/* ── Hero da livraria ── */}
+      {/* ── Hero ── */}
       <section className="relative overflow-hidden border-b border-[#1e1e1e]">
-        {/* Gradiente decorativo */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(180,130,60,0.12) 0%, transparent 70%)",
+              "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(180,130,60,0.10) 0%, transparent 70%)",
           }}
         />
-
-        <div className="relative mx-auto max-w-5xl px-6 py-20 text-center">
-          {/* Badge */}
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#b4823c]/30 bg-[#b4823c]/10 px-4 py-1.5 text-xs font-semibold tracking-widest text-[#d4a855] uppercase">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+        <div className="relative mx-auto max-w-5xl px-6 py-16 text-center">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#b4823c]/30 bg-[#b4823c]/10 px-4 py-1.5 text-xs font-semibold tracking-widest text-[#d4a855] uppercase">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-            Trilogia Completa · Leitura Gratuita
+            Leitura Gratuita · Direto no Site
           </span>
-
-          <h1 className="mb-4 font-serif text-4xl font-bold leading-tight text-[#f0e6d3] md:text-5xl">
-            O Mapa Antes da<br />
-            <span className="text-[#d4a855]">Tempestade</span>
+          <h1 className="mb-3 font-serif text-4xl font-bold text-[#f0e6d3] md:text-5xl">
+            Livraria
           </h1>
-
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#8a8a7a]">
-            Uma trilogia para quem sente que o mundo está mudando — e quer
-            entender o porquê antes que a próxima página da história vire.
+          <p className="mx-auto max-w-xl text-base leading-relaxed text-[#6b6b5e]">
+            Trilogias completas para quem quer entender o tempo em que vive —
+            sem precisar baixar nada.
           </p>
-
-          {/* Decoração de prateleira */}
-          <div className="mt-10 flex items-center justify-center gap-3 opacity-40">
-            <div className="h-px w-16 bg-[#b4823c]" />
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#b4823c">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-            </svg>
-            <div className="h-px w-16 bg-[#b4823c]" />
-          </div>
         </div>
       </section>
 
-      {/* ── Prateleira de livros ── */}
-      <section className="mx-auto max-w-5xl px-6 py-16">
-        <div className="grid gap-10 md:grid-cols-3">
-          {ebooks.map((ebook) => (
-            <Link
-              key={ebook.slug}
-              href={`/livraria/ebooks/${ebook.slug}`}
-              className="group relative flex flex-col"
-              aria-label={`Ler: ${ebook.title}`}
-            >
-              {/* Capa do livro */}
-              <div className="relative mb-5 overflow-hidden rounded-lg shadow-2xl transition-transform duration-300 group-hover:-translate-y-2">
-                {/* Efeito de lombada */}
-                <div
-                  aria-hidden
-                  className="absolute bottom-0 left-0 top-0 w-4 rounded-l-lg"
-                  style={{
-                    background:
-                      "linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)",
-                  }}
-                />
-                {/* Brilho na capa */}
-                <div
-                  aria-hidden
-                  className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%)",
-                  }}
-                />
+      {/* ── Banner "continuar leitura" (client) ── */}
+      <div className="mx-auto max-w-5xl px-6 pt-10">
+        <ContinueReadingBanner />
+      </div>
 
-                <Image
-                  src={ebook.image}
-                  alt={`Capa: ${ebook.title}`}
-                  width={400}
-                  height={560}
-                  className="aspect-[400/560] w-full object-cover"
-                  priority={ebook.volume === 1}
-                />
-
-                {/* Badge do volume */}
-                <div className="absolute right-3 top-3 rounded-full bg-[#0a0a0a]/80 px-2.5 py-1 text-xs font-bold tracking-wider text-[#d4a855] backdrop-blur-sm">
-                  VOL. {ebook.volume}
-                </div>
-              </div>
-
-              {/* Info do livro */}
-              <div className="flex flex-1 flex-col">
+      {/* ── Blocos por trilogia ── */}
+      <div className="mx-auto max-w-5xl px-6 pb-20 space-y-16">
+        {trilogies.map(({ trilogy, ebooks }) => (
+          <section key={trilogy.name} className="group/trilogy">
+            {/* Cabeçalho da trilogia */}
+            <div className="mb-8 flex flex-col gap-3 border-b border-[#1e1e1e] pb-6 sm:flex-row sm:items-end sm:justify-between">
+              <div>
                 <p className="mb-1 text-xs font-semibold tracking-widest text-[#b4823c] uppercase">
-                  {ebook.trilogy}
+                  Trilogia
                 </p>
-                <h2 className="mb-1 font-serif text-lg font-bold leading-snug text-[#f0e6d3] transition-colors group-hover:text-[#d4a855]">
-                  {ebook.title}
+                <h2 className="font-serif text-2xl font-bold text-[#f0e6d3] md:text-3xl">
+                  {trilogy.name}
                 </h2>
-                <p className="mb-3 text-sm text-[#6b6b5e] italic">
-                  {ebook.subtitle}
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#6b6b5e]">
+                  {trilogy.description}
                 </p>
-                <p className="mb-4 flex-1 text-sm leading-relaxed text-[#8a8a7a]">
-                  {ebook.description}
-                </p>
-
-                {/* Rodapé do card */}
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-xs text-[#5a5a4e]">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="text-[#b4823c]/60"
-                    >
-                      <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm.5 14.5h-1v-6h1v6zm0-8h-1V7h1v1.5z" />
-                    </svg>
-                    {ebook.readTime} de leitura
-                  </span>
-                  <span className="flex items-center gap-1 text-xs font-semibold text-[#d4a855] transition-gap group-hover:gap-2">
-                    Ler agora
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      className="transition-transform duration-200 group-hover:translate-x-0.5"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
               </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+              <span className="shrink-0 rounded-full border border-[#2a2a2a] px-3 py-1 text-xs text-[#4a4a42]">
+                {ebooks.length} {ebooks.length === 1 ? "volume" : "volumes"}
+              </span>
+            </div>
 
-      {/* ── Chamada para a trilogia ── */}
-      <section className="border-t border-[#1e1e1e] bg-[#0d0d0d]">
-        <div className="mx-auto max-w-3xl px-6 py-14 text-center">
-          <p className="mb-3 text-xs font-semibold tracking-widest text-[#b4823c] uppercase">
-            Por que ler em ordem?
-          </p>
-          <h3 className="mb-4 font-serif text-2xl font-bold text-[#f0e6d3]">
-            Cada volume aprofunda o anterior
-          </h3>
-          <p className="text-[#8a8a7a] leading-relaxed">
-            O Vol. 1 entrega o mapa do presente. O Vol. 2 revela que o presente
-            já aconteceu antes. O Vol. 3 transforma tudo isso em ação concreta.
-            Lidos juntos, formam um sistema completo de leitura do nosso tempo.
-          </p>
+            {/* Grade dos volumes */}
+            <div
+              className={`grid gap-6 ${
+                ebooks.length === 1
+                  ? "grid-cols-1 max-w-xs"
+                  : ebooks.length === 2
+                  ? "grid-cols-2 max-w-sm"
+                  : "grid-cols-3"
+              }`}
+            >
+              {ebooks.map((ebook) => (
+                <Link
+                  key={ebook.slug}
+                  href={`/livraria/ebooks/${ebook.slug}`}
+                  className="group flex flex-col"
+                  aria-label={`Ler: ${ebook.title}`}
+                >
+                  {/* Capa */}
+                  <div className="relative mb-4 overflow-hidden rounded-lg shadow-2xl transition-transform duration-300 group-hover:-translate-y-1.5">
+                    {/* Lombada */}
+                    <div
+                      aria-hidden
+                      className="absolute bottom-0 left-0 top-0 z-10 w-3 rounded-l-lg"
+                      style={{
+                        background:
+                          "linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 70%, transparent 100%)",
+                      }}
+                    />
+                    {/* Brilho no hover */}
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 55%)",
+                      }}
+                    />
+                    <Image
+                      src={ebook.image}
+                      alt={`Capa: ${ebook.title}`}
+                      width={320}
+                      height={448}
+                      className="aspect-[320/448] w-full object-cover"
+                      priority={ebook.volume === 1}
+                    />
+                    {/* Badge do volume */}
+                    <div className="absolute right-2 top-2 z-20 rounded-full bg-[#0a0a0a]/80 px-2 py-0.5 text-[10px] font-bold tracking-wider text-[#d4a855] backdrop-blur-sm">
+                      VOL. {ebook.volume}
+                    </div>
+                  </div>
 
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            {ebooks.map((e) => (
-              <Link
-                key={e.slug}
-                href={`/livraria/ebooks/${e.slug}`}
-                className="flex items-center gap-2 rounded-lg border border-[#2a2a2a] bg-[#141414] px-5 py-2.5 text-sm text-[#c8c8b8] transition-colors hover:border-[#b4823c]/40 hover:text-[#d4a855]"
-              >
-                <span className="text-[#b4823c] font-bold">Vol. {e.volume}</span>
-                <span className="truncate max-w-[140px]">{e.title}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+                  {/* Info */}
+                  <h3 className="mb-0.5 font-serif text-sm font-bold leading-snug text-[#e8dcc8] transition-colors group-hover:text-[#d4a855] md:text-base">
+                    {ebook.title}
+                  </h3>
+                  <p className="mb-2 text-xs italic text-[#5a5a4e] leading-snug">
+                    {ebook.subtitle}
+                  </p>
+
+                  {/* Tempo + badge de progresso */}
+                  <div className="mt-auto flex flex-wrap items-center gap-2">
+                    <span className="text-[10px] text-[#4a4a42]">
+                      {ebook.readTime}
+                    </span>
+                    {/* Client: mostra % lido se houver */}
+                    <EbookProgressBadge slug={ebook.slug} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Ler a trilogia em sequência */}
+            {ebooks.length > 1 && (
+              <div className="mt-6 flex items-center gap-2">
+                <Link
+                  href={`/livraria/ebooks/${ebooks[0].slug}`}
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#2a2a2a] bg-[#141414] px-4 py-2 text-xs text-[#8a8a7a] transition-colors hover:border-[#b4823c]/30 hover:text-[#d4a855]"
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  Começar pelo Vol. 1
+                </Link>
+                <span className="text-[10px] text-[#3a3a32]">
+                  · leia em ordem para melhor experiência
+                </span>
+              </div>
+            )}
+          </section>
+        ))}
+      </div>
     </main>
   );
 }

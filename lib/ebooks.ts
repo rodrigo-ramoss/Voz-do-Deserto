@@ -48,6 +48,24 @@ const EBOOK_META: Record<
 };
 
 /* ------------------------------------------------------------------ */
+/* Metadados por trilogia                                              */
+/* ------------------------------------------------------------------ */
+export interface TrilogyMeta {
+  name: string;
+  description: string;
+  order: number; // para ordenar trilogias quando houver mais de uma
+}
+
+const TRILOGY_META: Record<string, TrilogyMeta> = {
+  "O Mapa Antes da Tempestade": {
+    name: "O Mapa Antes da Tempestade",
+    description:
+      "Três volumes para quem quer entender o mundo que está se formando antes que ele forme. Do mapa geopolítico do presente aos ciclos que derrubaram impérios — até o manual prático para atravessar o interregno.",
+    order: 1,
+  },
+};
+
+/* ------------------------------------------------------------------ */
 /* Tipos                                                               */
 /* ------------------------------------------------------------------ */
 export interface EbookMeta {
@@ -184,6 +202,31 @@ export async function getEbookBySlug(slug: string): Promise<Ebook | null> {
     chapters: extractChapters(content),
     contentHtml: processed.toString(),
   };
+}
+
+export interface TrilogyGroup {
+  trilogy: TrilogyMeta;
+  ebooks: EbookMeta[];
+}
+
+/** Retorna os ebooks agrupados por trilogia, ordenados */
+export function getEbooksByTrilogy(): TrilogyGroup[] {
+  const all = getAllEbooks();
+  const map = new Map<string, EbookMeta[]>();
+
+  for (const ebook of all) {
+    const key = ebook.trilogy || "Sem Trilogia";
+    if (!map.has(key)) map.set(key, []);
+    map.get(key)!.push(ebook);
+  }
+
+  const groups: TrilogyGroup[] = [];
+  for (const [name, ebooks] of map.entries()) {
+    const meta = TRILOGY_META[name] ?? { name, description: "", order: 99 };
+    groups.push({ trilogy: meta, ebooks });
+  }
+
+  return groups.sort((a, b) => a.trilogy.order - b.trilogy.order);
 }
 
 export function getAllEbookSlugs(): string[] {

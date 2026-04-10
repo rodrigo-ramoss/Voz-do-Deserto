@@ -23,6 +23,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   "Bíblia & Interpretação": "Hermenêutica, contexto e o que o texto realmente diz.",
   "Sistema Religioso": "Estruturas, poder e o negócio do sagrado.",
   "Pilares da Fé": "Fundamentos: Cristo, obediência e vida prática.",
+  "Doutrina de Homem": "Tradições, regras e dogmas que a Bíblia nunca mandou — expostos versículo por versículo.",
 };
 
 const CATEGORY_COVER_SLUG: Record<string, string> = {
@@ -41,6 +42,7 @@ const CATEGORY_COVER_SLUG: Record<string, string> = {
   "Sistema Religioso": "o-templo-que-nunca-caiu-novos-donos-do-sagrado",
   "Pilares da Fé": "obediencia_jesus",
   "Fé no Deserto": "deserto-purificacao",
+  "Doutrina de Homem": "gritaria-no-altar",
 };
 
 function getDescription(category: string) {

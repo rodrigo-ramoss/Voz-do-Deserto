@@ -331,21 +331,20 @@ export default function ArquivoSecretoHubPage() {
             tags={["Profecias", "Geopolítica", "Escatologia", "Tecnologia", "Igreja & Poder"]}
           />
 
-          {/* Card 2 — Livraria (fechada) */}
+          {/* Card 2 — Livraria (ebooks) */}
           <SectionCard
-            href="/livraria/livros"
-            badge="02 · Recursos & Livros"
+            href="/livraria/ebooks"
+            badge="02 · Trilogia Gratuita"
             delay={120}
-            locked={true}
             icon={
               <svg className="w-6 h-6 text-gold/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
               </svg>
             }
             title="Livraria"
-            subtitle="Acervo Digital · Em Preparação"
-            description="Livros, guias e recursos digitais selecionados — materiais raros que complementam o que é estudado no Arquivo. Em preparação."
-            tags={["Livros Digitais", "Guias", "Recursos", "Acervo"]}
+            subtitle="Ebooks · Leitura no Site"
+            description="Trilogia completa para leitura gratuita: geopolítica, ciclos históricos e preparação prática para navegar o interregno — sem precisar baixar nada."
+            tags={["Trilogia", "Geopolítica", "História", "Preparação", "Gratuito"]}
           />
 
           {/* Card 3 — O Original */}

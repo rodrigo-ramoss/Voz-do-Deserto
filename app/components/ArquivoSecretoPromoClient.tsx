@@ -5,6 +5,30 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { OOriginalMeta } from "@/lib/o-original";
 
+function LockIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7.5 10V7.8a4.5 4.5 0 0 1 9 0V10"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.5 10h11a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"
+      />
+    </svg>
+  );
+}
+
 function formatPtDate(iso: string) {
   if (!iso) return "";
   const d = new Date(`${iso}T12:00:00`);
@@ -135,11 +159,12 @@ export default function ArquivoSecretoPromoClient({ latest }: { latest: OOrigina
               </div>
 
               <Link
-                href="/livraria"
+                href="/livraria#newsletter"
                 className="promo-card font-label text-[10px] uppercase tracking-widest border border-gold/45 px-6 min-h-[44px] inline-flex items-center text-gold hover:bg-gold hover:text-bg transition-colors"
                 style={{ animationDelay: "220ms" }}
               >
-                Conhecer o Arquivo Secreto →
+                <LockIcon className="w-4 h-4 mr-2 text-gold/70" />
+                Quero ser avisado →
               </Link>
             </div>
           </div>
@@ -257,4 +282,3 @@ export default function ArquivoSecretoPromoClient({ latest }: { latest: OOrigina
     </section>
   );
 }
-

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ArquivoSecretoHub from "./ArquivoSecretoHub";
+import ArquivoSecretoLockedNotice from "../components/ArquivoSecretoLockedNotice";
 
 export const metadata: Metadata = {
   title: "Arquivo Secreto — Voz do Deserto",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ArquivoSecretoPage() {
-  return <ArquivoSecretoHub />;
+  return <ArquivoSecretoLockedNotice variant="page" />;
 }

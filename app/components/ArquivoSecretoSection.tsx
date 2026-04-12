@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ScriptoriumMeta } from "@/lib/scriptorium";
+import ArquivoSecretoLockedNotice from "./ArquivoSecretoLockedNotice";
+
+const ARQUIVO_SECRETO_LOCKED = true;
 
 function LockIcon({ className }: { className?: string }) {
   return (
@@ -110,6 +113,10 @@ export default function ArquivoSecretoSection({
 }: {
   premium: ScriptoriumMeta[];
 }) {
+  if (ARQUIVO_SECRETO_LOCKED) {
+    return <ArquivoSecretoLockedNotice variant="section" />;
+  }
+
   if (!premium.length) return null;
 
   return (
@@ -158,4 +165,3 @@ export default function ArquivoSecretoSection({
     </section>
   );
 }
-

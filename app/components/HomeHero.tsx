@@ -1,5 +1,29 @@
 import Link from "next/link";
 
+function LockIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7.5 10V7.8a4.5 4.5 0 0 1 9 0V10"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.5 10h11a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"
+      />
+    </svg>
+  );
+}
+
 export default function HomeHero() {
   return (
     <section className="border-b border-gold/10 relative overflow-hidden">
@@ -39,7 +63,8 @@ export default function HomeHero() {
             href="/livraria"
             className="font-label text-[10px] uppercase tracking-widest text-muted hover:text-gold transition-colors min-h-[44px] inline-flex items-center"
           >
-            Arquivo secreto →
+            <LockIcon className="w-4 h-4 mr-2 text-gold/50" />
+            Arquivo secreto (em breve) →
           </Link>
         </div>
 

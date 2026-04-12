@@ -2,6 +2,30 @@
 
 import Link from "next/link";
 
+function LockIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7.5 10V7.8a4.5 4.5 0 0 1 9 0V10"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.5 10h11a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"
+      />
+    </svg>
+  );
+}
+
 export default function ArquivoSecretoCTA() {
   return (
     <div className="arquivo-secreto-cta relative overflow-hidden my-12 border border-gold/30 bg-[#0e0b07] p-8 md:p-10">
@@ -21,7 +45,7 @@ export default function ArquivoSecretoCTA() {
           Isso é apenas a superfície.
         </p>
         <p className="font-body text-sm text-muted/60 leading-relaxed mb-6">
-          O Arquivo Secreto vai mais fundo.
+          O que não pode ficar no blog vai para o app.
         </p>
 
         {/* "Na continuação..." com seta animada */}
@@ -50,10 +74,11 @@ export default function ArquivoSecretoCTA() {
 
         {/* Botão CTA */}
         <Link
-          href="/livraria"
+          href="/livraria#newsletter"
           className="arquivo-btn inline-flex items-center gap-2 font-label text-[10px] uppercase tracking-widest border border-gold/50 px-7 py-3.5 text-gold hover:bg-gold hover:text-bg hover:border-gold transition-all duration-300"
         >
-          Acessar o Arquivo Secreto
+          <LockIcon className="w-4 h-4 text-gold/80" />
+          Quero ser avisado
           <span className="animate-arrow-bounce" aria-hidden>→</span>
         </Link>
       </div>

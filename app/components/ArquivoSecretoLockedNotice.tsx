@@ -33,7 +33,7 @@ export default function ArquivoSecretoLockedNotice({
   const content = (
     <>
       <p className="premium-text-glow font-label text-[9px] uppercase tracking-[0.4em] mb-3 text-gold/75">
-        Conteúdo reservado
+        Em breve
       </p>
 
       <div className="flex items-center gap-3">
@@ -41,23 +41,24 @@ export default function ArquivoSecretoLockedNotice({
           <LockIcon className="h-5 w-5 text-gold/70" />
         </span>
         <h1 className="font-display text-3xl md:text-4xl text-text leading-tight">
-          Arquivo Secreto — em breve no app
+          Arquivo Secreto — app Êxodo
         </h1>
       </div>
 
       <div className="mt-4 space-y-3 max-w-3xl">
         <p className="font-body text-sm leading-relaxed text-muted">
-          Há conteúdos que não foi possível colocar no blog: eram reveladores
-          demais e colocariam o site em risco de ser derrubado.
+          Há conteúdos que não cabem no blog: análises que seriam censuradas,
+          conexões que a narrativa oficial não quer que você veja.
         </p>
         <p className="font-body text-sm leading-relaxed text-muted">
-          Por isso, o Arquivo Secreto está sendo preparado no nosso aplicativo:
-          um ambiente próprio para publicar o que não pode ficar público aqui.
+          Por isso, o Arquivo Secreto está sendo preparado dentro do{" "}
+          <span className="text-gold/80 font-semibold">app Êxodo</span> — um
+          ambiente próprio, fora do alcance das plataformas, para publicar o
+          que não pode ficar exposto aqui.
         </p>
         <p className="font-body text-sm leading-relaxed text-muted">
-          O app está quase pronto. Se você quer acesso ao material completo e ao
-          verdadeiro mapa (sem cortes), entre na lista para ser avisado assim
-          que ele estiver no ar.
+          O app está quase pronto. Entre na lista para ser o primeiro a saber
+          quando abrir.
         </p>
       </div>
     </>

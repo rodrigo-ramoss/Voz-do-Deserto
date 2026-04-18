@@ -4,7 +4,7 @@ import ArquivoSecretoLockedNotice from "../components/ArquivoSecretoLockedNotice
 export const metadata: Metadata = {
   title: "Arquivo Secreto — Voz do Deserto",
   description:
-    "Três câmaras de conteúdo exclusivo: Artigos Premium, Livraria e O Original — exegese, profecias e o que o sistema prefere que você nunca encontre.",
+    "O Arquivo Secreto chega no app Êxodo — análises profundas, conexões que a narrativa oficial esconde e o que o sistema prefere que você nunca encontre.",
 };
 
 export default function ArquivoSecretoPage() {

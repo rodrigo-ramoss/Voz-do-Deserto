@@ -2,21 +2,13 @@ import { getAllStudies } from "@/lib/studies";
 import Sidebar from "@/app/components/Sidebar";
 import EstudosClient from "./EstudosClient";
 import type { Metadata } from "next";
-import ArquivoSecretoPromo from "@/app/components/ArquivoSecretoPromo";
+import ArquivoSecretoLockedNotice from "@/app/components/ArquivoSecretoLockedNotice";
+import Newsletter from "@/app/components/Newsletter";
 
 const CATEGORY_OVERRIDES: Record<
   string,
   { title: string; description: string }
-> = {
-  "Escatologia Digital": {
-    title: "Escatologia Digital 1.0",
-    description: "Só uma prévia do que tem no Arquivo Secreto.",
-  },
-  "IA & Controle": {
-    title: "IA e Controle 1.0",
-    description: "Só uma prévia do que tem no Arquivo Secreto.",
-  },
-};
+> = {};
 
 export async function generateMetadata({
   searchParams,
@@ -83,7 +75,13 @@ export default async function EstudosPage({
         </div>
       </div>
 
-      <ArquivoSecretoPromo />
+      <ArquivoSecretoLockedNotice variant="section" />
+
+      <section className="border-t border-gold/10">
+        <div className="mx-auto max-w-4xl px-6 py-14">
+          <Newsletter />
+        </div>
+      </section>
     </main>
   );
 }

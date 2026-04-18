@@ -1,17 +1,14 @@
 import Link from "next/link";
 import { getAllStudies } from "@/lib/studies";
 import StudiesCarousel from "@/app/components/StudiesCarousel";
-import ArquivoSecretoPromo from "@/app/components/ArquivoSecretoPromo";
+import ArquivoSecretoLockedNotice from "@/app/components/ArquivoSecretoLockedNotice";
+import Newsletter from "@/app/components/Newsletter";
 
 const CAT_DISPLAY_NAMES: Record<string, string> = {
   "IA & Controle": "IA e Controle",
 };
 
-const CATEGORY_CTA: Record<string, string> = {
-  "Escatologia Digital":
-    "Escatologia Digital 1.0. Só uma prévia do que tem no Arquivo Secreto.",
-  "IA & Controle": "IA e Controle 1.0. Só uma prévia do que tem no Arquivo Secreto.",
-};
+const CATEGORY_CTA: Record<string, string> = {};
 
 export default function CategoriasPage() {
   const studies = getAllStudies();
@@ -101,7 +98,13 @@ export default function CategoriasPage() {
         </div>
       )}
 
-      <ArquivoSecretoPromo />
+      <ArquivoSecretoLockedNotice variant="section" />
+
+      <section className="border-t border-gold/10">
+        <div className="mx-auto max-w-4xl px-6 py-14">
+          <Newsletter />
+        </div>
+      </section>
     </main>
   );
 }
